@@ -1,0 +1,93 @@
+% 数式フォント用
+\usepackage[mathrm=sym]{unicode-math}
+\usepackage{amsmath}
+
+% 色名の読み込みと独自色定義
+\usepackage[svgnames]{xcolor}
+\definecolor{PaleIris}{RGB}{229,227,246}
+\definecolor{PaleGold}{RGB}{255,247,204}
+\definecolor{DarkGray}{RGB}{69,69,69}
+\definecolor{DarkCyan}{RGB}{0,123,123}
+
+% フォント定義 (日本語が大きくみえるため日本語は小さめにスケール)
+% \usepackage{fontspec}  % already loaded by unicode-math
+\setmainfont[  % 英数字本文
+    BoldFont={[MPLUSRounded1c-Medium.ttf]},
+]{[MPLUSRounded1c-Regular.ttf]}
+\setsansfont[Color=DarkGray]{[MPLUSRounded1c-Medium.ttf]}  % 英数字見出し
+\setmonofont[Scale=1.05]{[RictyDiminished-Regular.ttf]}  % 等幅
+\setmathfont[Scale=1.05, Color=DarkGray]{Latin Modern Math}  % 数式
+\setCJKmainfont[  % 日本語本文
+    Scale=0.95,
+    BoldFont={[MPLUSRounded1c-Medium.ttf]},
+]{[MPLUSRounded1c-Regular.ttf]}
+\setCJKsansfont[Scale=0.95, Color=DarkGray]{[MPLUSRounded1c-Medium.ttf]}  % 日本語見出し
+\setCJKmonofont[Scale=0.95]{[MPLUSRounded1c-Regular.ttf]}  % 日本語等幅
+
+% 行間をやや詰める
+\usepackage{leading}
+\leading{15pt}
+
+% カラーボックス
+\usepackage[most,listings]{tcolorbox}
+\tcbuselibrary{breakable}
+
+% 独自のセリフ枠の定義
+\newtcolorbox{SERIFU}[2][]{
+    enhanced,  % タイトルボックスの表示に必要
+    breakable,  % ページをまたぐのに必要
+    % セリフの文字色をグレーに変更する
+    fontupper=\addfontfeatures{Color=DarkGray}\
+    \addCJKfontfeatures{Color=DarkGray}\color{DarkGray},
+    arc=7pt,  % 角の丸みの半径
+    top=9pt, right=9pt, left=9pt, bottom=9pt,  % パディング
+    boxrule=0pt, frame hidden,  % フレーム隠蔽
+    grow to left by=-24pt,  % キャラクター画像を表示するため左にマージン
+    % タイトルボックスとしてキャラクター画像を表示
+    title={\hspace{6pt}},
+    attach boxed title to top left={xshift=-28pt, yshift=-38pt},
+    boxed title style={
+        enhanced,
+        arc=19pt,
+        top=17pt, right=13pt, left=14pt, bottom=16pt,
+        boxrule=0pt, frame hidden,
+        underlay={
+            \begin{tcbclipinterior}
+            \includegraphics[width=41pt]{#2}
+            \end{tcbclipinterior}
+        },
+    },
+    #1
+}
+
+
+% 独自の命題枠の定義
+\newtcolorbox{PROP}[2][]{
+    enhanced,
+    top=10pt,
+    right=10pt,
+    left=10pt,
+    bottom=10pt,
+    colbacktitle=White,
+    colback=White,
+    colframe=DarkGray,
+    boxrule=1pt,
+    arc=6pt,
+    breakable,
+    attach boxed title to top left={xshift=12pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={skin=enhancedfirst jigsaw, boxrule=0pt, frame hidden, left=2pt, right=2pt},
+    title=#2,
+    #1
+}
+
+
+% 独自のコード枠の定義
+\newtcolorbox{CODE}[1][]{
+    breakable,  % ページをまたぐのに必要
+    boxrule=0pt, frame hidden,  % フレーム隠蔽
+    sharp corners,
+    #1
+}
+
+\usepackage[colorlinks=true]{hyperref}  % ハイパーリンク
+\usepackage{setspace}  % 目次の行間を詰める用
