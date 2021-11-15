@@ -3,6 +3,14 @@
 \graphicspath{{../images/}}
 
 
+\renewcommand{\footnoterule}{%
+  \kern -5pt
+  \color{DarkGray}
+  \hrule width \textwidth height 1pt
+  \kern 4.7pt
+}
+
+
 \begin{document}
 
 
@@ -22,7 +30,7 @@
 \begin{thebibliography}{99}
     \bibitem{hamilton1994} James D. Hamilton. \textit{Time Series Analysis.} Princeton University Press, 1994.
     \bibitem{okimoto2010} 沖本 竜義. \textit{経済・ファイナンスデータの計量時系列分析.} 朝倉書店, 2010.
-    \bibitem{watanabe2012} 渡辺 澄夫. \textit{ベイズ統計の理論と方法.} コロナ社, 2012.
+    %\bibitem{watanabe2012} 渡辺 澄夫. \textit{ベイズ統計の理論と方法.} コロナ社, 2012.
 \end{thebibliography}
 \vspace{3pt}
 
@@ -41,7 +49,7 @@
   \item 8章は既に扱っていた線形回帰モデルの最小2乗推定の性質を掘り下げました．まずオーソドックスな最小2乗法を扱い，一般化最小2乗法を扱いましたね．
   \item 10章では単変量 ARMA 過程を多変量 ARMA 過程に拡張しました．
   \item 時系列が多変量になったとき私たちは{\addCJKfontfeatures{Color=DarkCyan}「この変数とこの変数は関係しているの？」}という興味を抱くでしょう．11章では多変量 ARMA 過程を用いてそのような問いに答えていきました．グレンジャー因果検定やインパルス応答関数を取り扱いましたね．
- \end{itemize}
+\end{itemize}
 \end{SERIFU}
 
 
@@ -62,8 +70,9 @@
 \end{SERIFU}
 
 
-\section*{12章 ベイズ推測へ}
-\addcontentsline{toc}{section}{12章 ベイズ推測へ}
+\section*{ベイズ推測へ}
+\addcontentsline{toc}{section}{ベイズ推測へ}
+\vspace{3pt}
 
 
 \begin{SERIFU}[colback=PaleGold]{takumi_0.png}
@@ -72,7 +81,7 @@
 
 
 \begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
-　そのモデルはもはや各時刻の値が独立なので全く時系列らしくないですが……しかし，そのような推測は5章で扱いましたよ．そのモデルの下で時刻 $1, \cdots, T$ にどんな値が観測されるかは確率ベクトル $Y = (Y_1, \cdots, Y_T)^\top$ です．$Y$ の確率密度関数は $\theta = (\mu, \sigma^2)^\top$ を用いてかけます．実際には $y = (y_1, \cdots, y_T)^\top$ が観測されているのでこの点で $Y$ の確率密度関数($\theta$ の関数と考えると尤度関数)が最大になっていてほしいです．そのような $\hat{\theta}$ を選びます…というものでしたよね．最尤推定です．
+　そのモデルはもはや各時刻の値が独立なので全く時系列らしくないですが……しかし，そのような推測は5章で扱いましたよ．そのモデルの下で時刻 $1, \cdots, T$ にどんな値が観測されるかは確率ベクトル $Y = (Y_1, \cdots, Y_T)^\top$ です．$Y$ の確率密度関数は $\theta = (\mu, \sigma^2)^\top$ を用いてかけます．実際には $y = (y_1, \cdots, y_T)^\top$ が観測されているのでこの点で $Y$ の確率密度関数($y$ の関数でなく $\theta$ の関数と考えると尤度関数)が最大になっていてほしいです．そのようになる $\hat{\theta}$ を選びます…というものでしたよね．最尤推定です．
 \end{SERIFU}
 
 
@@ -89,12 +98,12 @@
 
 
 \begin{SERIFU}[colback=PaleGold]{takumi_0.png}
-　うん，もはや，「観測したデータをもとにただ1点の推測値を出す」という枠組みだと扱いづらくなってくるよね．だから，ここでは $\theta$ も確率変数であると考えるよ．$\theta$ に対して事前に想定している確率分布があって，観測したデータをもとにその確率分布を更新する，という手続きをとる．
+　うん，もはや，「観測したデータをもとにただ1点の推測値 $\hat{\theta}$ を出す」という枠組みだと扱いづらくなってくるよね．だから，ここでは $\theta$ も確率変数であると考えるよ．$\theta$ に対して事前に想定している確率分布 $f(\theta)$ があって，観測したデータ $y$ をもとにその確率分布を $f(\theta|y)$ に更新する，という手続きをとる．
 \end{SERIFU}
 
 
 \begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
-　$\theta$ も確率変数であると考える？……これまでは神様がモデルというサイコロを振って観測値が出てくると考えていましたが，そのモデル(のパラメータ)すらもサイコロを振った結果で決まっていたということなのですか？ では，モデルから観測値を出す神様は実は下請けの神様にパラメータを発注していて，下請けの神様がサイコロを振ってパラメータを出して納品していたと……神様界にもそんな下請け構造が……．
+　$\theta$ も確率変数であると考える？……これまでは神様がモデルというサイコロを振って観測値が出てくると考えていましたが，そのモデル(のパラメータ)すらもサイコロを振った結果で決まっていたということなのですか？ \, では，モデルから観測値を出す神様は実は下請けの神様にパラメータを発注していて，下請けの神様がサイコロを振ってパラメータを出して納品していたと……神様界にもそんな下請け構造が……．
 \end{SERIFU}
 
 
@@ -103,13 +112,14 @@
 \end{SERIFU}
 
 
-\begin{PROP}[colback=White]{ベイズ推測 \cite{watanabe2012}}
-ベイズ推測とは「真の確率分布 $q(x)$ は，おおよそ $p^\ast(x)$ であろう」と推測することである．
-\end{PROP}
+%\begin{PROP}[colback=White]{ベイズ推測 \cite{watanabe2012}}
+%ベイズ推測とは「真の確率分布 $q(x)$ は，おおよそ $p^\ast(x)$ であろう」と推測することである．
+%\end{PROP}
 
 
-\section*{13章 カルマンフィルタ――みえないものを追いかける手続き}
-\addcontentsline{toc}{section}{13章 カルマンフィルタ――みえないものを追いかける手続き}
+\section*{カルマンフィルタ――みえないものを追いかける手続き}
+\addcontentsline{toc}{section}{カルマンフィルタ――みえないものを追いかける手続き}
+\vspace{3pt}
 
 
 \begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
@@ -125,27 +135,240 @@
 \xi_{t+1} &= F \xi_t + v_{t + 1} \tag{13.1.1} \\
 y_t &= A^\top x_t + H^\top \xi_t + w_t \tag{13.1.2}
 \end{align}
-上式のうち $v_t \in \mathbb{R}^r$ と $w_t \in \mathbb{R}^n$ はベクトルホワイトノイズだ．ノイズ以外の部分は……2つ目の (13.1.2) 式から説明すると，「$y_t$ は $x_t$ の線形変換と $\xi_t$ の線形変換の和からできる」という式だよね．このうち $x_t \in \mathbb{R}^k$ は予め決定している外生変数だ．例えば $y_t$ が日ごとのデータだとしたら $x_t$ は曜日を one-hot エンコーディングしたベクトルとかね．この $x_t$ はない教科書の方が多いと思うんだよね．曜日ごとの周期性とかが必要な場合でも $\xi_t$ に押し付けることができると思うし．
+　上式のうち $v_t \in \mathbb{R}^r$ と $w_t \in \mathbb{R}^n$ はそれぞれ 0 次の自己共分散行列が $Q, \, R$ であるようなベクトルホワイトノイズだ．ベクトルホワイトノイズだから1次以上の自己共分散行列は零行列ね．
 
-　それで肝心なのは $xi_t \in \mathbb{R}^r$ の方だ．これが観測できない「状態」．観測値を生み出す特徴ベクトルといった方がわかりやすいかな？ \, この $\xi_t$ が時間発展すると考えるよ．1つ目の (13.1.1) 式がそれだね．初期状態 $\xi_0$ は適当に決め打っておくことになるよ．
+　ノイズ以外の部分は……2つ目の (13.1.2) 式から説明すると，「$y_t$ は $x_t$ の線形変換と $\xi_t$ の線形変換の和からできる」という式だよね．このうち $x_t \in \mathbb{R}^k$ は予め決定している外生変数だ．例えば $y_t$ が日ごとのデータだとしたら $x_t$ は曜日を one-hot エンコーディングしたベクトルとかね．この $x_t$ はない教科書が多いと思うんだよね
+\footnote{{\addfontfeatures{Color=DarkGray}\addCJKfontfeatures{Color=DarkGray}例えば以下の教科書がそうである．\begin{itemize} \item G. Petris 他, Rによるベイジアン動的線型モデル, 朝倉書店, 2013. \item 樋口知之 \, 他, データ同化入門 (予測と発見の科学), 朝倉書店, 2019. \item 馬場真哉, 時系列分析と状態空間モデルの基礎: RとStanで学ぶ理論と実装, プレアデス出版, 2018. \end{itemize}}}．曜日ごとの周期性とかが必要な場合でも $\xi_t$ に押し付けることができると思うし．
+
+　それで肝心なのは $\xi_t \in \mathbb{R}^r$ の方だ．これが観測できない「状態」．観測値を生み出す特徴ベクトルといった方がわかりやすいかな？ \, この $\xi_t$ が時間発展すると考えるよ．1つ目の (13.1.1) 式がそれだね．初期状態 $\xi_0$ の分布は適当に決め打っておくことになるよ．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
 　観測できない「状態」が観測値を生み出す……そうですね，例えば私が毎日動物園にパンダさんのようすをみにいくとします．私に観測できるのは，パンダさんが遊び回っているか，そっぽを向いているかのどちらかくらいでしょう．しかし，パンダさんのそのようすの裏には「今日はいい気分だ」「今日は疲れがたまっている」「今日はいらいらしている」「今日は寂しい」などのもっと複雑な「状態」があるに違いありません．そのようなパンダさんの状態の分布の推移をこそモデリングしようというのが「状態空間モデル」なのですね？
 \end{SERIFU}
 
 
 \begin{SERIFU}[colback=PaleGold]{takumi_0.png}
-　う，うん……パンダの毎日のふるまいを分析する用途に適切かどうかは別として，状態空間モデルの考え方はそれで合っているよ．
-　まあそれで，重要なのは，状態空間モデルは以下が満たされるとき状態 $\xi_t$ を完全に解析的にトラッキングできるということなんだよね．そのときにトラッキングする手続きをカルマンフィルタとよぶよ．
+　う，うん……パンダの毎日のふるまいを分析する用途に適切かどうかは別として，状態空間モデルの考え方はそれで合っていると思うよ．
+
+　まあそれで重要なのは，状態空間モデルは以下が満たされるとき状態 $\xi_t$ の分布を完全に解析的に追いかけることができるということなんだよね．
 \begin{itemize}
-  \item 初期状態 $\xi_0$ がガウス分布にしたがう．
-  \item ベクトルホワイトノイズ $v_t, w_t$ がガウス分布にしたがう．
+  \item 初期状態 $\xi_0$ が多変量正規分布にしたがう．
+  \item ベクトルホワイトノイズ $v_t, w_t$ が多変量正規分布にしたがう．
   \item 変換 $F, H$ が線形変換である (教科書の書き方では転置をとっているし最初から行列であることが前提になっているけどね)．
 \end{itemize}
+このとき $\xi_{t}$ の分布を追いかける手続きをカルマンフィルタとよぶ．ちなみにこのときのモデルを特に動的線型モデルというよ\footnote{G. Petris 他, Rによるベイジアン動的線型モデル, 朝倉書店, 2013. の41ページ．}．
 \end{SERIFU}
 
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　状態の分布を完全に追いかけることができる……とは？
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　初期状態 $\xi_0$ の分布は決め打っておくとして，時刻 $t$ までに観測できる情報 $\mathcal{Y}_t \equiv (y_t, \cdots, y_1, x_t, \cdots, x_t)$ が手に入ったとき，現在の状態 $\xi_t$ の分布が完全に求まるってことだね．確率密度関数 $p(\xi_t | \mathcal{Y}_t)$ を具体的に求めてみれば，きちんと求まることがわかると思うよ．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　$p(\xi_t | \mathcal{Y}_t)$ を求めるのですか……といわれましても，どうやって求めればいいのやら……とりあえず，ベイズの定理を適用してみましょう．$\mathcal{Y}_t$ というかたまりは $y_t, x_t, \mathcal{Y}_{t-1}$ とほぐしてみましょう．観測値 $y_t$ を切り出したいので．条件付き分布の項からは，なくてもいい条件は取り除いておきましょう．
+\begin{align}
+p(\xi_t | \mathcal{Y}_t) &= p(\xi_t | y_t, x_t, \mathcal{Y}_{t-1}) \notag \\
+&= \frac{p(y_t | \xi_t, x_t, \mathcal{Y}_{t-1})p(\xi_t | x_t, \mathcal{Y}_{t-1})}{p(y_t | x_t, \mathcal{Y}_{t-1})} \notag \\
+&= \frac{p(y_t | \xi_t, x_t)p(\xi_t | \mathcal{Y}_{t-1})}{p(y_t | x_t, \mathcal{Y}_{t-1})} \tag{ア}
+\end{align}
+　上式をみると……分母は正規化定数と考えればいいので放っておきましょう．分子の $p(y_t | \xi_t, x_t)$ は (13.1.2)式から直ちに求まりますね．だって，$\xi_t$ と $x_t$ が確定している下では $y_t$ の確率的な成分はベクトルホワイトノイズ $w_t$ だけですから．よってこのときの $y_t$ の分布は以下の多変量正規分布です．
+\begin{align}
+y_t | \xi_t, x_t \sim N(A^\top x_t + H^\top \xi_t, R) \tag{イ}
+\end{align}
+　となると，分子の $p(\xi_t | \mathcal{Y}_{t-1})$ の方が問題ですね．(13.1.1)式から直ちに求まるのは $p(\xi_t | \xi_{t-1})$ であって $p(\xi_t | \mathcal{Y}_{t-1})$ ではありませんので．うーん……$\xi_t, \, \xi_{t-1}$ の同時密度関数 $p(\xi_t, \xi_{t-1}| \mathcal{Y}_{t-1}) = p(\xi_t | \xi_{t-1},\mathcal{Y}_{t-1}) p(\xi_{t-1} | \mathcal{Y}_{t-1}) = p(\xi_t | \xi_{t-1}) p(\xi_{t-1} | \mathcal{Y}_{t-1})$ を $\xi_{t-1}$ について積分して周辺化してみましょうか……．
+\begin{align}
+p(\xi_t | \mathcal{Y}_{t-1}) = \int p(\xi_t | \xi_{t-1}) p(\xi_{t-1} | \mathcal{Y}_{t-1}) d \xi_{t-1} \tag{ウ}
+\end{align}
+　……まとめると，$\xi_t$ の条件付き密度関数 $p(\xi_t | \mathcal{Y}_t)$ は (ア) になるので，これを求めるには (イ) と (ウ) の密度関数の積を正規化すればいいわけですが，(ウ) に1つ前の時刻の条件付き密度関数 $p(\xi_{t-1} | \mathcal{Y}_{t-1})$ が出てきてしまいましたね……．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　それで問題ないよ．最初の時刻の $p(\xi_1 | \mathcal{Y}_1)$ がどうなるか考えてみて．
+先にここでいくつかの表記を導入しておこうか．$\mathcal{Y}_\tau$ が手に入っている条件下での $\xi_t$ の期待値と分散共分散行列を以下のように表記することにしよう．
+\begin{align}
+\hat{\xi}_{t|\tau} &\equiv E(\xi_t | \mathcal{Y}_\tau) \notag \\
+P_{t|\tau} &\equiv E \bigl[ (\xi_t - \hat{\xi}_{t|\tau}) (\xi_t - \hat{\xi}_{t|\tau})^\top \bigr] \notag
+\end{align}
+　初期状態 $\xi_0$ の分布は $N(\hat{\xi}_{0|0}, P_{0|0})$ としようか．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　はあ……$p(\xi_1 | \mathcal{Y}_1)$ がどうなるかというと，(ア) に当てはめれば $p(y_1 | \xi_1, x_1)$ と $p(\xi_1)$ の積の正規化ですね．前者は(13.1.2)式より以下ですね．
+\begin{align}
+y_1 | \xi_1, x_1 &\sim N(A^\top x_1 + H^\top \xi_1, \, R) \tag{イ'}
+\end{align}
+　$p(\xi_1)$ はまだ何も観測しない下での $\xi_1$ の密度関数ですが，(13.1.1)式より $\xi_1 = F \xi_0 + v_1$ ですから，これは多変量正規分布にしたがうベクトルの線形変換の和であり，多変量正規分布にしたがいますね\footnote{多変量正規分布にしたがう確率ベクトルは線形変換しても多変量正規分布にしたがいますし，多変量正規分布にしたがう確率ベクトルどうしを足しても多変量正規分布にしたがいます．多変量正規分布のモーメント母関数を用いて証明できます．}．周辺化するまでもないです．
+\begin{align}
+\xi_0 &\sim N(\hat{\xi}_{0|0}, \, P_{0|0}) \notag \\
+F \xi_0 &\sim N(F\hat{\xi}_{0|0}, \, F P_{0|0} F^\top) \notag \\
+v_1 &\sim N(0, \, Q) \notag \\
+\xi_1 = F \xi_0 + v_1 &\sim N(F\hat{\xi}_{0|0}, \, F P_{0|0} F^\top + Q) \equiv N(\hat{\xi}_{1|0}, \, P_{1|0}) \tag{ウ'}
+\end{align}
+　となると，(イ') と (ウ') の密度関数が具体的にわかるので積をとることができますね．それぞれ多変量正規分布ですが正規化因子はさしあたり無視しましょう．$\xi_1$ に依存しない，密度を定数倍しかしない項も無視していきましょう．
+\begin{align}
+p(\xi_1 | \mathcal{Y}_1) &\propto \exp \biggl( -\frac{1}{2} (y_1 - A^\top x_1 - H^\top \xi_1)^\top R^{-1} (y_1 - A^\top x_1 - H^\top \xi_1) \biggr) \notag \\
+& \quad \times \exp \biggl( -\frac{1}{2} (\xi_1 - \hat{\xi}_{1|0})^\top P_{1|0}^{-1} (\xi_1 - \hat{\xi}_{1|0}) \biggr) \notag \\
+&\propto \exp \biggl( -\frac{1}{2} \xi_1 ^\top \Bigl( H R^{-1} H^\top + P_{1|0}^{-1} \Bigr) \xi_1 \notag \\
+& \quad \quad \quad + \frac{1}{2} \Bigl( (y_1 - A^\top x_1)^\top R^{-1} H^\top + \hat{\xi}_{1|0}^\top P_{1|0}^{-1} \Bigr) \xi_1 \notag \\
+& \quad \quad \quad + \frac{1}{2} \xi_1^\top \Bigl( P_{1|0}^{-1} \hat{\xi}_{1|0} + H R^{-1} (y_1 - A^\top x_1) \Bigr)
+\biggr) \tag{エ}
+\end{align}
+(エ) は平方完成して多変量正規分布 $\exp \Bigl(-\frac{1}{2} (\xi_1 - \hat{\xi}_{1|1})^\top P_{1|1}^{-1} (\xi_1 - \hat{\xi}_{1|1}) \Bigr)$ にできますね．$P_{1|1}^{-1} = H R^{-1} H^\top + P_{1|0}^{-1}$ ですから，係数比較で平均ベクトル $\hat{\xi}_{1|1}$ を求めましょう．
+\begin{align}
+p(\xi_1 | \mathcal{Y}_1) &\propto \exp \biggl( -\frac{1}{2} (\xi_1 -\hat{\xi}_{1|1}) ^\top \Bigl( H R^{-1} H^\top + P_{1|0}^{-1} \Bigr) (\xi_1 -\hat{\xi}_{1|1}) \biggr) \notag \\
+&\propto \exp \biggl( -\frac{1}{2} \xi_1 ^\top \Bigl( H R^{-1} H^\top + P_{1|0}^{-1} \Bigr) \xi_1 \notag \\
+& \quad \quad \quad + \frac{1}{2} \Bigl( \hat{\xi}_{1|1}^\top ( H R^{-1} H^\top + P_{1|0}^{-1} ) \Bigr) \xi_1 \notag \\
+& \quad \quad \quad + \frac{1}{2} \xi_1^\top \Bigl( ( H R^{-1} H^\top + P_{1|0}^{-1} ) \hat{\xi}_{1|1} \Bigr)
+\biggr) \tag{オ}
+\end{align}
+これで (オ) と (エ) を比較すれば $\hat{\xi}_{1|1}$ が求まるはずです\footnote{(オ) と (エ) の2行目を比較していますが3行目を比較すれば一発で (カ) にたどり着きます．式変形では観測ノイズの共分散行列 $R$ が対称行列であること，対称行列の逆行列も対称行列であること，転置の線形性などを利用しています，}．
+\begin{align}
+& \quad \; \, \hat{\xi}_{1|1}^\top ( H R^{-1} H^\top + P_{1|0}^{-1} ) = (y_1 - A^\top x_1)^\top R^{-1} H^\top + \hat{\xi}_{1|0}^\top P_{1|0}^{-1} \notag \\
+& \Rightarrow \hat{\xi}_{1|1}^\top = \Bigl( (y_1 - A^\top x_1)^\top R^{-1} H^\top + \hat{\xi}_{1|0}^\top P_{1|0}^{-1} \Bigr) ( H R^{-1} H^\top + P_{1|0}^{-1} )^{-1} \notag \\
+& \Rightarrow \hat{\xi}_{1|1} = ( H R^{-1} H^\top + P_{1|0}^{-1} )^{-1} \Bigl( (y_1 - A^\top x_1)^\top R^{-1} H^\top + \hat{\xi}_{1|0}^\top P_{1|0}^{-1} \Bigr)^\top  \notag \\
+& \Rightarrow \hat{\xi}_{1|1} = ( H R^{-1} H^\top + P_{1|0}^{-1} )^{-1} \Bigl( H R^{-1} (y_1 - A^\top x_1) + P_{1|0}^{-1} \hat{\xi}_{1|0} \Bigr) \tag{カ}
+\end{align}
+求まりました！ つまり，$p(\xi_1 | \mathcal{Y}_1)$ の分布は共分散行列が $P_{1|1}^{-1} = H R^{-1} H^\top + P_{1|0}^{-1}$ で平均ベクトルが (カ) である多変量正規分布です！ ……初期状態の分布を多変量正規分布としましたが，時刻$1$にかけて時間発展し，時刻$1$の観測を受けてベイズの定理を適用してもなお，状態は多変量正規分布にしたがうのですね！
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　そうだね．それに，部長がいま $p(\xi_1 | \mathcal{Y}_1)$ を求めたのと全く同じ要領で，任意の $t$ に対する $p(\xi_t | \mathcal{Y}_t)$ が求まるよ．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+　え？ \, あっ，なるほど，いま $p(\xi_1 | \mathcal{Y}_1)$ を求めたことで以下がわかりましたね．
+\begin{itemize}
+  \item 初期状態 $\xi_0$ の分布を多変量正規分布 $N(\hat{\xi}_{0|0}, P_{0|0})$ とする．
+  \item すると時刻$1$の観測をする前の $\xi_1$ の分布も多変量正規分布になる．(ウ')
+  \item すると時刻$1$の観測をした後の $\xi_1$ の分布も多変量正規分布になる．(エ)(オ)(カ)
+\end{itemize}
+となると次の時刻も同じことが繰り返せます．
+\begin{itemize}
+  \item 時刻$1$の観測をした下での $\xi_1$ の分布は多変量正規分布である．
+  \item すると時刻$2$の観測をする前の $\xi_2$ の分布も多変量正規分布になる．
+  \item すると時刻$2$の観測をした後の $\xi_2$ の分布も多変量正規分布になる．
+\end{itemize}
+つまり任意の時刻 $t$ に対して $p(\xi_t | \mathcal{Y}_{t-1}), \, p(\xi_t | \mathcal{Y}_t)$ は平均ベクトルと共分散行列が以下の多変量正規分布です！
+\begin{align}
+\hat{\xi}_{t|t-1} &= F\hat{\xi}_{t-1|t-1} \notag \\
+P_{t|t-1}^{-1} &= F P_{t-1|t-1} F^\top + Q \notag \\
+\hat{\xi}_{t|t} &= ( H R^{-1} H^\top + P_{t|t-1}^{-1} )^{-1} \Bigl( H R^{-1} (y_t - A^\top x_t) + P_{t|t-1}^{-1} \hat{\xi}_{t|t-1} \Bigr) \tag{キ} \\
+P_{t|t}^{-1} &= H R^{-1} H^\top + P_{t|t-1}^{-1} \tag{ク}
+\end{align}
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　……と思ったのですが，上式の (キ), (ク) は教科書の (13.2.15), (13.2.16) 式とは異なってみえますね．教科書の (13.2.15), (13.2.16) 式の $\hat{\xi}_{t|t}$ と $P_{t|t}^{-1}$ は時刻 $t$ の観測をする前のそれにインクリメントする形式になっていますが，上式はそうなっていません．どこで計算ミスしてしまったのでしょうか？
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　計算ミスではないよ．以下の Woodbury の公式を使ってみよう．
+\end{SERIFU}
+
+
+\vspace{5pt}
+\begin{PROP}[colback=White]{Sherman-Morrison-Woodbury の公式}
+$A \in \mathbb{R}^{n \times n}, \, B \in \mathbb{R}^{n \times m}, \, C \in \mathbb{R}^{m \times n}, \, D \in \mathbb{R}^{m \times m}$ について，$A$ も $D - CA^{-1}B$ も $D$ も $A - BD^{-1}C$ も正則なとき，以下の等式が成り立つ．
+\begin{align}
+(A - BD^{-1}C)^{-1} = A^{-1} + A^{-1} B (D - CA^{-1}B)^{-1} C A^{-1} \notag
+\end{align}
+\end{PROP}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　何ですかその公式は……右辺も左辺もややこしくてありがたみがよくわからないのですが…しかし，今回は $( H R^{-1} H^\top + P_{t|t-1}^{-1} )^{-1}$ の箇所にその公式を適用することができそうですね．$A = P_{t|t-1}^{-1} \in \mathbb{R}^{r \times r}$ としましょう．$D = -R \in \mathbb{R}^{n \times n}$ としましょう．$B = H \in \mathbb{R}^{r \times n}, \, C = H^\top \in \mathbb{R}^{n \times r}$ とすれば次元の要件は満たされますね．適用すると以下のようになります．
+\begin{align}
+( H R^{-1} H^\top + P_{t|t-1}^{-1} )^{-1} = P_{t|t-1} - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1} \tag{ケ}
+\end{align}
+(ケ) を (ク) の両辺の逆行列をとったものに代入すると……教科書の (13.2.16) 式に他なりません！ 
+\begin{align}
+P_{t|t} = P_{t|t-1} - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1} \tag{コ}
+\end{align}
+(ケ) を (キ) にも代入してみましょう．
+\begin{align}
+\hat{\xi}_{t|t} &= \Bigl( P_{t|t-1} - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1} \Bigr) \notag \\
+& \quad \times \Bigl( H R^{-1} (y_t - A^\top x_t) + P_{t|t-1}^{-1} \hat{\xi}_{t|t-1} \Bigr) \notag \\
+&= \hat{\xi}_{t|t-1} + P_{t|t-1} H R^{-1} (y_t - A^\top x_t)  \notag \\
+& \quad - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top \Bigl(P_{t|t-1} H R^{-1} (y_t - A^\top x_t) + \hat{\xi}_{t|t-1} \Bigr) \notag \\
+&= \hat{\xi}_{t|t-1} + \Bigl( 1 - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top \Bigr) P_{t|t-1} H R^{-1} (y_t - A^\top x_t)  \notag \\
+& \quad - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top \hat{\xi}_{t|t-1} \notag \\
+&= \hat{\xi}_{t|t-1} + \Bigl( P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} R \Bigr) R^{-1} (y_t - A^\top x_t)  \notag \\
+& \quad - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top \hat{\xi}_{t|t-1} \notag \\
+&= \hat{\xi}_{t|t-1} + P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} (y_t - A^\top x_t - H^\top \hat{\xi}_{t|t-1})  \tag{サ}
+\end{align}
+教科書の (13.2.15) 式に一致します！
+
+　しかし，(キ), (ク) も計算ミスではなかったのですね．それでも Woodbury の公式を使って (コ), (サ) に変形するのはやはり共分散行列と平均ベクトルが「観測する前のそれにインクリメント」となるのがわかりやすいからなのでしょうか．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　形のわかりやすさ以上の意味があるよ．(キ), (ク) の場合と (コ), (サ) の場合で逆行列をとるべき行列のサイズはどうなっているだろう？ \, どちらの場合でも式の中にインバースがあるから，実際に計算していくにあたって逆行列の計算をしないといけないよね．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　逆行列をとるべき行列のサイズですか？ \, ……(キ), (ク) の場合は $r \times r$，(コ), (サ) の場合は $n \times n$ ですね．両者で異なっていますね……．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　だよね．それで，カルマンフィルタを用いる状況下では，観測ベクトルの次元数 $n$ よりも状態ベクトルの次元数 $r$ を大きくとることが多い．逆行列の計算は行列のサイズに対して $\mathcal{O}(N^3)$ だから，逆行列をとるべき行列のサイズは小さいほどよい．だから普通は (コ), (サ) の形式で状態の平均ベクトルと共分散行列の更新式を表示することが多いはずだよ．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+　なるほど．ときに (コ), (サ) が求まったのはよいのですが，私たちはこれを求めてどうすればいいのでしょうか．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　次の時刻 $t+1$ の状態がどうなるか予測してみたら？ \, (コ), (サ) に基づくとどうなるだろうか．
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+　次の時刻 $t+1$ の状態の予測ですか．といっても時刻 $t$ の状態を (13.1.1) 式にしたがって線形変換するだけですよね．結局多変量正規分布のままですし．
+\begin{align}
+P_{t+1|t} &= F P_{t|t} F^\top + Q \notag \\
+&= F P_{t|t-1} F^\top - F P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1} F^\top + Q \tag{シ}\\
+\hat{\xi}_{t+1|t} &= F \notag \hat{\xi}_{t|t} \notag \\
+&= F\hat{\xi}_{t|t-1} + FP_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} (y_t - A^\top x_t - H^\top \hat{\xi}_{t|t-1})  \tag{ス}
+\end{align}
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　うん．ここで $K_t \equiv FP_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1}$ とおくと以下のようにかけるよ．この $K_t$ をカルマンゲインとか利得行列とかよぶ．
+\begin{align}
+\hat{\xi}_{t+1|t} = F\hat{\xi}_{t|t-1} + K_t (y_t - A^\top x_t - H^\top \hat{\xi}_{t|t-1}) \tag{ス'}
+\end{align}
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+　カルマンゲイン？
+\end{SERIFU}
+
+
+\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+　(ス') においてカルマンゲイン $K_t$ がかかっている $(y_1 - A^\top x_1 - H^\top \hat{\xi}_{t|t-1})$ の部分って，「時刻 $t-1$ までの観測に基づいて $y_t$ を予測したときの誤差」(予測分布の期待値を予測値としたときの) に他ならないよね．だから，カルマンゲインは「予測誤差を受けて状態の予測をどれだけ修正するか」という係数(行列)になる．
+　カルマンゲイン $K_t$ は例えば観測ノイズの共分散行列 $R$ のノルムが大きいと小さくなるよね．「観測のノイズが大きいなら予測誤差が出てもあまり修正しない」というのは理解しやすいよね．
+\end{SERIFU}
 
 % \vspace{5pt}
 % \noindent つづかない
