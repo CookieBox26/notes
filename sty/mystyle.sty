@@ -84,8 +84,10 @@
 % 独自のコード枠の定義
 \newtcolorbox{CODE}[1][]{
     breakable,  % ページをまたぐのに必要
-    boxrule=0pt, frame hidden,  % フレーム隠蔽
-    sharp corners,
+    arc=3pt,
+    colframe=DarkGray,
+    boxrule=1pt,
+    top=1pt, right=6pt, left=6pt, bottom=1pt,  % パディング
     #1
 }
 

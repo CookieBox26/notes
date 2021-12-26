@@ -1,0 +1,117 @@
+\documentclass[b5paper,xelatex,ja=standard,10pt]{bxjsarticle}
+\usepackage{mystyle}  % export TEXINPUTS="./;../sty/;"
+\graphicspath{{../images/}}
+
+\usepackage{listings}
+\def\lstlanguagefiles{lstjava.tex}
+\lstset{language=java}
+
+\renewcommand{\footnoterule}{%
+  \kern -5pt
+  \color{DarkGray}
+  \hrule width \textwidth height 1pt
+  \kern 4.7pt
+}
+
+
+\begin{document}
+
+
+% 地の文の文字色をグレーに変更する
+\addfontfeatures{Color=DarkGray}
+\addCJKfontfeatures{Color=DarkGray}
+
+
+\part*{クッキーと素敵な Spring Boot}
+
+\begin{spacing}{0.9}
+\tableofcontents
+\end{spacing}
+
+%\vspace{-5pt}
+
+\vspace{3pt}
+
+\section*{クッキー、Spring Boot 開発に参加する}
+\addcontentsline{toc}{section}{クッキー、Spring Boot 開発に参加する}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+Spring Boot (Java)による REST API 開発に参加することになりました。Python でならいくつかのやり方で REST API を実装したことがありますが、Spring Boot は触ったことがありません。そもそも Java での開発も初めてに等しいです。Java モジュールに数行の修正 PR をしたことは何度かありますが、機能追加をするなどは経験がないので、Java における開発プラクティスの知見もまるでありません。C\# での開発経験はありますが昔すぎて記憶が……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_2.png}
+……まあしかし、REST API であるならばコードをみれば何が何なのかは概ねわかるでしょう。今回の私のタスクは何もスクラッチで REST API を構築することではありません。{\addCJKfontfeatures{Color=VioletRed}{\addfontfeatures{Color=VioletRed}現在既に「弁当」を返却しているベントウAPIがあり、リクエストに応じてその「弁当」に「卵焼き」を追加する}}だけです。外部 API から新たに「卵」を取り寄せる必要はありますが――。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+ともかく適当なソースファイルをみてみましょう――どのファイルも1行目に
+\begin{CODE}[title=\texttt{src/main/java/com/example/bentou/BentouApplication.java}]
+\begin{lstlisting}[basicstyle=\normalsize]
+package com.example.bentou;
+\end{lstlisting}
+\end{CODE}
+などとありますね。これは「このソースファイル内に定義されているクラスは com.example.bentou なるパッケージに所属しています」という意味ですか。クラスを適宜パッケージに整理せよということですね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+では、HTTP リクエストを受け取るハンドラはどこにあるのでしょうか?  現在の仕様書によると {\addfontfeatures{Color=FireBrick}/bentou} なるエンドポイントに HTTP GET することで「弁当」が返却されるはずですが……あっ、このクラスでしょうか。
+\begin{CODE}[title=\texttt{src/main/java/com/example/bentou/BentouController.java}]
+\begin{lstlisting}[basicstyle=\normalsize]
+package com.example.bentou;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BentouController {
+    private final OnigiriService service;
+
+    @Autowired
+    public BentouController(@Qualifier("tuna") OnigiriService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/bentou")
+    public Onigiri provide() {
+        Onigiri onigiri = this.service.provideOnigiri();
+        return onigiri;
+    }
+}
+\end{lstlisting}
+\end{CODE}
+{\addfontfeatures{Color=VioletRed}@GetMapping}({\addfontfeatures{Color=FireBrick}"/bentou"}) が付加されたメソッド(Python でいうデコレータのようですが――?)がリクエストを受け取っておにぎりを返却しているようにみえます。このメソッドがリクエストハンドラとみていいでしょう。
+\end{SERIFU}
+
+
+\section*{クッキー、謎に直面する}
+\addcontentsline{toc}{section}{クッキー、謎に直面する}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+リクエストハンドラがわかればリクエストに応じて返却フィールドを追加する変更は実装できそうです。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+……しかし、リクエストハンドラをもつ BentouController クラスがどこでインスタンス化されているのかさっぱりわかりません。リポジトリを grep してもそれらしき箇所がありません。BentouController クラスにはコンストラクタもあるようですし、やはりこれはインスタンス化して利用するものでしょう。であれば、何がどうなって――
+\end{SERIFU}
+
+
+\section*{クッキー、単体テストを実装する}
+\addcontentsline{toc}{section}{クッキー、単体テストを実装する}
+\vspace{3pt}
+
+
+\addcontentsline{toc}{section}{参考文献}
+\begin{thebibliography}{99}
+    \bibitem{mockito_stubbing_consecutive_calls} \url{https://javadoc.io/doc/org.mockito/mockito-core/4.0.0/org/mockito/Mockito.html#10}
+\end{thebibliography}
+
+
+% \vspace{5pt}
+% \noindent つづかない
+
+
+\end{document}
