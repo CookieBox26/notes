@@ -13,6 +13,9 @@
   \kern 4.7pt
 }
 
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
+\makeatother
 
 \begin{document}
 
@@ -21,19 +24,23 @@
 \addfontfeatures{Color=DarkGray}
 \addCJKfontfeatures{Color=DarkGray}
 
+%\part*{クッキーと素敵な Spring Boot}
 
-\part*{クッキーと素敵な Spring Boot}
-
-\begin{spacing}{0.9}
-\tableofcontents
+\begin{spacing}{1.0}
+\textbf{\tableofcontents}
 \end{spacing}
 
-%\vspace{-5pt}
 
+\section*{まえがき}
+\addcontentsline{toc}{section}{まえがき}
+%\addcontentsline{toc}{section}{\protect\numberline{\null}まえがき}
 \vspace{3pt}
 
-\section*{クッキー、Spring Boot 開発に参加する}
-\addcontentsline{toc}{section}{クッキー、Spring Boot 開発に参加する}
+\newcounter{mycounter}
+\stepcounter{mycounter}
+\newcommand*{\mysectiontitle}{クッキー、Spring Boot 開発に参加する}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
 \vspace{3pt}
 
 \begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
@@ -86,9 +93,11 @@ public class BentouController {
 \end{SERIFU}
 
 
-\section*{クッキー、謎に直面する}
-\addcontentsline{toc}{section}{クッキー、謎に直面する}
-\vspace{3pt}
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、最大の謎に直面する}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
 
 \begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
 リクエストハンドラがわかればリクエストに応じて返却フィールドを追加する変更は実装できそうです。
@@ -99,9 +108,46 @@ public class BentouController {
 \end{SERIFU}
 
 
-\section*{クッキー、単体テストを実装する}
-\addcontentsline{toc}{section}{クッキー、単体テストを実装する}
-\vspace{3pt}
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、Controller の単体テストで行き詰まる}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、RestTemplate の利用に行き詰まる}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、Service の単体テストで行き詰まる}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、サーキットブレーカーに嫌われる}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、接続プールが不足する}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキー、メトリクスを隠される}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+
+\stepcounter{mycounter}
+\renewcommand*{\mysectiontitle}{クッキーと素敵な Spring Boot}
+\section*{第{\themycounter}話 \, \mysectiontitle}
+\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
 
 
 \addcontentsline{toc}{section}{参考文献}
