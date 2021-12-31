@@ -14,3 +14,4 @@ $ cd 20211114_hamilton
 $ export TEXINPUTS="./;../sty/;"
 $ xelatex main.tex
 ```
+
