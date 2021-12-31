@@ -17,8 +17,26 @@
 \renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
 \makeatother
 
+\usepackage{eso-pic}
+
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=0.96\paperwidth,height=0.96\paperheight,%
+keepaspectratio]{cover.png}%
+\vfill
+}}}
+
+
+
 \begin{document}
 
+\AddToShipoutPicture*{\BackgroundPic}
+\begin{titlepage}
+\ 
+\end{titlepage}
 
 % 地の文の文字色をグレーに変更する
 \addfontfeatures{Color=DarkGray}
