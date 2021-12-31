@@ -10,8 +10,26 @@
   \kern 4.7pt
 }
 
+\usepackage{eso-pic}
+
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=0.96\paperwidth,height=0.96\paperheight,%
+keepaspectratio]{cover.png}%
+\vfill
+}}}
+
+
 
 \begin{document}
+
+\AddToShipoutPicture*{\BackgroundPic}
+\begin{titlepage}
+\ 
+\end{titlepage}
 
 
 % 地の文の文字色をグレーに変更する
@@ -38,7 +56,7 @@ https://github.com/CookieBox26/notes/issues
 \addcontentsline{toc}{section}{オーバービュー}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_5.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_0.png}
 NeurIPS 2021 で発表された(時)系列データを扱うモデルに関連する研究をみていきましょう。NeurIPS 2021 で発表された論文の総数は……2334本！？
 \end{SERIFU}
 
