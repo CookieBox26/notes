@@ -1,4 +1,6 @@
 \documentclass[b5paper,xelatex,ja=standard,10pt]{bxjsarticle}
+\setpagelayout*{top=18truemm,bottom=21truemm,left=18truemm,right=18truemm}
+\addtolength{\footskip}{8mm}  % ページ番号を下げる
 \usepackage{mystyle}  % export TEXINPUTS="./;../sty/;"
 \graphicspath{{../images/}}
 
@@ -10,6 +12,10 @@
   \kern 4.7pt
 }
 
+%\makeatletter
+%\renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
+%\makeatother
+
 \usepackage{eso-pic}
 
 \newcommand\BackgroundPic{%
@@ -17,7 +23,7 @@
 \parbox[b][\paperheight]{\paperwidth}{%
 \vfill
 \centering
-\includegraphics[width=0.99\paperwidth,height=0.99\paperheight,%
+\includegraphics[width=1.0\paperwidth,height=1.0\paperheight,%
 keepaspectratio]{cover.png}%
 \vfill
 }}}
@@ -56,15 +62,15 @@ https://github.com/CookieBox26/notes/issues
 \addcontentsline{toc}{section}{オーバービュー}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
 NeurIPS 2021 で発表された(時)系列データを扱うモデルに関連する研究をみていきましょう。NeurIPS 2021 で発表された論文の総数は……2334本！？
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
 あ、あまりに多いので機械的に絞り込みましょう。タイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。画像認識, GAN, 強化学習系のタイトルは断腸の思いでとばしていきましょう……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
 ――こうしてみると、\textbf{「セルフアテンションの計算量に対処する」}は引き続き人気(?)なテーマである一方、\textbf{「RNN を理論的に理解する」}という研究も割りにみられるように感じられます。以下は私見による整理です。
 \begin{itemize}
   \item \textbf{RNN を理論的に理解する} \cite{05_Fermanian2021} \cite{18_Smith2021} \cite{21_Wang2021} \cite{22_Panigrahi2021}。
@@ -145,17 +151,31 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
   \item アテンションの計算に高速フーリエ変換を応用する \cite{25_Luo2021}。
 \end{itemize}
 
+
 \section*{各論(未執筆)}
 \addcontentsline{toc}{section}{各論(未執筆)}
 
-\vspace{5pt}
-\begin{PROP}[colback=White]{カーネル法の計算量削減のアプローチを応用する \cite{03_Chen2021}}
-\textbf{原題: Skyformer: Remodel Self-Attention with Gaussian Kernel and Nystr\"om Method (Chen et al.)} 
-\tcblower
-トランスフォーマーはセルフアテンション層が計算量のボトルネックとなっていますが、カーネルマシンもまた内積計算がボトルネックになっている、と。そうですね、カーネル法のグラム行列のサイズもデータサイズに応じて $N \times N$ になりますものね。そこで、カーネル法で用いられる Nyström 近似を適用できるようにして適用したトランスフォーマーがスカイフォーマーであると。なぜスカイフォーマーなのか少し気になったので論文を覗いてみると \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method なのですね…。
-\end{PROP}
 
-以下未執筆。
+\newcommand*{\mysectiontitle}{「線形状態空間層」}
+%\section*{\cite{01_Gu2021} \, \mysectiontitle}
+%\addcontentsline{toc}{section}{\cite{01_Gu2021} \, \mysectiontitle} %\numberline 
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysectiontitle}{ふがふが}
+\section*{\cite{25_Luo2021} \, \mysectiontitle}
+\addcontentsline{toc}{subsection}{\cite{25_Luo2021} \, \mysectiontitle}
+\vspace{3pt}
+ふが。
+
+
+%\vspace{5pt}
+%\begin{PROP}[colback=White]{カーネル法の計算量削減のアプローチを応用する \cite{03_Chen2021}}
+%\textbf{原題: Skyformer: Remodel Self-Attention with Gaussian Kernel and Nystr\"om Method (Chen et al.)} 
+%\tcblower
+%トランスフォーマーはセルフアテンション層が計算量のボトルネックとなっていますが、カーネルマシンもまた内積計算がボトルネックになっている、と。そうですね、カーネル法のグラム行列のサイズもデータサイズに応じて $N \times N$ になりますものね。そこで、カーネル法で用いられる Nyström 近似を適用できるようにして適用したトランスフォーマーがスカイフォーマーであると。なぜスカイフォーマーなのか少し気になったので論文を覗いてみると \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method なのですね…。
+%\end{PROP}
 
 \addcontentsline{toc}{section}{参考文献}
 \begin{thebibliography}{99}
@@ -184,6 +204,20 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
     \bibitem{23_Wu2021} Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{24_Ren2021} Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{25_Luo2021} Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{26_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{27_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{28_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{29_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{30_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{31_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{32_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{33_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{34_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{35_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{36_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{37_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{38_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{39_2021} Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{In NeurIPS 2021}}.
 \end{thebibliography}
 
 
