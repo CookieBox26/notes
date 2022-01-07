@@ -73,42 +73,42 @@ NeurIPS 2021 で発表されたニューラル系列モデルに関連する研�
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
 ――こうしてみると、\textbf{「セルフアテンションの計算量に対処する」}は引き続き人気(?)なテーマである一方、\textbf{「RNN を理論的に理解する」}という研究も割りにみられるように感じられます。以下は私見による整理です。
 \begin{itemize}
-  \item \textbf{RNN を理論的に理解する} \cite{AdelineFermanian2021} \cite{18_Smith2021} \cite{21_Wang2021} \cite{22_Panigrahi2021}。
+  \item \textbf{RNN を理論的に理解する} \cite{AdelineFermanian2021} \cite{JimmySmith2021} \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
   \item RNN を工夫する。
   \begin{itemize}
-    \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{06_Lim2021}。
-    \item RNN 自体が時間変化できるようにする \cite{09_Zhang2021}。
+    \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
+    \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
   \end{itemize}
 
   \vspace{5pt}
-  \item トランスフォーマーを理論的に理解する \cite{AliakbarPanahi2021} \cite{16_Bricken2021}。
+  \item トランスフォーマーを理論的に理解する \cite{AliakbarPanahi2021} \cite{TrentonBricken2021}。
   \item トランスフォーマーを工夫する。
   \begin{itemize}
-    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{23_Wu2021}。
-    \item グリッド分割をさらにする(ビジョントランスフォーマー) \cite{17_Han2021}。
-    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{07_Dutta2021} \cite{11_Jaszczur2021} \cite{19_Chen2021} \cite{20_Zhu2021} \cite{24_Ren2021} \cite{25_Luo2021}。
-    \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{15_Zhang2021}。
+    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
+    \item グリッド分割をさらにする(ビジョントランスフォーマー) \cite{KaiHan2021}。
+    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021}。
+    \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
     \item トランスフォーマーのアーキテクチャ自体を再考する。
     \begin{itemize}
-      \item 言語処理に適した構造を探索する \cite{08_So2021}
-      \item セルフアテンションの代わりにゲート付MLPにする \cite{10_Liu2021}。
+      \item 言語処理に適した構造を探索する \cite{DavidSo2021}
+      \item セルフアテンションの代わりにゲート付MLPにする \cite{HanxiaoLiu2021}。
     \end{itemize}
   \end{itemize}
 
   \vspace{5pt}
-  \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{14_Zhu2021}。
+  \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{ZhiboZhu2021}。
 
   \vspace{5pt}
   \item 微分方程式で記述されるシステムをニューラルネットで実現する。
   \begin{itemize}
     \item 線形時不変連続時間システムをニューラルネットで実現する \cite{AlbertGu2021}。
-    \item 連立微分方程式システムをベイズフィルタで解く \cite{13_Schmidt2021}。
+    \item 連立微分方程式システムをベイズフィルタで解く \cite{JonathanSchmidt2021}。
   \end{itemize}
   
   \vspace{5pt}
   \item 系列モデルを新しい用途に活用する。
   \begin{itemize}
-    \item トランスフォーマーを活用してガウス過程モデル適用時のカーネルを同定する \cite{12_Simpson2021}。
+    \item トランスフォーマーを活用してガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
   \end{itemize}
 \end{itemize}
 \end{SERIFU}
@@ -120,8 +120,8 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
 
 \begin{itemize}
   \item RNN がある再生核ヒルベルト空間におけるカーネル法と捉えられることを示す \cite{AdelineFermanian2021}。
-  \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{18_Smith2021}。
-  \item これまでの理論保証の制約を緩和する \cite{21_Wang2021} \cite{22_Panigrahi2021}。
+  \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
+  \item これまでの理論保証の制約を緩和する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
 \end{itemize}
 
 \subsection*{グループ「セルフアテンションの計算量に対処する」}
@@ -131,24 +131,24 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
 \begin{itemize}
   \item $Q K ^\top$ の成分を間引く(スパースにする) 。
   \begin{itemize}
-    \item どの成分か不要なのか自体を学習する \cite{11_Jaszczur2021}。
+    \item どの成分か不要なのか自体を学習する \cite{SebastianJaszczur2021}。
   \end{itemize}
   \item $Q K ^\top$ を低ランク近似する(行列分解する)。
   \begin{itemize}
     \item カーネル法の計算量削減のアプローチを応用する \cite{YifanChen2021}。
   \end{itemize}
-  \item スパース化と低ランク近似を統合する \cite{19_Chen2021}。
+  \item スパース化と低ランク近似を統合する \cite{BeidiChen2021}。
   \vspace{5pt}
   \item $Q K ^\top$ の計算箇所でだけ入力系列を短い系列に射影する \cite{XuezheMa2021}。
   \begin{itemize}
-    \item 短距離依存性はそのまま計算し、長距離依存性は短い系列に射影する \cite{20_Zhu2021}。
+    \item 短距離依存性はそのまま計算し、長距離依存性は短い系列に射影する \cite{ChenZhu2021}。
   \end{itemize}
   \vspace{5pt}
-  \item 長距離依存性については重み付き期待値に対してアテンションする \cite{24_Ren2021}。
+  \item 長距離依存性については重み付き期待値に対してアテンションする \cite{HongyuRen2021}。
   \vspace{5pt}
-  \item 最初のセルフアテンション層では $Q K ^\top$ を計算するが、2番目以降ではそれを時間発展させる \cite{07_Dutta2021}。
+  \item 最初のセルフアテンション層では $Q K ^\top$ を計算するが、2番目以降ではそれを時間発展させる \cite{SubhabrataDutta2021}。
   \vspace{5pt}
-  \item アテンションの計算に高速フーリエ変換を応用する \cite{25_Luo2021}。
+  \item アテンションの計算に高速フーリエ変換を応用する \cite{ShengjieLuo2021}。
 \end{itemize}
 
 
@@ -197,6 +197,215 @@ Nyström 近似?
 \vspace{3pt}
 ほげ。
 
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{DavidSo2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{DavidSo2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{AstonZhang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{AstonZhang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{FergusSimpson2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{FergusSimpson2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ShujianZhang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ShujianZhang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{TrentonBricken2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{TrentonBricken2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{KaiHan2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{KaiHan2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{JimmySmith2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{JimmySmith2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{BeidiChen2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{BeidiChen2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ChenZhu2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ChenZhu2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{LifuWang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{LifuWang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{HaixuWu2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{HaixuWu2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{HongyuRen2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{HongyuRen2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{BinhTang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{BinhTang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{AnupSarma2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{AnupSarma2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{SebastianZeng2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{SebastianZeng2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{EliaTurner2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{EliaTurner2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{ZimingZhang2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{ZimingZhang2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{YutongBai2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{YutongBai2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
+
+
+\renewcommand*{\mysubsectiontitle}{ほげ}
+\subsection*{\cite{StephenChung2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{StephenChung2021} \, \mysubsectiontitle}
+\vspace{3pt}
+ほげ。
 
 
 \renewcommand*{\mysubsectiontitle}{ほげ}
@@ -251,41 +460,41 @@ Nyström 近似?
     \bibitem{XuezheMa2021} Xuezhe Ma, Xiang Kong, Sinong Wang, Chunting Zhou, Jonathan May, Hao Ma, Luke Zettlemoyer. Luna: Linear Unified Nested Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/14319d9cfc6123106878dc20b94fbaf3-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{AdelineFermanian2021} Adeline Fermanian, Pierre Marion, Jean-Philippe Vert, Gérard Biau. Framing RNN as a kernel method: A neural ODE approach. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/18a9042b3fc5b02fe3d57fea87d6992f-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{06_Lim2021} Soon Hoe Lim, N. Benjamin Erichson, Liam Hodgkinson, Michael W. Mahoney. Noisy Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/29301521774ff3cbd26652b2d5c95996-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{07_Dutta2021} Subhabrata Dutta, Tanya Gautam, Soumen Chakrabarti, Tanmoy Chakraborty. Redesigning the Transformer Architecture with Insights from Multi-particle Dynamical Systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2bd388f731f26312bfc0fe30da009595-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{08_So2021} David So, Wojciech Mańke, Hanxiao Liu, Zihang Dai, Noam Shazeer, Quoc Le. Searching for Efficient Transformers for Language Modeling. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{09_Zhang2021} Aston Zhang, Yi Tay, Yikang Shen, Alvin Chan Guo Wei, SHUAI ZHANG. Self-Instantiated Recurrent Units with Dynamic Soft Recursion. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/3341f6f048384ec73a7ba2e77d2db48b-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{10_Liu2021} Hanxiao Liu, Zihang Dai, David So, Quoc Le. Pay Attention to MLPs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/4cc05b35c2f937c5bd9e7d41d3686fff-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SoonHoeLim2021} Soon Hoe Lim, N. Benjamin Erichson, Liam Hodgkinson, Michael W. Mahoney. Noisy Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/29301521774ff3cbd26652b2d5c95996-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SubhabrataDutta2021} Subhabrata Dutta, Tanya Gautam, Soumen Chakrabarti, Tanmoy Chakraborty. Redesigning the Transformer Architecture with Insights from Multi-particle Dynamical Systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2bd388f731f26312bfc0fe30da009595-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{DavidSo2021} David So, Wojciech Mańke, Hanxiao Liu, Zihang Dai, Noam Shazeer, Quoc Le. Searching for Efficient Transformers for Language Modeling. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AstonZhang2021} Aston Zhang, Yi Tay, Yikang Shen, Alvin Chan Guo Wei, SHUAI ZHANG. Self-Instantiated Recurrent Units with Dynamic Soft Recursion. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/3341f6f048384ec73a7ba2e77d2db48b-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HanxiaoLiu2021} Hanxiao Liu, Zihang Dai, David So, Quoc Le. Pay Attention to MLPs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/4cc05b35c2f937c5bd9e7d41d3686fff-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{11_Jaszczur2021} Sebastian Jaszczur, Aakanksha Chowdhery, Afroz Mohiuddin, Łukasz Kaiser, Wojciech Gajewski, Henryk Michalewski, Jonni Kanerva. Sparse is Enough in Scaling Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/51f15efdd170e6043fa02a74882f0470-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{12_Simpson2021} Fergus Simpson, Ian Davies, Vidhi Lalchand, Alessandro Vullo, Nicolas Durrande, Carl Edward Rasmussen. Kernel Identification Through Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/56c3b2c6ea3a83aaeeff35eeb45d700d-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{13_Schmidt2021} Jonathan Schmidt, Nicholas Krämer, Philipp Hennig. A Probabilistic State Space Model for Joint Inference from Differential Equations and Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6734fa703f6633ab896eecbdfad8953a-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{14_Zhu2021} Zhibo Zhu, Ziqi Liu, Ge Jin, Zhiqiang Zhang, Lei Chen, Jun Zhou, Jianyong Zhou. MixSeq: Connecting Macroscopic Time Series Forecasting with Microscopic Time Series Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6b5754d737784b51ec5075c0dc437bf0-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{15_Zhang2021} Shujian Zhang, Xinjie Fan, Huangjie Zheng, Korawat Tanwisuth, Mingyuan Zhou. Alignment Attention by Matching Key and Query Distributions. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6fd6b030c6afec018415662d0db43f9d-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SebastianJaszczur2021} Sebastian Jaszczur, Aakanksha Chowdhery, Afroz Mohiuddin, Łukasz Kaiser, Wojciech Gajewski, Henryk Michalewski, Jonni Kanerva. Sparse is Enough in Scaling Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/51f15efdd170e6043fa02a74882f0470-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{FergusSimpson2021} Fergus Simpson, Ian Davies, Vidhi Lalchand, Alessandro Vullo, Nicolas Durrande, Carl Edward Rasmussen. Kernel Identification Through Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/56c3b2c6ea3a83aaeeff35eeb45d700d-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{JonathanSchmidt2021} Jonathan Schmidt, Nicholas Krämer, Philipp Hennig. A Probabilistic State Space Model for Joint Inference from Differential Equations and Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6734fa703f6633ab896eecbdfad8953a-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ZhiboZhu2021} Zhibo Zhu, Ziqi Liu, Ge Jin, Zhiqiang Zhang, Lei Chen, Jun Zhou, Jianyong Zhou. MixSeq: Connecting Macroscopic Time Series Forecasting with Microscopic Time Series Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6b5754d737784b51ec5075c0dc437bf0-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShujianZhang2021} Shujian Zhang, Xinjie Fan, Huangjie Zheng, Korawat Tanwisuth, Mingyuan Zhou. Alignment Attention by Matching Key and Query Distributions. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6fd6b030c6afec018415662d0db43f9d-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{16_Bricken2021} Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{17_Han2021} Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{18_Smith2021} Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{19_Chen2021} Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{20_Zhu2021} Chen Zhu, Wei Ping, Chaowei Xiao, Mohammad Shoeybi, Tom Goldstein, Anima Anandkumar, Bryan Catanzaro. Long-Short Transformer: Efficient Transformers for Language and Vision. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9425be43ba92c2b4454ca7bf602efad8-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{TrentonBricken2021} Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{KaiHan2021} Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{JimmySmith2021} Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{BeidiChen2021} Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ChenZhu2021} Chen Zhu, Wei Ping, Chaowei Xiao, Mohammad Shoeybi, Tom Goldstein, Anima Anandkumar, Bryan Catanzaro. Long-Short Transformer: Efficient Transformers for Language and Vision. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9425be43ba92c2b4454ca7bf602efad8-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{21_Wang2021} Lifu Wang, Bo Shen, Bo Hu, Xing Cao. On the Provable Generalization of Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/a928731e103dfc64c0027fa84709689e-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{22_Panigrahi2021} Abhishek Panigrahi, Navin Goyal. Learning and Generalization in RNNs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/b04c387c8384ca083a71b8da516f65f6-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{23_Wu2021} Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{24_Ren2021} Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{25_Luo2021} Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{LifuWang2021} Lifu Wang, Bo Shen, Bo Hu, Xing Cao. On the Provable Generalization of Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/a928731e103dfc64c0027fa84709689e-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AbhishekPanigrahi2021} Abhishek Panigrahi, Navin Goyal. Learning and Generalization in RNNs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/b04c387c8384ca083a71b8da516f65f6-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HaixuWu2021} Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HongyuRen2021} Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShengjieLuo2021} Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{In NeurIPS 2021}}.
 
     \bibitem{LingxiaoHuang2021} Lingxiao Huang, K Sudhir, Nisheeth Vishnoi. Coresets for Time Series Clustering. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c115ba9e04ab27fbbb664f932112246d-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{27_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{28_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{29_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{30_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{BinhTang2021} Binh Tang, David Matteson. Probabilistic Transformer For Time Series Analysis. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c68bd9055776bf38d8fc43c0ed283678-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AnupSarma2021} Anup Sarma, Sonali Singh, Huaipan Jiang, Rui Zhang, Mahmut Kandemir, Chita Das. Structured in Space, Randomized in Time: Leveraging Dropout in RNNs for Efficient Training. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/cd81cfd0a3397761fac44ddbe5ec3349-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SebastianZeng2021} Sebastian Zeng, Florian Graf, Christoph Hofer, Roland Kwitt. Topological Attention for Time Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d062f3e278a1fbba2303ff5a22e8c75e-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShuhaoCao2021} Shuhao Cao. Choose a Transformer: Fourier or Galerkin. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d0921d442ee91b896ad95059d13df618-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{31_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{32_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{33_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{34_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
-    \bibitem{35_2021} . . {\addfontfeatures{Color=SteelBlue}\href{}{In NeurIPS 2021}}.
+    \bibitem{EliaTurner2021} Elia Turner, Kabir Dabholkar, Omri Barak. Charting and Navigating the Space of Solutions for Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d530d454337fb09964237fecb4bea6ce-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ZimingZhang2021} Ziming Zhang, Yun Yue, Guojun Wu, Yanhua Li, Haichong Zhang. SBO-RNN: Reformulating Recurrent Neural Networks via Stochastic Bilevel Optimization. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d87ca511e2a8593c8039ef732f5bffed-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{QuentinRebjock2021} Quentin Rebjock, Baris Kurt, Tim Januschowski, Laurent Callot. Online false discovery rate control for anomaly detection in time series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/def130d0b67eb38b7a8f4e7121ed432c-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{YutongBai2021} Yutong Bai, Jieru Mei, Alan L. Yuille, Cihang Xie. Are Transformers more robust than CNNs? . {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/e19347e1c3ca0c0b97de5fb3b690855a-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{StephenChung2021} Stephen Chung, Hava Siegelmann. Turing Completeness of Bounded-Precision Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/ef452c63f81d0105dd4486f775adec81-Abstract.html}{In NeurIPS 2021}}.
 
     \bibitem{JannikKossen2021} Jannik Kossen, Neil Band, Clare Lyle, Aidan N. Gomez, Thomas Rainforth, Yarin Gal. Self-Attention Between Datapoints: Going Beyond Individual Input-Output Pairs in Deep Learning. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{TanNguyen2021} Tan Nguyen, Vai Suliafu, Stanley Osher, Long Chen, Bao Wang. FMMformer: Efficient and Flexible Transformer via Decomposed Near-field and Far-field Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f621585df244e9596dc70a39b579efb1-Abstract.html}{In NeurIPS 2021}}.
