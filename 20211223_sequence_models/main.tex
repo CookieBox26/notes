@@ -1,8 +1,10 @@
 \documentclass[b5paper,xelatex,ja=standard,10pt]{bxjsarticle}
-\setpagelayout*{top=18truemm,bottom=21truemm,left=18truemm,right=18truemm}
-\addtolength{\footskip}{8mm}  % ページ番号を下げる
 \usepackage{mystyle}  % export TEXINPUTS="./;../sty/;"
 \graphicspath{{../images/}}
+
+\usepackage{listings}
+\def\lstlanguagefiles{lstpython.tex}
+\lstset{language=python}
 
 
 \renewcommand{\footnoterule}{%
@@ -450,6 +452,23 @@ Nyström 近似?
 
 \section*{Appendix}
 \addcontentsline{toc}{section}{Appendix}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+スカイフォーマー\cite{YifanChen2021}を動かしてみましょう。
+\begin{CODE}[title=\texttt{Jupyter Notebook}]
+\begin{lstlisting}[basicstyle=\normalsize]
+from models.model_LRA import ModelForSC, ModelForSCDual
+from config import Config
+
+model_config = Config["lra-text"]["model"]
+model_config["mixed_precision"] = True
+model_config["attn_type"] = "softmax"
+model = ModelForSC(model_config)
+print(model)
+\end{lstlisting}
+\end{CODE}
+これに Long Range Arena のデータを渡せばよいですね。
+\end{SERIFU}
 
 
 \addcontentsline{toc}{section}{参考文献}
