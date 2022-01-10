@@ -3,9 +3,17 @@
 \graphicspath{{../images/}}
 
 \usepackage{listings}
-\def\lstlanguagefiles{lstpython.tex}
-\lstset{language=python}
-
+\lstset{  % グローバル設定
+  columns=fixed,  % 等幅
+  basewidth=0.5em,  % 字間詰め
+  lineskip=-3pt,  % 行間詰め
+  % フォント設定
+  basicstyle={\ttfamily\small\color{DarkGray}},  % 全体設定
+  keywordstyle=[1]{\color{RoyalBlue}},  % kewords[1]の設定 (Python だと予約語)
+  keywordstyle=[2]{\color{VioletRed}},  % kewords[2]の設定 (Python だと組み込み関数)
+  stringstyle={\color{FireBrick}},  % 文字列リテラルの設定
+  commentstyle={\color{SeaGreen}},  % コメントの設定
+}
 
 \renewcommand{\footnoterule}{%
   \kern -5pt
@@ -455,8 +463,8 @@ Nyström 近似?
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
 スカイフォーマー\cite{YifanChen2021}を動かしてみましょう。
-\begin{CODE}[title=\texttt{Jupyter Notebook}]
-\begin{lstlisting}[basicstyle=\normalsize]
+\begin{CODE}[title=\texttt{Python}]
+\begin{lstlisting}[language=python]
 from models.model_LRA import ModelForSC, ModelForSCDual
 from config import Config
 
@@ -467,6 +475,31 @@ model = ModelForSC(model_config)
 print(model)
 \end{lstlisting}
 \end{CODE}
+
+\begin{CODE}[title=\texttt{出力},colback=SlateGray2]
+\begin{lstlisting}[basicstyle={\ttfamily\small\color{White}}]
+ModelForSC(
+  (model): Model(
+    (embeddings): Embeddings(
+      (word_embeddings): Embedding(512, 64)
+      (position_embeddings): Embedding(4000, 64)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (transformer_0): TransformerLayer(
+      (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (mha): Attention(
+        (W_q): Linear(in_features=64, out_features=64, bias=True)
+        (W_k): Linear(in_features=64, out_features=64, bias=True)
+        (W_v): Linear(in_features=64, out_features=64, bias=True)
+        (attn): SoftmaxAttention(
+          (drop_attn): Dropout(p=0.1, inplace=False)
+        )
+# 以下省略
+\end{lstlisting}
+\end{CODE}
+
+
+
 これに Long Range Arena のデータを渡せばよいですね。
 \end{SERIFU}
 
@@ -520,10 +553,6 @@ print(model)
     \bibitem{FanKengSun2021} Fan-Keng Sun, Chris Lang, Duane Boning. Adjusting for Autocorrelated Errors in Neural Networks for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f8e6ba1db0f3c4054afec1684ba8fb26-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{AbdulFatirAnsari2021} Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{In NeurIPS 2021}}.
 \end{thebibliography}
-
-
-% \vspace{5pt}
-% \noindent つづかない
 
 
 \end{document}
