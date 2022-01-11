@@ -38,29 +38,46 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
+\AddToShipoutPictureBG{
+  \AtPageUpperLeft{
+    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} } }
+    \end{minipage}}}
+  }
+}
+
 
 
 \begin{document}
 
-\AddToShipoutPicture*{\BackgroundPic}
+
+% タイトル画像
+\AddToShipoutPicture*{
+  \BackgroundPic
+  \AtPageLowerLeft{
+    \raisebox{2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} } }
+    \end{minipage}}}
+  }
+}
 \begin{titlepage}
 \ 
 \end{titlepage}
+
 
 % 地の文の文字色をグレーに変更する
 \addfontfeatures{Color=DarkGray}
 \addCJKfontfeatures{Color=DarkGray}
 
-%\part*{クッキーと素敵な Spring Boot}
 
-\begin{spacing}{1.0}
+% 目次
+\begin{spacing}{1.1}
 \textbf{\tableofcontents}
 \end{spacing}
 
 
 \section*{まえがき}
 \addcontentsline{toc}{section}{まえがき}
-%\addcontentsline{toc}{section}{\protect\numberline{\null}まえがき}
 \vspace{3pt}
 
 以下の JDK を使用しています。
@@ -75,9 +92,12 @@ keepaspectratio]{cover.png}%
 \item Spring Boot 2.6.1
 \end{itemize}
 
-お気付きの点がありましたらこの原稿のリポジトリの Issues までお願いいたします。
+本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または(GitHub アカウントがない場合などは)著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
-https://github.com/CookieBox26/notes/issues
+\begin{description}
+   \item[　リポジトリ] https://github.com/CookieBox26/notes/
+   \item[　著者ブログ] https://cookie-box.hatenablog.com/
+\end{description}
 
 
 \newcounter{mycounter}
@@ -200,8 +220,24 @@ public class BentouController {
 \end{thebibliography}
 
 
-% \vspace{5pt}
-% \noindent つづかない
+% 奥付
+\clearpage
+\vspace*{16.7cm}
+
+\begin{OKUDUKE}[title={\textbf{\large クッキーと素敵な Spring Boot}}]
+YYYY年MM月DD日　初版発行 \\
+YYYY年MM月DD日　第2版発行 \\
+{
+\renewcommand\arraystretch{0.9}
+\begin{tabular}{p{4cm}rp{5.9cm}}
+ &  &  \\
+ & 著　者 & クッキー \\
+ & 発行者 & クッキーの日記 \\
+ & & https://cookie-box.hatenablog.com/ 
+\end{tabular}
+}
+\end{OKUDUKE}
+\thispagestyle{empty}
 
 
 \end{document}

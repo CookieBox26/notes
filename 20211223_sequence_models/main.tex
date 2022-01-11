@@ -38,11 +38,28 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
+\AddToShipoutPictureBG{
+  \AtPageUpperLeft{
+    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
+    \end{minipage}}}
+  }
+}
+
 
 
 \begin{document}
 
-\AddToShipoutPicture*{\BackgroundPic}
+
+% タイトル画像
+\AddToShipoutPicture*{
+  \BackgroundPic
+  \AtPageUpperLeft{
+    \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
+    \end{minipage}}}
+  }
+}
 \begin{titlepage}
 \ 
 \end{titlepage}
@@ -53,19 +70,28 @@ keepaspectratio]{cover.png}%
 \addCJKfontfeatures{Color=DarkGray}
 
 
-% \part*{NeurIPS 2021 の(時)系列っぽいタイトル}
-
+% 目次
 \begin{spacing}{1.0}
 \tableofcontents
 \end{spacing}
 
+
+% まえがき
+\newpage
 \section*{まえがき}
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-お気付きの点がありましたらこの原稿のリポジトリの Issues までお願いいたします。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を眺めたものです。
 
-https://github.com/CookieBox26/notes/issues
+本書の内容は著者の理解であることにご留意ください。著者の誤りは著者に帰属します。
+
+本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または(GitHub アカウントがない場合などは)著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+
+\begin{description}
+   \item[　リポジトリ] https://github.com/CookieBox26/notes/
+   \item[　著者ブログ] https://cookie-box.hatenablog.com/
+\end{description}
 
 
 \section*{NeurIPS 2021 のニューラル系列モデルを眺める}
@@ -166,7 +192,7 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
 \addcontentsline{toc}{section}{それぞれのお話}
 
 
-\newcommand*{\mysubsectiontitle}{ほげ}
+\newcommand*{\mysubsectiontitle}{RNN、CNN、連続時間モデルを結合したい}
 \subsection*{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \vspace{3pt}
@@ -461,9 +487,14 @@ Nyström 近似?
 \section*{Appendix}
 \addcontentsline{toc}{section}{Appendix}
 
+\renewcommand*{\mysubsectiontitle}{公開コードを動かす――\cite{YifanChen2021} Skyformer}
+\subsection*{\mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\mysubsectiontitle}
+\vspace{3pt}
+
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
-スカイフォーマー\cite{YifanChen2021}を動かしてみましょう。
-\begin{CODE}[title=\texttt{Python}]
+Skyformer \cite{YifanChen2021}を動かしてみましょう。
+\begin{CODE}[boxrule=0pt,frame hidden]
 \begin{lstlisting}[language=python]
 from models.model_LRA import ModelForSC, ModelForSCDual
 from config import Config
@@ -476,7 +507,7 @@ print(model)
 \end{lstlisting}
 \end{CODE}
 
-\begin{CODE}[title=\texttt{出力},colback=SlateGray2]
+\begin{CODE}[boxrule=0pt,frame hidden,colback=SlateGray2]
 \begin{lstlisting}[basicstyle={\ttfamily\small\color{White}}]
 ModelForSC(
   (model): Model(
@@ -504,6 +535,8 @@ ModelForSC(
 \end{SERIFU}
 
 
+% 参考文献
+\clearpage
 \addcontentsline{toc}{section}{参考文献}
 \begin{thebibliography}{99}
     \bibitem{AlbertGu2021} Albert Gu, Isys Johnson, Karan Goel, Khaled Saab, Tri Dao, Atri Rudra, Christopher Ré. Combining Recurrent, Convolutional, and Continuous-time Models with Linear State Space Layers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/05546b0e38ab9175cd905eebcc6ebb76-Abstract.html}{In NeurIPS 2021}}.
@@ -553,6 +586,26 @@ ModelForSC(
     \bibitem{FanKengSun2021} Fan-Keng Sun, Chris Lang, Duane Boning. Adjusting for Autocorrelated Errors in Neural Networks for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f8e6ba1db0f3c4054afec1684ba8fb26-Abstract.html}{In NeurIPS 2021}}.
     \bibitem{AbdulFatirAnsari2021} Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{In NeurIPS 2021}}.
 \end{thebibliography}
+
+
+% 奥付
+\clearpage
+\vspace*{16.7cm}
+
+\begin{OKUDUKE}[title={NeurIPS 2021 にみる \, \textbf{\large 最近のニューラル系列モデルへの発見・工夫・理解}}]
+YYYY年MM月DD日　初版発行 \\
+YYYY年MM月DD日　第2版発行 \\
+{
+\renewcommand\arraystretch{0.9}
+\begin{tabular}{p{4cm}rp{5.9cm}}
+ &  &  \\
+ & 著　者 & クッキー \\
+ & 発行者 & クッキーの日記 \\
+ & & https://cookie-box.hatenablog.com/ 
+\end{tabular}
+}
+\end{OKUDUKE}
+\thispagestyle{empty}
 
 
 \end{document}

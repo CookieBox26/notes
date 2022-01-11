@@ -67,7 +67,6 @@
     #1
 }
 
-
 % 独自の命題枠の定義
 \newtcolorbox{PROP}[2][]{
     enhanced,
@@ -87,7 +86,6 @@
     #1
 }
 
-
 % 独自のコード枠の定義
 \newtcolorbox{CODE}[1][]{
     enhanced,
@@ -99,5 +97,25 @@
     #1
 }
 
+% 奥付
+\newtcolorbox{OKUDUKE}[1][]{
+    enhanced,
+    sharp corners,
+    colbacktitle=White,
+    colback=White,
+    colframe=DarkGray,
+    toprule=1.25pt,
+    bottomrule=1.25pt,
+    rightrule=0pt,
+    leftrule=0pt,
+    top=4pt, right=6pt, left=6pt, bottom=2pt,  % パディング
+    grow to left by=-10pt,
+    grow to right by=-10pt,
+    attach boxed title to top left={yshift=3pt},
+    boxed title style={skin=enhancedfirst jigsaw, boxrule=0pt, frame hidden},
+    #1
+}
+
 \usepackage[colorlinks=true]{hyperref}  % ハイパーリンク
+\hypersetup{urlcolor=PaleVioletRed}
 \usepackage{setspace}  % 目次の行間を詰める用
