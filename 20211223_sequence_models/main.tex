@@ -41,7 +41,7 @@ keepaspectratio]{cover.png}%
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
     \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-13 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
     \end{minipage}}}
   }
 }
@@ -56,7 +56,7 @@ keepaspectratio]{cover.png}%
   \BackgroundPic
   \AtPageUpperLeft{
     \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
+      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-13 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
     \end{minipage}}}
   }
 }
@@ -82,7 +82,7 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を眺めたものです。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を私見で眺めたものです。網羅的でも排他的でもありません。
 
 本書の内容は著者の理解であることにご留意ください。著者の誤りは著者に帰属します。
 
@@ -93,77 +93,117 @@ keepaspectratio]{cover.png}%
    \item[　著者ブログ] https://cookie-box.hatenablog.com/
 \end{description}
 
+\vspace{6pt}
+%\subsubsection*{登場人物紹介}
+\centerline{\textbf{登場人物紹介}}
+
+\vspace{3pt}
+\begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_3.png}
+\small
+この人はベイズ統計部の部長です。1年生です。とある目的のためにベイズ統計部を立ち上げ、統計や機械学習を勉強しています。ベイズ統計部には部長と副部長しかいません。三姉妹の末っ子です。
+\end{SERIFU}
+\begin{SERIFU}[colback=White, colbacktitle=PaleGold2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{takumi_2.png}
+\small
+この人はベイズ統計部の副部長です。2年生です。海外からの編入生でラクロス部に入部しようとしていましたが、部長に勧誘されてベイズ統計部に入部しました。数学が得意ですがなぜか著者を超える数学力が出せません。
+\end{SERIFU}
+\vspace{4pt}
+
 
 \section*{NeurIPS 2021 のニューラル系列モデルを眺める}
 \addcontentsline{toc}{section}{NeurIPS 2021 のニューラル系列モデルを眺める}
-\vspace{3pt}
+\vspace{5pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
-NeurIPS 2021 で発表されたニューラル系列モデルに関連する研究をみていきましょう。NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}！？
+(時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}！？
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
-あ、あまりに多いので機械的に絞り込みましょう。タイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。画像認識, GAN, 強化学習系のタイトルは断腸の思いでとばしていきましょう……。
+あ、あまりに多いので機械的に絞り込みましょう。さしあたりタイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。ただこの絞り込みだと画像認識, GAN, 強化学習の研究も多そうですね。それらも興味深いですが、(時)系列に関する研究を優先するべく断腸の思いでとばしていきましょう……。
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-――こうしてみると、\textbf{「セルフアテンションの計算量に対処する」}は引き続き人気(?)なテーマである一方、\textbf{「RNN を理論的に理解する」}という研究も割りにみられるように感じられます。以下は私見による整理です。
+とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けして、アブストラクトからの理解で整理してみましょう。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+まず最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます……\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続き人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。
+\end{SERIFU}
+
+\vspace{1pt}
+\begin{PROP}[colback=White, left=0pt]{グループ「Transformer」}
 \begin{itemize}
-  \item \textbf{RNN を理論的に理解する} \cite{AdelineFermanian2021} \cite{JimmySmith2021} \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
+  \item Transformerの性質を理解する。
+    \begin{itemize}
+    \item 行列分解でパラメータを10倍削減しても性能が出ると示す \cite{AliakbarPanahi2021}。
+    \item セルフアテンションを生物学的な記憶モデルと解釈する \cite{TrentonBricken2021}。
+  \end{itemize}
+  \item Transformerを工夫する。
+  \begin{itemize}
+    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
+    \item グリッド分割をさらにグリッド分割する(Vision Transformer) \cite{KaiHan2021}。
+    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021}。
+    \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
+    \item Transformerのアーキテクチャ自体を再考する。
+    \begin{itemize}
+      \item 言語処理に適した構造を探索する \cite{DavidSo2021}
+      \item セルフアテンションの代わりにゲート付MLPにする \cite{HanxiaoLiu2021}。
+      \item 状態空間モデルと組み合わせて時系列の長期予測等をする \cite{BinhTang2021}。
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+\end{PROP}
+\vspace{1pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+次は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……??
+\end{SERIFU}
+
+\vspace{1pt}
+\begin{PROP}[colback=White, left=0pt]{グループ「RNN」}
+\begin{itemize}
+  \item \textbf{RNN を理論的に理解する}。
+  \begin{itemize}
+    \item RNN がある再生核ヒルベルト空間におけるカーネル法であると示す \cite{AdelineFermanian2021}。
+    \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
+    \item RNN が学習できると保証される関数の制約を撤廃する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
+  \end{itemize}
   \item RNN を工夫する。
   \begin{itemize}
     \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
     \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
   \end{itemize}
+\end{itemize}
+\end{PROP}
+\vspace{1pt}
 
-  \vspace{5pt}
-  \item トランスフォーマーを理論的に理解する \cite{AliakbarPanahi2021} \cite{TrentonBricken2021}。
-  \item トランスフォーマーを工夫する。
-  \begin{itemize}
-    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
-    \item グリッド分割をさらにする(ビジョントランスフォーマー) \cite{KaiHan2021}。
-    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021}。
-    \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
-    \item トランスフォーマーのアーキテクチャ自体を再考する。
-    \begin{itemize}
-      \item 言語処理に適した構造を探索する \cite{DavidSo2021}
-      \item セルフアテンションの代わりにゲート付MLPにする \cite{HanxiaoLiu2021}。
-    \end{itemize}
-  \end{itemize}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+後はその他とでもしましょうか。
+\end{SERIFU}
 
-  \vspace{5pt}
+\vspace{1pt}
+\begin{PROP}[colback=White, left=0pt]{その他}
+\begin{itemize}
   \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{ZhiboZhu2021}。
-
-  \vspace{5pt}
+  \item 時系列を生成する混合分布を推定するためのコアセットを構築する \cite{LingxiaoHuang2021}。
   \item 微分方程式で記述されるシステムをニューラルネットで実現する。
   \begin{itemize}
     \item 線形時不変連続時間システムをニューラルネットで実現する \cite{AlbertGu2021}。
     \item 連立微分方程式システムをベイズフィルタで解く \cite{JonathanSchmidt2021}。
   \end{itemize}
-  
-  \vspace{5pt}
   \item 系列モデルを新しい用途に活用する。
   \begin{itemize}
-    \item トランスフォーマーを活用してガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
+    \item Transformer を活用してガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
   \end{itemize}
 \end{itemize}
+\end{PROP}
+\vspace{1pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+最後に\textbf{「セルフアテンションの計算量に対処する」}を改めてみましょう。Transformer の計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。
 \end{SERIFU}
 
-\subsection*{グループ「RNNを理論的に理解する」}
-\addcontentsline{toc}{subsection}{グループ「RNNを理論的に理解する」}
-
-RNN の理論的な理解に関する論文が複数みられました。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか？
-
-\begin{itemize}
-  \item RNN がある再生核ヒルベルト空間におけるカーネル法と捉えられることを示す \cite{AdelineFermanian2021}。
-  \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
-  \item これまでの理論保証の制約を緩和する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
-\end{itemize}
-
-\subsection*{グループ「セルフアテンションの計算量に対処する」}
-\addcontentsline{toc}{subsection}{グループ「セルフアテンションの計算量に対処する」}
-
-トランスフォーマーの計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。
+\vspace{1pt}
+\begin{PROP}[colback=White, left=0pt, borderline={0.5mm}{0mm}{white,dashed}]{サブグループ「セルフアテンションの計算量に対処する」}
 \begin{itemize}
   \item $Q K ^\top$ の成分を間引く(スパースにする) 。
   \begin{itemize}
@@ -186,6 +226,8 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
   \vspace{5pt}
   \item アテンションの計算に高速フーリエ変換を応用する \cite{ShengjieLuo2021}。
 \end{itemize}
+\end{PROP}
+\vspace{1pt}
 
 
 \section*{それぞれのお話}
@@ -197,7 +239,8 @@ RNN の理論的な理解に関する論文が複数みられました。理論�
 \addcontentsline{toc}{subsection}{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
-
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\end{SERIFU}
 
 \renewcommand*{\mysubsectiontitle}{ほげ}
 \subsection*{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
@@ -473,14 +516,6 @@ Nyström 近似?
 \addcontentsline{toc}{subsection}{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
-
-
-%\vspace{5pt}
-%\begin{PROP}[colback=White]{カーネル法の計算量削減のアプローチを応用する \cite{YifanChen2021}}
-%\textbf{原題: Skyformer: Remodel Self-Attention with Gaussian Kernel and Nystr\"om Method (Chen et al.)} 
-%\tcblower
-%トランスフォーマーはセルフアテンション層が計算量のボトルネックとなっていますが、カーネルマシンもまた内積計算がボトルネックになっている、と。そうですね、カーネル法のグラム行列のサイズもデータサイズに応じて $N \times N$ になりますものね。そこで、カーネル法で用いられる Nyström 近似を適用できるようにして適用したトランスフォーマーがスカイフォーマーであると。なぜスカイフォーマーなのか少し気になったので論文を覗いてみると \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method なのですね…。
-%\end{PROP}
 
 
 \section*{結び――NeurIPS 2021 にみる最近のニューラル系列モデルへの発見・工夫・理解}
