@@ -38,11 +38,10 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-14 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} }}
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
-    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} } }
-    \end{minipage}}}
+    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
   }
 }
 
@@ -55,9 +54,7 @@ keepaspectratio]{cover.png}%
 \AddToShipoutPicture*{
   \BackgroundPic
   \AtPageLowerLeft{
-    \raisebox{2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-10 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} } }
-    \end{minipage}}}
+    \raisebox{2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
   }
 }
 \begin{titlepage}
@@ -92,13 +89,23 @@ keepaspectratio]{cover.png}%
 \item Spring Boot 2.6.1
 \end{itemize}
 
-本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+本書の内容についてお気付きの点がありましたら、大変お手数ですが、この本のコードか原稿のリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
 \begin{description}
-   \item[　リポジトリ] https://github.com/CookieBox26/notes/
+   \item[　コードリポジトリ] https://github.com/CookieBox26/bentou-application
+   \item[　原稿リポジトリ] https://github.com/CookieBox26/notes/
    \item[　著者ブログ] https://cookie-box.hatenablog.com/
 \end{description}
 
+\vspace{6pt}
+%\subsubsection*{登場人物紹介}
+\centerline{\textbf{登場人物(の代理)紹介}}
+
+\vspace{3pt}
+\begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_3.png}
+\small
+この人はベイズ統計部の部長ですが、この本ではクッキーの代理として登場します。この人がベイズ統計部の部長として出てくるお話は{\addCJKfontfeatures{Color=SteelBlue}\href{https://cookiebox26.github.io/notes/20211223_sequence_models/main.pdf}{別の本}}を参照してください。
+\end{SERIFU}
 
 \newcounter{mycounter}
 \stepcounter{mycounter}
@@ -138,17 +145,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BentouController {
-    private final OnigiriService service;
+    private final OnigiriService onigiriService;
 
     @Autowired
-    public BentouController(@Qualifier("tuna") OnigiriService service) {
-        this.service = service;
+    public BentouController(
+        @Qualifier("tuna") OnigiriService onigiriService
+    ) {
+        this.onigiriService = onigiriService;
     }
 
     @GetMapping("/bentou")
-    public Onigiri provide() {
-        Onigiri onigiri = this.service.provideOnigiri();
-        return onigiri;
+    public Bentou provide() {
+        Bentou bentou = new Bentou();
+        bentou.onigiri = this.onigiriService.provideOnigiri();
+        return bentou;
     }
 }
 \end{lstlisting}
