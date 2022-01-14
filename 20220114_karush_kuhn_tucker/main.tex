@@ -1,0 +1,211 @@
+\documentclass[b5paper,xelatex,ja=standard,10pt]{bxjsarticle}
+\usepackage{mystyle}  % export TEXINPUTS="./;../sty/;"
+\graphicspath{{../images/}}
+
+\renewcommand{\footnoterule}{%
+  \kern -5pt
+  \color{DarkGray}
+  \hrule width \textwidth height 1pt
+  \kern 4.7pt
+}
+
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
+\makeatother
+
+\usepackage{eso-pic}
+
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=1.0\paperwidth,height=1.0\paperheight,%
+keepaspectratio]{cover.png}%
+\vfill
+}}}
+
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-14 \\ \url{https://github.com/CookieBox26/notes/tree/main/20220114_karush_kuhn_tucker} }}
+\AddToShipoutPictureBG{
+  \AtPageUpperLeft{
+    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
+  }
+}
+
+
+\begin{document}
+
+% 地の文の文字色をグレーに変更する
+\addfontfeatures{Color=DarkGray}
+\addCJKfontfeatures{Color=DarkGray}
+
+% タイトル画像
+\AddToShipoutPicture*{
+  \BackgroundPic
+  \AtPageLowerLeft{
+    \raisebox{2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
+  }
+}
+\begin{titlepage}
+\ 
+\end{titlepage}
+
+
+% 目次
+%\begin{spacing}{1.1}
+%\textbf{\tableofcontents}
+%\end{spacing}
+
+
+\section*{まえがき}
+\addcontentsline{toc}{section}{まえがき}
+\vspace{3pt}
+
+本書は以下の著者ブログの記事をやや修正して再録したものです。
+
+\begin{description}
+   \item[　雑記： KKT条件の話] \url{https://cookie-box.hatenablog.com/entry/2019/07/09/231225}
+\end{description}
+
+原稿は以下で管理しています。
+
+\begin{description}
+   \item[　原稿リポジトリ] \url{https://github.com/CookieBox26/notes/}
+\end{description}
+
+本書の内容についてお気付きの点がありましたら、大変お手数ですが、原稿リポジトリの Issues または元記事のコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+
+\addcontentsline{toc}{section}{参考文献}
+\begin{thebibliography}{99}
+    \bibitem{constraint_qualifications} \url{https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#Regularity_conditions_(or_constraint_qualifications)}
+\end{thebibliography}
+
+
+%\newcounter{mycounter}
+%\stepcounter{mycounter}
+%\newcommand*{\mysectiontitle}{クッキー、Spring Boot 開発に参加する}
+%\section*{第{\themycounter}話 \, \mysectiontitle}
+%\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+%\vspace{3pt}
+
+%\stepcounter{mycounter}
+%\renewcommand*{\mysectiontitle}{クッキー、最大の謎に直面する}
+%\section*{第{\themycounter}話 \, \mysectiontitle}
+%\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+\newpage
+\newcommand*{\mysectiontitle}{KKT 条件}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+サポートベクターマシンの本を読んでいていざパラメータを最適化しようという段になったところ、突如として KKT 条件というのが出てきて困惑したのですが……最適化をしようとしていたのに条件って何なんですか……KKT という名前もどこの秘密結社かといった感じですし……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+それは KKK だよね。Karush–Kuhn–Tucker 条件は不等式制約付きの最適化問題の局所最適解が満たす必要条件だね。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{定理．Karush–Kuhn–Tucker（KKT）条件}
+$x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であり，かつ，\cite{constraint_qualifications} の Constraint のどれかが満たされているものとする．
+\\[3pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x)  \quad  \mathrm{subject \; to}   \; \; \; g_i(x) \leqq 0,  \quad i = 1, \cdots, m $
+\\[3pt]
+このとき，以下を満たす $\lambda^\ast \in \mathbb{R}^m$ が存在する．
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\displaystyle \nabla f (x^\ast) + \sum_{i=1}^m \lambda^\ast_i \nabla g_i (x^\ast) = \vec{0} \\[5pt]
+\displaystyle g_i(x^\ast) \leqq 0 \; \; (i = 1, \cdots, m) \\[5pt]
+\displaystyle \lambda^\ast_i g_i (x^\ast) = 0 \; \; (i = 1, \cdots, m) \\[5pt]
+\displaystyle \lambda^\ast_i \geqq 0 \; \; (i = 1, \cdots, m) \notag
+\end{array}
+\right.
+\end{eqnarray*}
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+Wikipedia によると最初はこの条件を発表した Kuhn と Tucker にちなんで呼ばれていたみたいだけど、後に彼らの発表の 12 年前に Karush が修士論文でこの条件を主張していたのが見つかって、彼の名も冠してこの名前になったのかな?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_4.png}
+なんと、それで KKT というのですか…研究成果を12年前に修士論文で導出していましたといわれるのもなかなかショックですね。Karush 氏ももっとツイッターで自身の結果を宣伝しておくとよかったのでは?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+1939年にツイッターはないからね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+さておき、なぜサポートベクターマシンの本で急に KKT 条件が出てくるのでしょう? いきなり $\lambda^\ast$ (これは $\alpha^\ast$ かもしれないしお手元の本によります) というベクトルが存在するといわれても反応に困るんですが。$\lambda^\ast$ って何なんです？ そしてなぜそのような不等式たちが成り立つんです？ そもそも、「最適解はこのような条件たちを満たす」といわれても、だから何なんです？ 式が増えてかえってややこしくなった気がするんですが…。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+$\lambda$ は KKT 乗数ともよばれる、等式制約付き最適化でいうラグランジュ乗数に相当するものだね。それが何なのかというのは、なぜ KKT 条件が成り立つのかを証明する過程で得ないといけないかな。先に、KKT 条件を満たすから何なのかというのは、どこにあるかまるで見当もつかない「最適解」について、「このような条件を満たす」という情報が得られること自体がありがたいんじゃないのないかな？ KKT 条件があるお陰で、これをつかって最適解に向かうアルゴリズムを構築することができる（実際多くのアルゴリズムが KKT 条件を解いていると解釈できるらしい）けど、これがなかったら定義域の1点1点を「不等式制約を満たすか」「これまで探索した点より小さいか」をあてもなく探索しないといけなくて、途方もないよ？ それにサポートベクターマシンの場合は、KKT 条件から「限られた一部のデータ（サポートベクター）のみが解となる分離超平面を形づくっている」という重要な事実が直接的にわかるからね。最適解の必要条件がわかることは強力だよ？
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+うーん、そういわれてみれば最適解について重要な手がかりを与えてくれているような気はしてきましたが…しかし、なぜ最適解では KKT 条件が成り立つんでしょう？ どのように考え始めればいいやら…。
+\end{SERIFU}
+
+
+\renewcommand*{\mysectiontitle}{制約がないとき}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+そうだな…まず、制約がない場合をイメージしてみると、局所最適解ってどんな点かな？ あ、$x^\ast$ が局所最適解っていうのは、その点 $x^\ast$ を中心にしたある半径 $\delta > 0$ の開球 $ B(x^\ast; \delta)$ の中でその点が最小 $ \forall x \in B(x^\ast; \delta), \; f(x^\ast) \leqq f(x)$ って意味ね。局所最適解であっても大域最適解とは限らないけど、大域最適解は必ず局所最適解だから、大域最適解がどんな点か調べるのに局所最適解がどんな点かを考えてもいい。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+制約がない場合に局所最適解はどんな点かといわれても…制約がないんだったらもう単純に $f(x)$ が一番小さい点でしかないですよね？
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+うん。言い換えると、$x^\ast$ からどんな向きに進んでも $f$ の値が「より小さくなる」ことはないよね？
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+そうですね、もし最適解が平らな場所にあったら、少し進んでも $f$ の値が変わらない（最適解から少し進んでも最適解という状態）ということはあるかもしれませんが、$f$ の値が小さくなることは絶対にないです。もし小さくなるなら、そこはもはや最適解ではないですから。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+「より小さくなることはない」を言い換える。「 $ \nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」\footnote{この言い換えは $f(x^\ast + s)$ が $f(x^\ast + s) \approx f(x^\ast) + \nabla f(x^\ast)^\top s$ と一次近似できるほど $x^\ast$ に十分近いところでは」のようなイメージで理解できると思いますが、近似的でなくても成り立ちます。が、証明はここでは割愛します。}。
+\end{SERIFU}
+
+%え、えっと？ [tex: \nabla f(x)] は [tex:f(x)] の勾配といって、ヤコビ行列の転置なのですね。<center style="margin:0.5em 0">[tex: \nabla f(c)^\top = Df(c) = \displaystyle \left( \frac{\partial f}{\partial x_1}(c) \;\; \cdots \;\; \frac{\partial f}{\partial x_n}(c) \right) ]</center>ならば [tex: \nabla f(x^\ast)^\top] は [tex:f] の [tex:x^\ast] におけるヤコビ行列そのもので、[tex: \nabla f(x^\ast)^\top s] は [tex:f] の起点 [tex:x^\ast] における増分 [tex:s] の微分ですね…この微分が負になるような増分は存在しない、ということは…起点 [tex:x^\ast] からどんな方向付きステップ [tex:s] だけ進んでも、より小さくなることはない、ということですね。
+
+%だから、どんな [tex:s] でも [tex: \nabla f(x^\ast)^\top s \geqq 0] でないといけないし、一方、[tex:-s] に対しても [tex: -\nabla f(x^\ast)^\top s \geqq 0] でないといけない。結局、任意の [tex:s] に対して [tex: \nabla f(x^\ast)^\top s = 0] でないといけない。であれば、[tex: \nabla f(x^\ast) = \vec{0}] でないといけない。制約がないバージョンの「KKT条件」はこれで終わりだ。<div style="margin:0.6em 0;padding:0.5em 0.7em 0.8em;border:1px solid #4d4d4d;"><b>定理．制約がないときの1次の必要条件</b><hr style="margin:0.3em 0;border:0"/>[tex:x^\ast] を問題（P）の局所最適解とする．但し，[tex:f] は [tex: x^\ast] で微分可能であるものとする．<hr style="margin:0.4em 0;border:0"/>（P）[tex: \displaystyle  \underset{x \in \mathbb{R}^n}{\rm minimize} \; \; f(x)]<hr style="margin:0.4em 0;border:0"/>このとき，以下が満たされる．<hr style="margin:0.4em 0;border:0"/>[tex: \; \nabla f (x^\ast) = \vec{0}]</div>
+
+\renewcommand*{\mysectiontitle}{等式制約があるとき}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+\renewcommand*{\mysectiontitle}{不等式制約があるとき}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+% 奥付
+\clearpage
+\vspace*{16.7cm}
+
+\begin{OKUDUKE}[title={\textbf{\large KKT条件の話}}]
+2022年1月22日　初版発行 \\
+{
+\renewcommand\arraystretch{0.9}
+\begin{tabular}{p{4cm}rp{5.9cm}}
+ &  &  \\
+ & 著　者 & クッキー \\
+ & 発行者 & クッキーの日記 \\
+ & & https://cookie-box.hatenablog.com/ 
+\end{tabular}
+}
+\end{OKUDUKE}
+\thispagestyle{empty}
+
+
+\end{document}
