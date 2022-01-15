@@ -31,11 +31,10 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-15 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
-    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-13 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
-    \end{minipage}}}
+    \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
   }
 }
 
@@ -48,9 +47,7 @@ keepaspectratio]{cover.png}%
 \AddToShipoutPicture*{
   \BackgroundPic
   \AtPageUpperLeft{
-    \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering
-      {\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-13 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} } }
-    \end{minipage}}}
+    \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
   }
 }
 \begin{titlepage}
@@ -82,10 +79,12 @@ keepaspectratio]{cover.png}%
 本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
 \begin{description}
-   \item[　リポジトリ] \url{https://github.com/CookieBox26/notes/}
-   \item[　著者ブログ] \url{https://cookie-box.hatenablog.com/} \\ 本書に関連している記事は以下です。 \\
-　　\url{https://cookie-box.hatenablog.com/entry/2021/11/28/191332} \\
-　　\url{https://cookie-box.hatenablog.com/entry/2021/12/23/124713}
+    \item[　リポジトリ] \url{https://github.com/CookieBox26/notes/}
+    \item[　著者ブログ] \url{https://cookie-box.hatenablog.com/} \\ 本書に関連している記事は以下です。
+    \begin{description}
+        \item[　　メモ前編] \url{https://cookie-box.hatenablog.com/entry/2021/11/28/191332}
+        \item[　　メモ後編] \url{https://cookie-box.hatenablog.com/entry/2021/12/23/124713}
+    \end{description}
 \end{description}
 
 \vspace{6pt}
@@ -124,6 +123,7 @@ keepaspectratio]{cover.png}%
 まず最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます……\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続き人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。
 \end{SERIFU}
 
+\addcontentsline{toc}{subsection}{グループ「Transformer」}
 \vspace{1pt}
 \begin{PROP}[colback=White, left=0pt]{グループ「Transformer」}
 \begin{itemize}
@@ -132,17 +132,26 @@ keepaspectratio]{cover.png}%
     \item 行列分解でパラメータを10倍削減しても性能が出ると示す \cite{AliakbarPanahi2021}。
     \item セルフアテンションを生物学的な記憶モデルと解釈する \cite{TrentonBricken2021}。
   \end{itemize}
-  \item Transformerを工夫する。
+  \item Transformerの使用方法を工夫する。
   \begin{itemize}
-    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
     \item グリッド分割をさらにグリッド分割する(Vision Transformer) \cite{KaiHan2021}。
-    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021}。
+    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
+    \item 状態空間モデルと組み合わせて時系列の長期予測等をする \cite{BinhTang2021}。
+    \item データ間でセルフ(?)アテンションする \cite{JannikKossen2021}。
+  \end{itemize}
+  \item Transformerの訓練方法を工夫する。
+  \begin{itemize}
     \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
-    \item Transformerのアーキテクチャ自体を再考する。
+  \end{itemize}
+  \item Transformerのアーキテクチャを工夫する。
+  \begin{itemize}
+    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021} \cite{TanNguyen2021}。
+    \item その他Transformerのアーキテクチャを再考する。
     \begin{itemize}
       \item 言語処理に適した構造を探索する \cite{DavidSo2021}
       \item セルフアテンションの代わりにゲート付MLPにする \cite{HanxiaoLiu2021}。
-      \item 状態空間モデルと組み合わせて時系列の長期予測等をする \cite{BinhTang2021}。
+      \item 時系列予測のために位相的アテンションを導入する \cite{SebastianZeng2021}。
+      \item セルフアテンションを Softmax しない Transformer で偏微分方程式を解く \cite{ShuhaoCao2021}。
     \end{itemize}
   \end{itemize}
 \end{itemize}
@@ -153,6 +162,7 @@ keepaspectratio]{cover.png}%
 次は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……??
 \end{SERIFU}
 
+\addcontentsline{toc}{subsection}{グループ「RNN」}
 \vspace{1pt}
 \begin{PROP}[colback=White, left=0pt]{グループ「RNN」}
 \begin{itemize}
@@ -161,11 +171,15 @@ keepaspectratio]{cover.png}%
     \item RNN がある再生核ヒルベルト空間におけるカーネル法であると示す \cite{AdelineFermanian2021}。
     \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
     \item RNN が学習できると保証される関数の制約を撤廃する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
+    \item タスクの解空間を構造化して RNN の性質を調べる \cite{EliaTurner2021}。
+    \item 勾配消失/爆発しない RNN のサブセットを突き止める \cite{ZimingZhang2021}。
+    \item 成長するメモリ付き固定精度 RNN がチューリング完全であると示す \cite{StephenChung2021}。
   \end{itemize}
   \item RNN を工夫する。
   \begin{itemize}
     \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
     \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
+    \item ドロップアウトを活用して LSTM の計算量を削減する \cite{AnupSarma2021}。
   \end{itemize}
 \end{itemize}
 \end{PROP}
@@ -175,6 +189,7 @@ keepaspectratio]{cover.png}%
 後はその他とでもしましょうか。
 \end{SERIFU}
 
+\addcontentsline{toc}{subsection}{その他}
 \vspace{1pt}
 \begin{PROP}[colback=White, left=0pt]{その他}
 \begin{itemize}
@@ -189,6 +204,10 @@ keepaspectratio]{cover.png}%
   \begin{itemize}
     \item Transformer を活用してガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
   \end{itemize}
+  \item 時系列のオンライン異常検知の偽陽性率を制御する \cite{QuentinRebjock2021}。
+  \item Transformer と CNN のロバスト性を比較する \cite{YutongBai2021}。
+  \item ニューラル時系列モデルにおいて誤差の自己相関を調整する \cite{FanKengSun2021}。
+  \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
 \end{itemize}
 \end{PROP}
 \vspace{1pt}
@@ -197,6 +216,7 @@ keepaspectratio]{cover.png}%
 最後に\textbf{「セルフアテンションの計算量に対処する」}を改めてみましょう。Transformer の計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。
 \end{SERIFU}
 
+\addcontentsline{toc}{subsection}{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
 \vspace{1pt}
 \begin{PROP}[colback=White, left=0pt, borderline={0.5mm}{0mm}{white,dashed}]{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
 \begin{itemize}
@@ -204,21 +224,25 @@ keepaspectratio]{cover.png}%
   \begin{itemize}
     \item どの成分か不要なのか自体を学習する \cite{SebastianJaszczur2021}。
   \end{itemize}
+  \vspace{7pt}
   \item $Q K ^\top$ を低ランク近似する(行列分解する)。
   \begin{itemize}
     \item カーネル法の計算量削減のアプローチを応用する \cite{YifanChen2021}。
   \end{itemize}
+  \vspace{7pt}
   \item スパース化と低ランク近似を統合する \cite{BeidiChen2021}。
-  \vspace{5pt}
-  \item $Q K ^\top$ の計算箇所でだけ入力系列を短い系列に射影する \cite{XuezheMa2021}。
+  \vspace{7pt}
+  \item 長距離依存性の計算量を削減する。
   \begin{itemize}
     \item 短距離依存性はそのまま計算し、長距離依存性は短い系列に射影する \cite{ChenZhu2021}。
+    \item 長距離依存性については重み付き期待値に対してアテンションする \cite{HongyuRen2021}。
+    \item FMM(高速多重極法)を応用して長距離依存性を低ランク近似する \cite{TanNguyen2021}。
   \end{itemize}
-  \vspace{5pt}
-  \item 長距離依存性については重み付き期待値に対してアテンションする \cite{HongyuRen2021}。
-  \vspace{5pt}
+  \vspace{7pt}
+  \item $Q K ^\top$ の計算箇所でだけ入力系列を短い系列に射影する \cite{XuezheMa2021}。
+  \vspace{7pt}
   \item 最初のセルフアテンション層では $Q K ^\top$ を計算するが、2番目以降ではそれを時間発展させる \cite{SubhabrataDutta2021}。
-  \vspace{5pt}
+  \vspace{7pt}
   \item アテンションの計算に高速フーリエ変換を応用する \cite{ShengjieLuo2021}。
 \end{itemize}
 \end{PROP}
@@ -436,81 +460,109 @@ Nyström 近似?
 ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{時系列予測のための位相的アテンション}
 \subsection*{\cite{SebastianZeng2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianZeng2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{セルフアテンションを Softmax しない Transformer で偏微分方程式を解く}
 \subsection*{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{タスクの解空間を構造化して RNN の性質を調べる}
 \subsection*{\cite{EliaTurner2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{EliaTurner2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{SBO-RNN――勾配消失/爆発しない RNN のサブセット}
 \subsection*{\cite{ZimingZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ZimingZhang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+こちらの SBO-RNN は、RNN の中でも勾配消失/爆発せず安定的に学習できる構造を突き止め、そのサブセットに SBO-RNN と名付けたということなのでしょうか?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{時系列のオンライン異常検知の偽陽性率を制御する}
 \subsection*{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+時系列データのオンライン異常検知の話ですが、「FDRC ルール」とは読んで字のごとく偽陽性率を抑えるためのルール、なのでしょうか……? 
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Transformer と CNN のロバスト性を比較する}
 \subsection*{\cite{YutongBai2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{YutongBai2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+「Transformer が CNN よりロバストとされているがそんなことはない」といったアブストラクトですが、そもそも Transformer が CNN よりロバストとされているんですか?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{成長するメモリ付き固定精度 RNN がチューリング完全であると示す}
 \subsection*{\cite{StephenChung2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{StephenChung2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+チューリング完全って何ですか?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{データ間でセルフ(?)アテンションするNon-Parametric Transformer}
 \subsection*{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+検証したのがテーブルデータや CIFAR-10 であって系列データといった向きのデータではなさそうですが、タイトルが気になりました。Self-Attention Between Datapoints というのは、言語データに喩えるなら、単語から文章内の他の単語へアテンションするのではなく、文章から他の文章へアテンションするということなのでしょうか。それって Self なんでしょうか……? それはさておき、本当に「データセット全体を入力とする」のであれば訓練や推論のコストが膨大になりそうですが……?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{FMMformer――FMM(高速多重極法)を応用して長距離依存性を低ランク近似する}
 \subsection*{\cite{TanNguyen2021} \, \mysubsectiontitle}
-\addcontentsline{toc}{subsection}{\cite{TanNguyen2021} \, \mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\cite{TanNguyen2021} \, FMMformer――FMMを応用して長距離依存性を低ランク近似する}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+FMM(高速多重極法)というのは粒子間の相互作用を近距離成分と遠距離成分に分けて計算量を削減する電磁気学分野の手法なのでしょうか? こういわれると、Transformer の相互作用にも応用できる気配がしますが、具体的にどのような手法なのでしょうか?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{ニューラル時系列モデルにおける誤差の自己相関の調整}
 \subsection*{\cite{FanKengSun2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{FanKengSun2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+通常ニューラルネットで時系列データを学習するときにステップ間で誤差に自己相関はないとしていますが、現実には自己相関するので誤差の自己相関係数も学習するといっていますね?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{RED-SDS――継続期間も明示的に利用するレジームスイッチングモデル}
 \subsection*{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+時系列のレジームの切り替わりを捉えたいといっていますね……レジームというのはこの時点を境に好景気から不景気になったというような環境の変化のようなものですよね、適当な訳語がわかりませんが……。それで、RED-SDS: Recurrent Explicit Duration Switching Dynamical System なる提案モデルでは状態にも時間にも依存してレジームをスイッチングできるようにしたんですね? うーん、いまいちどう価値があることをしたのかわからないのですが……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+おそらくレジームスイッチングモデルは元々は何らかの変数(観測不可能なら状態といった方がいいかな)に依存してスイッチングするモデルとして考案されたんだよね。ある変数がこうなってきたらここから不景気レジームだな、みたいに。でも、レジームの継続期間にもパターンがあるならそれを積極的に利用した方がいいよね。わからないけど、この病気の流行は1ヶ月で落ち着く、みたいな知識があったりしたらさ。それが Explicit Duration Switching の意味かなと思うんだけど、この発想自体は前からあって、この論文の新規性はそれを状態スイッチングモデルと組み合わせてディープで実現したところにあるのかな?
+\end{SERIFU}
 
 
 \section*{結び――NeurIPS 2021 にみる最近のニューラル系列モデルへの発見・工夫・理解}
