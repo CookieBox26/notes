@@ -15,13 +15,6 @@
   commentstyle={\color{SeaGreen}},  % コメントの設定
 }
 
-\renewcommand{\footnoterule}{%
-  \kern -5pt
-  \color{DarkGray}
-  \hrule width \textwidth height 0.5pt
-  \kern 5pt
-}
-
 %\makeatletter
 %\renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
 %\makeatother
@@ -89,8 +82,10 @@ keepaspectratio]{cover.png}%
 本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
 \begin{description}
-   \item[　リポジトリ] https://github.com/CookieBox26/notes/
-   \item[　著者ブログ] https://cookie-box.hatenablog.com/
+   \item[　リポジトリ] \url{https://github.com/CookieBox26/notes/}
+   \item[　著者ブログ] \url{https://cookie-box.hatenablog.com/} \\ 本書に関連している記事は以下です。 \\
+　　\url{https://cookie-box.hatenablog.com/entry/2021/11/28/191332} \\
+　　\url{https://cookie-box.hatenablog.com/entry/2021/12/23/124713}
 \end{description}
 
 \vspace{6pt}
@@ -100,7 +95,7 @@ keepaspectratio]{cover.png}%
 \vspace{3pt}
 \begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_3.png}
 \small
-この人はベイズ統計部の部長です。1年生です。とある目的のためにベイズ統計部を立ち上げ、統計や機械学習を勉強しています。ベイズ統計部には部長と副部長しかいません。三姉妹の末っ子です。
+この人はベイズ統計部の部長です。1年生です。とある目的のためにベイズ統計部を立ち上げ、統計や機械学習を勉強しています。ベイズ統計部には部長と副部長しかいません。姉が2人います。
 \end{SERIFU}
 \begin{SERIFU}[colback=White, colbacktitle=PaleGold2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{takumi_2.png}
 \small
@@ -203,7 +198,7 @@ keepaspectratio]{cover.png}%
 \end{SERIFU}
 
 \vspace{1pt}
-\begin{PROP}[colback=White, left=0pt, borderline={0.5mm}{0mm}{white,dashed}]{サブグループ「セルフアテンションの計算量に対処する」}
+\begin{PROP}[colback=White, left=0pt, borderline={0.5mm}{0mm}{white,dashed}]{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
 \begin{itemize}
   \item $Q K ^\top$ の成分を間引く(スパースにする) 。
   \begin{itemize}
