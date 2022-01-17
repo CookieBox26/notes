@@ -76,11 +76,31 @@
     bottom=10pt,
     colbacktitle=White,
     colback=White,
-    colframe=DarkGray,
+    borderline={{1pt}{0pt}{DarkGray,solid}},
+    colframe=White,
     boxrule=1pt,
     arc=6pt,
     breakable,
     attach boxed title to top left={xshift=12pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={skin=enhancedfirst jigsaw, boxrule=0pt, frame hidden, left=2pt, right=2pt},
+    title=#2,
+    #1
+}
+
+\newtcolorbox{PROP2}[2][]{
+    enhanced,
+    top=10pt,
+    right=10pt,
+    left=10pt,
+    bottom=10pt,
+    colbacktitle=White,
+    colback=White,
+    borderline={{1pt}{0pt}{DarkGray,dashed}},
+    colframe=White,
+    boxrule=1pt,
+    arc=6pt,
+    breakable,
+    attach boxed title to top left={xshift=10pt, yshift=-\tcboxedtitleheight/2},
     boxed title style={skin=enhancedfirst jigsaw, boxrule=0pt, frame hidden, left=2pt, right=2pt},
     title=#2,
     #1

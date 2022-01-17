@@ -31,7 +31,7 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-15 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-17 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
     \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
@@ -67,12 +67,13 @@ keepaspectratio]{cover.png}%
 
 
 % まえがき
-\newpage
+% \newpage
+\vspace{6pt}
 \section*{まえがき}
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を私見で眺めたものです。網羅的でも排他的でもありません。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を私見で選んでコメントしたものです。網羅的でも排他的でもありません。
 
 本書の内容は著者の理解であることにご留意ください。著者の誤りは著者に帰属します。
 
@@ -100,71 +101,80 @@ keepaspectratio]{cover.png}%
 \small
 この人はベイズ統計部の副部長です。2年生です。海外からの編入生でラクロス部に入部しようとしていましたが、部長に勧誘されてベイズ統計部に入部しました。数学が得意ですがなぜか著者を超える数学力が出せません。
 \end{SERIFU}
-\vspace{4pt}
 
-
+\vspace{6pt}
 \section*{NeurIPS 2021 のニューラル系列モデルを眺める}
 \addcontentsline{toc}{section}{NeurIPS 2021 のニューラル系列モデルを眺める}
 \vspace{5pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
-(時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}！？
+(時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。予稿サイトによると、NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}!?
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
-あ、あまりに多いので機械的に絞り込みましょう。さしあたりタイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。ただこの絞り込みだと画像認識, GAN, 強化学習の研究も多そうですね。それらも興味深いですが、(時)系列に関する研究を優先するべく断腸の思いでとばしていきましょう……。
+あ、あまりに多いので絞り込みましょう。タイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。ただこの絞り込みだと画像認識, GAN, 強化学習の研究も多そうですね。それらも興味深いですが、(時)系列に関する研究を優先するべく断腸の思いでとばしていきましょう……。
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けして、アブストラクトからの理解で整理してみましょう。
+とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けしてみましょう。さらにグループ内をアブストラクトから私が想像できる範囲で整理してみましょう。
 \end{SERIFU}
+\vspace{1pt}
+\centerline{――作業後。}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
-まず最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます……\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続き人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。
+まず、最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます。特に\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続いて人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。全体としては、「Transformer の性質を明らかにしようとしたもの」「訓練方法を工夫したもの」「使い方を工夫したもの」「アーキテクチャ自体を工夫したもの」「新しい用途に利用したもの」といった区分をしてみました。無論、この区分も恣意的なものであることに留意ください。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「Transformer」}
 \vspace{1pt}
-\begin{PROP}[colback=White, left=0pt]{グループ「Transformer」}
+\begin{PROP}[left=0pt]{グループ「Transformer」}
 \begin{itemize}
   \item Transformerの性質を理解する。
     \begin{itemize}
     \item 行列分解でパラメータを10倍削減しても性能が出ると示す \cite{AliakbarPanahi2021}。
     \item セルフアテンションを生物学的な記憶モデルと解釈する \cite{TrentonBricken2021}。
   \end{itemize}
-  \item Transformerの使用方法を工夫する。
-  \begin{itemize}
-    \item グリッド分割をさらにグリッド分割する(Vision Transformer) \cite{KaiHan2021}。
-    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
-    \item 状態空間モデルと組み合わせて時系列の長期予測等をする \cite{BinhTang2021}。
-    \item データ間でセルフ(?)アテンションする \cite{JannikKossen2021}。
-  \end{itemize}
+  \vspace{6pt}
   \item Transformerの訓練方法を工夫する。
   \begin{itemize}
     \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
   \end{itemize}
+  \vspace{6pt}
+  \item Transformerの使い方を工夫する。
+  \begin{itemize}
+    \item グリッド分割をさらにグリッド分割する(Vision Transformer) \cite{KaiHan2021}。
+    \item 機械的にプレ処理(トレンド-季節性分解)をする \cite{HaixuWu2021}。
+    \item 状態空間モデルと組み合わせて時系列の長期予測等をする \cite{BinhTang2021}。
+    \item データ間でセルフ(セルフ?)アテンションする \cite{JannikKossen2021}。
+  \end{itemize}
+  \vspace{6pt}
   \item Transformerのアーキテクチャを工夫する。
   \begin{itemize}
-    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \cite{ShengjieLuo2021} \cite{TanNguyen2021}。
+    \item \textbf{セルフアテンションの計算量に対処する} \cite{YifanChen2021} \cite{XuezheMa2021} \cite{SubhabrataDutta2021} \cite{SebastianJaszczur2021} \cite{BeidiChen2021} \cite{ChenZhu2021} \cite{HongyuRen2021} \, \cite{ShengjieLuo2021} \cite{TanNguyen2021}。
     \item その他Transformerのアーキテクチャを再考する。
     \begin{itemize}
       \item 言語処理に適した構造を探索する \cite{DavidSo2021}
       \item セルフアテンションの代わりにゲート付MLPにする \cite{HanxiaoLiu2021}。
       \item 時系列予測のために位相的アテンションを導入する \cite{SebastianZeng2021}。
-      \item セルフアテンションを Softmax しない Transformer で偏微分方程式を解く \cite{ShuhaoCao2021}。
+      \item Softmax しないセルフアテンションで偏微分方程式を解く \cite{ShuhaoCao2021}。
     \end{itemize}
+  \end{itemize}
+  \vspace{6pt}
+  \item Transformerを新しい用途に利用する。
+  \begin{itemize}
+    \item Transformerでガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
   \end{itemize}
 \end{itemize}
 \end{PROP}
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
-次は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……??
+次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。それぞれ「訓練をロバストにしたい」「表現力を上げたい」「訓練時間を短くしたい」といったところでしょうか。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「RNN」}
 \vspace{1pt}
-\begin{PROP}[colback=White, left=0pt]{グループ「RNN」}
+\begin{PROP}[left=0pt]{グループ「RNN」}
 \begin{itemize}
   \item \textbf{RNN を理論的に理解する}。
   \begin{itemize}
@@ -175,97 +185,135 @@ keepaspectratio]{cover.png}%
     \item 勾配消失/爆発しない RNN のサブセットを突き止める \cite{ZimingZhang2021}。
     \item 成長するメモリ付き固定精度 RNN がチューリング完全であると示す \cite{StephenChung2021}。
   \end{itemize}
+  \vspace{6pt}
   \item RNN を工夫する。
   \begin{itemize}
     \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
     \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
-    \item ドロップアウトを活用して LSTM の計算量を削減する \cite{AnupSarma2021}。
+    \item ドロップアウトを活用してLSTMの訓練を効率化する \cite{AnupSarma2021}。
   \end{itemize}
 \end{itemize}
 \end{PROP}
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-後はその他とでもしましょうか。
+後はその他とでもしましょうか。内容は色々なんですが……例えば Transformer と CNN の比較がありました。後は微分方程式で記述されるシステムを表現するモデルが2つ。それ以降は特に時系列といった研究ですね。異常検知やクラスタリングの研究はたまたま目に付いたので選びました。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{その他}
 \vspace{1pt}
-\begin{PROP}[colback=White, left=0pt]{その他}
+\begin{PROP}[left=0pt]{その他}
 \begin{itemize}
-  \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{ZhiboZhu2021}。
-  \item 時系列を生成する混合分布を推定するためのコアセットを構築する \cite{LingxiaoHuang2021}。
+  \item 系列モデルを比較する。
+  \begin{itemize}
+    \item Transformer と CNN のロバスト性を比較する \cite{YutongBai2021}。
+  \end{itemize}
+  \vspace{6pt}
   \item 微分方程式で記述されるシステムをニューラルネットで実現する。
   \begin{itemize}
     \item 線形時不変連続時間システムをニューラルネットで実現する \cite{AlbertGu2021}。
     \item 連立微分方程式システムをベイズフィルタで解く \cite{JonathanSchmidt2021}。
   \end{itemize}
-  \item 系列モデルを新しい用途に活用する。
+  \vspace{6pt}
+  \item 時系列モデルの表現力を向上させる。
   \begin{itemize}
-    \item Transformer を活用してガウス過程モデル適用時のカーネルを同定する \cite{FergusSimpson2021}。
+    \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{ZhiboZhu2021}。
+    \item 誤差の自己相関を調整する \cite{FanKengSun2021}。
+    \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
   \end{itemize}
-  \item 時系列のオンライン異常検知の偽陽性率を制御する \cite{QuentinRebjock2021}。
-  \item Transformer と CNN のロバスト性を比較する \cite{YutongBai2021}。
-  \item ニューラル時系列モデルにおいて誤差の自己相関を調整する \cite{FanKengSun2021}。
-  \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
+  \vspace{6pt}
+  \item 時系列の異常検知を工夫する。
+  \begin{itemize}
+    \item 時系列のオンライン異常検知の偽陽性率を制御する \cite{QuentinRebjock2021}。
+  \end{itemize}
+  \vspace{6pt}
+  \item 時系列のクラスタリングを工夫する。
+  \begin{itemize}
+    \item 時系列を生成する混合分布を推定するためのコアセットを構築する \cite{LingxiaoHuang2021}。
+  \end{itemize}
 \end{itemize}
 \end{PROP}
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-最後に\textbf{「セルフアテンションの計算量に対処する」}を改めてみましょう。Transformer の計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。
+最後に\textbf{「セルフアテンションの計算量に対処する」}を回収しましょう。そもそも Transformer の計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。「長距離依存性だけ近似して対処する」という研究が3つありますね。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
 \vspace{1pt}
-\begin{PROP}[colback=White, left=0pt, borderline={0.5mm}{0mm}{white,dashed}]{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
+\begin{PROP2}[left=0pt]{グループ「Transformer」のサブグループ「セルフアテンションの計算量に対処する」}
 \begin{itemize}
   \item $Q K ^\top$ の成分を間引く(スパースにする) 。
   \begin{itemize}
     \item どの成分か不要なのか自体を学習する \cite{SebastianJaszczur2021}。
   \end{itemize}
-  \vspace{7pt}
+  \vspace{6pt}
   \item $Q K ^\top$ を低ランク近似する(行列分解する)。
   \begin{itemize}
     \item カーネル法の計算量削減のアプローチを応用する \cite{YifanChen2021}。
   \end{itemize}
-  \vspace{7pt}
+  \vspace{6pt}
   \item スパース化と低ランク近似を統合する \cite{BeidiChen2021}。
-  \vspace{7pt}
+  \vspace{6pt}
   \item 長距離依存性の計算量を削減する。
   \begin{itemize}
     \item 短距離依存性はそのまま計算し、長距離依存性は短い系列に射影する \cite{ChenZhu2021}。
-    \item 長距離依存性については重み付き期待値に対してアテンションする \cite{HongyuRen2021}。
+    \item 長距離依存性については重み付き期待値に対してセルフアテンションする \cite{HongyuRen2021}。
     \item FMM(高速多重極法)を応用して長距離依存性を低ランク近似する \cite{TanNguyen2021}。
   \end{itemize}
-  \vspace{7pt}
-  \item $Q K ^\top$ の計算箇所でだけ入力系列を短い系列に射影する \cite{XuezheMa2021}。
-  \vspace{7pt}
-  \item 最初のセルフアテンション層では $Q K ^\top$ を計算するが、2番目以降ではそれを時間発展させる \cite{SubhabrataDutta2021}。
-  \vspace{7pt}
+  \vspace{6pt}
+  \item 固定長の系列を利用して計算量を線形に抑える \cite{XuezheMa2021}。
+  \vspace{6pt}
+  \item 最初のセルフアテンション層でのみ $Q K ^\top$ を計算し後はそれを時間発展させる \cite{SubhabrataDutta2021}。
+  \vspace{6pt}
   \item アテンションの計算に高速フーリエ変換を応用する \cite{ShengjieLuo2021}。
 \end{itemize}
-\end{PROP}
+\end{PROP2}
 \vspace{1pt}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+大雑把に全体が整理できた気がします。とはいえ、アブストラクトだけではよくわからないので本文も確認したいですが、これだけ選んでしまったので一人で作業するのは骨が折れますね……。
+\end{SERIFU}
 
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+――お疲れさま。随分とホワイトボードがぎっしりだね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_0.png}
+副部長! よいところにいらっしゃいました!!
+\end{SERIFU}
+
+
+\vspace{6pt}
 \section*{それぞれのお話}
 \addcontentsline{toc}{section}{それぞれのお話}
 
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+えっこれらの論文を全部読みたいの? まあいいけど……何を抑えたいか絞った方がいいんじゃないかな。理論系の論文には当てはまらないけど、「提案手法」「想定データ(実際に検証したデータ)」「ベースライン手法」あたりかな。とりあえず予稿で出てきた順に確認していこうか。
+\end{SERIFU}
 
-\newcommand*{\mysubsectiontitle}{RNN、CNN、連続時間モデルを結合したい}
+\newcommand*{\mysubsectiontitle}{RNN、CNN、連続時間モデルの性質をあわせもつ「線形状態空間層」}
 \subsection*{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
 \begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+「『線形状態空間層(LSSL)』で RNN、CNN、連続時間モデルを結合する」といったタイトルだよね。であれば想定データはこれらのモデルの性質を全て要するデータなんだろうか?
 \end{SERIFU}
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+この論文はゴールを「RNN、CNN、連続時間モデルの結合」に置いていると思います。なので RNN と CNN と連続時間モデルをコンポーネントとして組み合わせたようなモデルをイメージしてしまうのですが、どうもそうではないんです。
+\end{SERIFU}
+
+
+\renewcommand*{\mysubsectiontitle}{Transformerを行列分解してパラメータが10倍削減できることを示す}
 \subsection*{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+この論文についてはアブストラクトで何となく研究内容がわかるような気がします。つまり、「Transformerはそんなにパラメータが必要なのか」という問題意識から、Transformerの低ランク近似表現を打ち出し、その表現でも性能を損なわないといったことを検証しているはずです。具体的にどの層をどのように低ランク近似したかまではわかりませんが……なお、この研究を「セルフアテンションの計算量に対処する」ではなく「Transformerの性質を理解する」に分類した理由は、この研究が専ら「パラメータ数」に主眼を置いているようにみえるからです。無論パラメータ数の削減は計算量の削減と無関係ではありませんが、この研究は指標もパラメータ数そのものになっているようにみえます。実務的に「パラメータ数を小さくすること」は最終目的にはならないと思うんです。なのでこれはむしろTransformerの性質を解明した研究であると解釈しました。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{Skyformer――セルフアテンションの Nyström 近似}
@@ -282,154 +330,164 @@ Nyström 近似?
 \end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Luna――固定長系列を利用してセルフアテンションの計算量を線形に抑える}
 \subsection*{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+先の論文に続いて「セルフアテンションの計算量に対処する」一味です。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{RNN がある再生核ヒルベルト空間におけるカーネル法であると示す}
 \subsection*{\cite{AdelineFermanian2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AdelineFermanian2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{RNN の隠れ状態にノイズを添加して訓練してロバスト性を向上させる}
 \subsection*{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{セルフアテンション行列を時間発展させる}
 \subsection*{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+これも「セルフアテンションの計算量に対処する」一味なんですが、一味の中でも最も異端児なのではと思うんです。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{言語処理に適したTransformerの構造を探索する}
 \subsection*{\cite{DavidSo2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{DavidSo2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Self-IRU――繰り返し自身のインスタンスを生み出すRNN}
 \subsection*{\cite{AstonZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AstonZhang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+自由度が高そうです。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能を得る}
 \subsection*{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能が得られると。これによって画像認識ではセルフアテンションが重要でないこともわかったとありますね。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Terraformer――セルフアテンションを如何に疎にすべきかも学習する}
 \subsection*{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+controllerなる、ベクトルであって多くの成分が0で少しの成分が1であるようなものを全結合の結果に噛ませているのでしょうか。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Transformerによるガウス過程モデルのカーネル同定}
 \subsection*{\cite{FergusSimpson2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{FergusSimpson2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+Figure 1 を覗いてみると、正解付きの訓練データをすべて投入してエンコードしてデコードすると Matern 1/2 + Matern 3/2 + RBF × Matern 1/2 といったカーネルが出力されているように確かにみえますね。これが画像にキャプションを付けるモデルと似ているのでしょうか。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{微分方程式群システムの逐次ベイズ推定}
 \subsection*{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+COVID-19 データに SIRD モデルを適用して検証しているのですね。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{時系列データのプレ処理としての成分クラスタリング}
 \subsection*{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{セルフアテンションのヘッド間で $Q, K$ の分布を一致させるように訓練する}
 \subsection*{\cite{ShujianZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShujianZhang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{セルフアテンションを生物学的な記憶モデルと解釈する}
 \subsection*{\cite{TrentonBricken2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{TrentonBricken2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Vision Transformerでグリッド分割のグリッド分割もTransformerする}
 \subsection*{\cite{KaiHan2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{KaiHan2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{スイッチング線形動的システムで RNN をリバースエンジニアリングする}
 \subsection*{\cite{JimmySmith2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JimmySmith2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{スパース化と低ランク近似を併用してセルフアテンションの計算量を削減する}
 \subsection*{\cite{BeidiChen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{BeidiChen2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{長距離依存性は短い系列に射影してセルフアテンションする}
 \subsection*{\cite{ChenZhu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ChenZhu2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の長男ですね。なるほど長男らしいストレートなアプローチです。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+3兄弟だったの!?
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{RNN が学習できると保証される関数の制約を撤廃する}
 \subsection*{\cite{LifuWang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{LifuWang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{RNN が学習できると保証される関数の制約を撤廃する}
 \subsection*{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{機械的にプレ処理(トレンド-季節性分解)してからTransformerする}
 \subsection*{\cite{HaixuWu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HaixuWu2021} \, \mysubsectiontitle}
 \vspace{3pt}
 ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{長距離依存性については重み付き期待値に対してセルフアテンションする}
 \subsection*{\cite{HongyuRen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HongyuRen2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の次男ですね。お兄さんとは一味違うアプローチです。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{FFTを応用した相対位置エンコーディングにも適用できるセルフアテンション計算量削減}
 \subsection*{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
 \vspace{3pt}
@@ -439,46 +497,40 @@ Nyström 近似?
 \end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{時系列の混合分布を推定するためのコアセットを構築する}
 \subsection*{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{Transformerに状態空間モデルを組み合わせて時系列を長期予測する}
 \subsection*{\cite{BinhTang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{BinhTang2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{ほげ}
+\renewcommand*{\mysubsectiontitle}{ドロップアウトを活用してLSTMの訓練を効率化する}
 \subsection*{\cite{AnupSarma2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AnupSarma2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
 \renewcommand*{\mysubsectiontitle}{時系列予測のための位相的アテンション}
 \subsection*{\cite{SebastianZeng2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianZeng2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
-\renewcommand*{\mysubsectiontitle}{セルフアテンションを Softmax しない Transformer で偏微分方程式を解く}
+\renewcommand*{\mysubsectiontitle}{Softmax しないセルフアテンションで偏微分方程式を解く}
 \subsection*{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
 \renewcommand*{\mysubsectiontitle}{タスクの解空間を構造化して RNN の性質を調べる}
 \subsection*{\cite{EliaTurner2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{EliaTurner2021} \, \mysubsectiontitle}
 \vspace{3pt}
-ほげ。
 
 
 \renewcommand*{\mysubsectiontitle}{SBO-RNN――勾配消失/爆発しない RNN のサブセット}
@@ -520,8 +572,12 @@ Nyström 近似?
 チューリング完全って何ですか?
 \end{SERIFU}
 
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+大雑把にいうと、C言語がチューリング完全だから、C言語で実装できる関数を実装できるってことかな。
+\end{SERIFU}
 
-\renewcommand*{\mysubsectiontitle}{データ間でセルフ(?)アテンションするNon-Parametric Transformer}
+
+\renewcommand*{\mysubsectiontitle}{データ間でセルフ(セルフ?)アテンションするNon-Parametric Transformer}
 \subsection*{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \vspace{3pt}
@@ -535,6 +591,14 @@ Nyström 近似?
 \subsection*{\cite{TanNguyen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{TanNguyen2021} \, FMMformer――FMMを応用して長距離依存性を低ランク近似する}
 \vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の3男にして、1番目のお兄さんとも2番目のお兄さんとも似ていないアプローチです。複雑な家庭環境なんでしょうか……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+兄弟じゃないんだよなあ。
+\end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
 FMM(高速多重極法)というのは粒子間の相互作用を近距離成分と遠距離成分に分けて計算量を削減する電磁気学分野の手法なのでしょうか? こういわれると、Transformer の相互作用にも応用できる気配がしますが、具体的にどのような手法なのでしょうか?
