@@ -2,13 +2,6 @@
 \usepackage{mystyle}  % export TEXINPUTS="./;../sty/;"
 \graphicspath{{../images/}}
 
-\renewcommand{\footnoterule}{%
-  \kern -5pt
-  \color{DarkGray}
-  \hrule width \textwidth height 1pt
-  \kern 4.7pt
-}
-
 \makeatletter
 \renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
 \makeatother
@@ -25,7 +18,7 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-14 \\ \url{https://github.com/CookieBox26/notes/tree/main/20220114_karush_kuhn_tucker} }}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-18 \\ \url{https://github.com/CookieBox26/notes/tree/main/20220114_karush_kuhn_tucker} }}
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
     \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
@@ -52,16 +45,16 @@ keepaspectratio]{cover.png}%
 
 
 % 目次
-%\begin{spacing}{1.1}
-%\textbf{\tableofcontents}
-%\end{spacing}
+\begin{spacing}{1.1}
+\textbf{\tableofcontents}
+\end{spacing}
 
 
 \section*{まえがき}
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は以下の著者ブログの記事をやや修正して再録したものです。
+本稿は以下の著者ブログの記事を加筆修正したものになります。
 
 \begin{description}
    \item[　雑記： KKT条件の話] \url{https://cookie-box.hatenablog.com/entry/2019/07/09/231225}
@@ -73,45 +66,76 @@ keepaspectratio]{cover.png}%
    \item[　原稿リポジトリ] \url{https://github.com/CookieBox26/notes/}
 \end{description}
 
-本書の内容についてお気付きの点がありましたら、大変お手数ですが、原稿リポジトリの Issues または元記事のコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+本稿の内容についてお気付きの点がありましたら、大変お手数ですが、原稿リポジトリの Issues または元記事のコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨お知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+
 
 \addcontentsline{toc}{section}{参考文献}
 \begin{thebibliography}{99}
-    \bibitem{constraint_qualifications} \url{https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#Regularity_conditions_(or_constraint_qualifications)}
+    \bibitem{wikipedia_en} Karush–Kuhn–Tucker conditions - Wikipedia, \url{https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions}, 参照日：2022年1月17日.
+    \begin{itemize}
+        \item 英語版WikipediaのKKT条件の記事であり、よく知られている制約想定(constraint qualifications)が列挙されている。これは日本語版にはない。Karush の成果が後から発見された経緯が載っているがこれも日本語版にはない。
+    \end{itemize}
+    \bibitem{boyd} \url{https://web.stanford.edu/~boyd/cvxbook/}
+    \begin{itemize}
+        \item Webで公開されている凸最適化の本で、263ページに Farkas の補題がある。
+    \end{itemize}
+    \bibitem{yabe} 矢部 博. 工学基礎 最適化とその応用 (新・工科系の数学). 数理工学社, 2006.
+    \begin{itemize}
+        \item 99ページに Farkas の補題がある。
+    \end{itemize}
+    \bibitem{zenn} 凸最適化を読むその0―制約がないときの凸関数の最小点. \url{https://zenn.dev/cookiebox26/articles/3c3d1156f27cc0dd7faa}, 参照日：2022年1月17日.
+    \begin{itemize}
+        \item 著者が公開している記事で、本稿の「制約がないときの条件」の厳密な証明にあたる。明記しているように\cite{boyd}の9章を参考としている。
+    \end{itemize}
+    \bibitem{kanamori} 金森 敬文 他. 機械学習のための連続最適化 (機械学習プロフェッショナルシリーズ). 講談社, 2017.
+    \begin{itemize}
+        \item 162ページに KKT 条件が出てくる(1次独立制約想定での証明がある)。
+    \end{itemize}
+    \bibitem{fukumizu} 福水 健次. カーネル法入門. 朝倉書店, 2010.
+    \begin{itemize}
+        \item 付録Bに強双対性の下での KKT 条件の証明がある。
+    \end{itemize}
+    \bibitem{banach} \url{https://www.jstage.jst.go.jp/article/ieejeiss1987/109/4/109_4_178/_pdf}
+    \begin{itemize}
+        \item Web 上でみつけた PDF で、183 ページにバナッハ空間かつ制約想定を課さないときの KKT 条件(KKT 条件ではないが)が出てくる。本文中で触れることはない。
+    \end{itemize}
 \end{thebibliography}
 
 
-%\newcounter{mycounter}
-%\stepcounter{mycounter}
-%\newcommand*{\mysectiontitle}{クッキー、Spring Boot 開発に参加する}
-%\section*{第{\themycounter}話 \, \mysectiontitle}
-%\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
-%\vspace{3pt}
+\section*{注意}
+\addcontentsline{toc}{section}{注意}
+\vspace{3pt}
 
-%\stepcounter{mycounter}
-%\renewcommand*{\mysectiontitle}{クッキー、最大の謎に直面する}
-%\section*{第{\themycounter}話 \, \mysectiontitle}
-%\addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+\begin{itemize}
+    \item 本稿は KKT 条件――不等式制約付きの最適化問題の局所最適解が満たす必要条件――を紹介していますが、証明を欠きます。
+    \item 本稿では適当な制約想定を課してから Farkas の補題によって KKT 条件を得る流れを紹介していますが、KKT 条件を得る流れは他にも色々あります。例えば、
+    \begin{itemize}
+        \item 先に Fritz John の定理を示し、それに適当な制約想定を課して KKT 条件とする \cite{yabe}。
+        \item 一次独立制約想定を課し、最適解が有効制約について等式制約付き最適化問題の最適解にもなっていることを利用して KKT 条件を得る \cite{kanamori}。
+        \item 強双対性を課し、強双対性から示す(サポートベクターマシンの文脈でよくみられるはず; 下記)。
+    \end{itemize}
+    \item サポートベクターマシンの文脈でみられる（＝強双対性を課した下での）の KKT 条件は、「λ∗ が存在する」だけでなく、「λ∗ が存在し、かつこれが双対問題の最適解である」というもっと強いことをいっています（ので、最適化問題を解く代わりにその双対問題を解いてもよい、ということになります）。それは強双対性が満たされている場合にのみ成り立つ話なのでご注意ください。サポートベクターマシンの文脈に絞った KKT 条件を知りたい方は、この記事を読んでも得るものが少ないので、強双対性の下で KKT 条件を示している文献を参照されるのがよいと思います。例えば、\cite{fukumizu} の付録Bがそうです。
+\end{itemize}
 
-\newpage
-\newcommand*{\mysectiontitle}{KKT 条件}
+
+\newcommand*{\mysectiontitle}{なぞの KKT 条件}
 \section*{\mysectiontitle}
 \addcontentsline{toc}{section}{\mysectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
-サポートベクターマシンの本を読んでいていざパラメータを最適化しようという段になったところ、突如として KKT 条件というのが出てきて困惑したのですが……最適化をしようとしていたのに条件って何なんですか……KKT という名前もどこの秘密結社かといった感じですし……。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+サポートベクターマシンの本を読んでいて、いざパラメータを最適化しようという段になったところ、いきなり KKT 条件というのが出てきて困惑したのですが……。最適化をしようとしていたのに条件って何ですか? KKT という名前もどこの秘密結社かといった感じですし……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 それは KKK だよね。Karush–Kuhn–Tucker 条件は不等式制約付きの最適化問題の局所最適解が満たす必要条件だね。
 \end{SERIFU}
 
 \begin{PROP}[colback=White]{定理．Karush–Kuhn–Tucker（KKT）条件}
-$x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であり，かつ，\cite{constraint_qualifications} の Constraint のどれかが満たされているものとする．
-\\[3pt]
+$x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であり，かつ，\cite{wikipedia_en} の Regularity conditions のいずれかが満たされているものとする．
+\\[5pt]
 　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x)  \quad  \mathrm{subject \; to}   \; \; \; g_i(x) \leqq 0,  \quad i = 1, \cdots, m $
-\\[3pt]
+\\[5pt]
 このとき，以下を満たす $\lambda^\ast \in \mathbb{R}^m$ が存在する．
 \begin{eqnarray*}
 \left\{
@@ -125,69 +149,376 @@ $x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1
 \end{eqnarray*}
 \end{PROP}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
-Wikipedia によると最初はこの条件を発表した Kuhn と Tucker にちなんで呼ばれていたみたいだけど、後に彼らの発表の 12 年前に Karush が修士論文でこの条件を主張していたのが見つかって、彼の名も冠してこの名前になったのかな?
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+Wikipedia \cite{wikipedia_en} によると最初はこの条件を発表した Kuhn と Tucker にちなんで名付けられたみたいだけど、後に彼らの発表の 12 年前に Karush が修士論文でこの条件を主張していたのがみつかって、彼の名も冠してこの名前になったのかな?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_4.png}
-なんと、それで KKT というのですか…研究成果を12年前に修士論文で導出していましたといわれるのもなかなかショックですね。Karush 氏ももっとツイッターで自身の結果を宣伝しておくとよかったのでは?
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_idea.png}
+なんと、それで KKT というのですか……研究成果を12年前に修士論文で導出していましたといわれるのもなかなかショックですね。Karush 氏ももっとツイッターで自身の結果を宣伝しておくとよかったのでは?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 1939年にツイッターはないからね。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-さておき、なぜサポートベクターマシンの本で急に KKT 条件が出てくるのでしょう? いきなり $\lambda^\ast$ (これは $\alpha^\ast$ かもしれないしお手元の本によります) というベクトルが存在するといわれても反応に困るんですが。$\lambda^\ast$ って何なんです？ そしてなぜそのような不等式たちが成り立つんです？ そもそも、「最適解はこのような条件たちを満たす」といわれても、だから何なんです？ 式が増えてかえってややこしくなった気がするんですが…。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+さておき、なぜサポートベクターマシンの本で急に KKT 条件が出てくるのでしょう? いきなり $\lambda^\ast$ ($\alpha^\ast$ かもしれないしお手元の本によります) というベクトルが存在するといわれても反応に困るんですが。$\lambda^\ast$ って何なんです? そしてなぜそのような不等式たちが成り立つんです? そもそも、「最適解はこのような条件たちを満たす」といわれても、だから何なんです? 式が増えてかえってややこしくなった気がするんですが…。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
-$\lambda$ は KKT 乗数ともよばれる、等式制約付き最適化でいうラグランジュ乗数に相当するものだね。それが何なのかというのは、なぜ KKT 条件が成り立つのかを証明する過程で得ないといけないかな。先に、KKT 条件を満たすから何なのかというのは、どこにあるかまるで見当もつかない「最適解」について、「このような条件を満たす」という情報が得られること自体がありがたいんじゃないのないかな？ KKT 条件があるお陰で、これをつかって最適解に向かうアルゴリズムを構築することができる（実際多くのアルゴリズムが KKT 条件を解いていると解釈できるらしい）けど、これがなかったら定義域の1点1点を「不等式制約を満たすか」「これまで探索した点より小さいか」をあてもなく探索しないといけなくて、途方もないよ？ それにサポートベクターマシンの場合は、KKT 条件から「限られた一部のデータ（サポートベクター）のみが解となる分離超平面を形づくっている」という重要な事実が直接的にわかるからね。最適解の必要条件がわかることは強力だよ？
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+$\lambda$ は KKT 乗数ともよばれる、等式制約付き最適化でいうラグランジュ乗数に相当するものだね。KKT 条件を満たすから何なのかというのは、「最適解」について、「このような条件を満たす」という情報が得られること自体がありがたいんじゃないのないかな? KKT 条件があるお陰で、これをつかって最適解に向かうアルゴリズムを構築することができる(実際多くのアルゴリズムが KKT 条件を解いていると解釈できるらしい)けど、これがなかったら定義域の1点1点を「不等式制約を満たすか」「これまで探索した点より小さいか」をあてもなく探索しないといけなくて、途方もないよ? それにサポートベクターマシンの場合は、KKT 条件から「限られた一部のデータ(サポートベクター)のみが解となる分離超平面を形づくっている」という重要な事実が直接的にわかるからね。最適解の必要条件がわかることは強力だよ?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-うーん、そういわれてみれば最適解について重要な手がかりを与えてくれているような気はしてきましたが…しかし、なぜ最適解では KKT 条件が成り立つんでしょう？ どのように考え始めればいいやら…。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+うーん、そういわれてみれば、どこにあるかまるで見当もつかない最適解について手がかりを与えてくれるような気はしてきましたが……しかし、なぜ最適解では KKT 条件が成り立つんでしょう? どのように考え始めればいいやら……。
 \end{SERIFU}
 
 
-\renewcommand*{\mysectiontitle}{制約がないとき}
+\renewcommand*{\mysectiontitle}{制約がないときの条件}
 \section*{\mysectiontitle}
 \addcontentsline{toc}{section}{\mysectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
-そうだな…まず、制約がない場合をイメージしてみると、局所最適解ってどんな点かな？ あ、$x^\ast$ が局所最適解っていうのは、その点 $x^\ast$ を中心にしたある半径 $\delta > 0$ の開球 $ B(x^\ast; \delta)$ の中でその点が最小 $ \forall x \in B(x^\ast; \delta), \; f(x^\ast) \leqq f(x)$ って意味ね。局所最適解であっても大域最適解とは限らないけど、大域最適解は必ず局所最適解だから、大域最適解がどんな点か調べるのに局所最適解がどんな点かを考えてもいい。
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+そうだな……まず、制約が何もない場合をイメージしてみると局所最適解ってどんな点かな? あ、$x^\ast$ が局所最適解っていうのは、その点 $x^\ast$ を中心にしたある半径 $\delta > 0$ の開球 $ B(x^\ast; \delta)$ の中でその点が最小 $ \forall x \in B(x^\ast; \delta), \; f(x^\ast) \leqq f(x)$ って意味ね。局所最適解であっても大域最適解とは限らないけど、大域最適解は必ず局所最適解だから、大域最適解がどんな点か調べるのに局所最適解がどんな点かを考えてもいい。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
-制約がない場合に局所最適解はどんな点かといわれても…制約がないんだったらもう単純に $f(x)$ が一番小さい点でしかないですよね？
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+制約がない場合に局所最適解はどんな点かといわれても……制約がないんだったらもう単純に $f(x)$ が一番小さい点でしかないですよね?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
-うん。言い換えると、$x^\ast$ からどんな向きに進んでも $f$ の値が「より小さくなる」ことはないよね？
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+うん。言い換えると、$x^\ast$ からどんな向きに進んでも $f$ の値が「より小さくなる」ことはないよね?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 そうですね、もし最適解が平らな場所にあったら、少し進んでも $f$ の値が変わらない（最適解から少し進んでも最適解という状態）ということはあるかもしれませんが、$f$ の値が小さくなることは絶対にないです。もし小さくなるなら、そこはもはや最適解ではないですから。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
-「より小さくなることはない」を言い換える。「 $ \nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」\footnote{この言い換えは $f(x^\ast + s)$ が $f(x^\ast + s) \approx f(x^\ast) + \nabla f(x^\ast)^\top s$ と一次近似できるほど $x^\ast$ に十分近いところでは」のようなイメージで理解できると思いますが、近似的でなくても成り立ちます。が、証明はここでは割愛します。}。
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+「より小さくなることはない」を言い換える。「 $ \nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」\footnote{この言い換えは $f(x^\ast + s)$ が $f(x^\ast + s) \approx f(x^\ast) + \nabla f(x^\ast)^\top s$ と一次近似できるほど $x^\ast$ に十分近いところでは」のようなイメージで理解できると思いますが、近似的でなくても成り立ちます。証明は \cite{zenn} を参照ください。}。
 \end{SERIFU}
 
-%え、えっと？ [tex: \nabla f(x)] は [tex:f(x)] の勾配といって、ヤコビ行列の転置なのですね。<center style="margin:0.5em 0">[tex: \nabla f(c)^\top = Df(c) = \displaystyle \left( \frac{\partial f}{\partial x_1}(c) \;\; \cdots \;\; \frac{\partial f}{\partial x_n}(c) \right) ]</center>ならば [tex: \nabla f(x^\ast)^\top] は [tex:f] の [tex:x^\ast] におけるヤコビ行列そのもので、[tex: \nabla f(x^\ast)^\top s] は [tex:f] の起点 [tex:x^\ast] における増分 [tex:s] の微分ですね…この微分が負になるような増分は存在しない、ということは…起点 [tex:x^\ast] からどんな方向付きステップ [tex:s] だけ進んでも、より小さくなることはない、ということですね。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+え、えっと? $\nabla f(x)$ は $f(x)$ の勾配といって、ヤコビ行列の転置なのですね。
+\begin{eqnarray*}
+\nabla f(c)^\top = Df(c) = \displaystyle \left( \frac{\partial f}{\partial x_1}(c) \;\; \cdots \;\; \frac{\partial f}{\partial x_n}(c) \right)
+\end{eqnarray*}
 
-%だから、どんな [tex:s] でも [tex: \nabla f(x^\ast)^\top s \geqq 0] でないといけないし、一方、[tex:-s] に対しても [tex: -\nabla f(x^\ast)^\top s \geqq 0] でないといけない。結局、任意の [tex:s] に対して [tex: \nabla f(x^\ast)^\top s = 0] でないといけない。であれば、[tex: \nabla f(x^\ast) = \vec{0}] でないといけない。制約がないバージョンの「KKT条件」はこれで終わりだ。<div style="margin:0.6em 0;padding:0.5em 0.7em 0.8em;border:1px solid #4d4d4d;"><b>定理．制約がないときの1次の必要条件</b><hr style="margin:0.3em 0;border:0"/>[tex:x^\ast] を問題（P）の局所最適解とする．但し，[tex:f] は [tex: x^\ast] で微分可能であるものとする．<hr style="margin:0.4em 0;border:0"/>（P）[tex: \displaystyle  \underset{x \in \mathbb{R}^n}{\rm minimize} \; \; f(x)]<hr style="margin:0.4em 0;border:0"/>このとき，以下が満たされる．<hr style="margin:0.4em 0;border:0"/>[tex: \; \nabla f (x^\ast) = \vec{0}]</div>
+ならば $\nabla f(x^\ast)^\top$ は $f$ の $x^\ast$ におけるヤコビ行列そのもので、$\nabla f(x^\ast)^\top s$ は $f$ の起点 $x^\ast$ における増分 $s$ の微分ですね……この微分が負になるような増分は存在しない、ということは……起点 $x^\ast$ からどんな方向付きステップ $s$ だけ進んでも、より小さくなることはない、ということですね。
+\end{SERIFU}
 
-\renewcommand*{\mysectiontitle}{等式制約があるとき}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+だから、どんな $s$ でも $\nabla f(x^\ast)^\top s \geqq 0$ でないといけないし、一方、$-s$ に対しても $-\nabla f(x^\ast)^\top s \geqq 0$ でないといけない。結局、任意の $s$ に対して $\nabla f(x^\ast)^\top s = 0$ でないといけない。であれば、$\nabla f(x^\ast) = \vec{0}$ でないといけない。制約がないバージョンの「KKT条件」はこれで終わりだ。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{定理．制約がないときの1次の必要条件}
+$x^\ast$ を問題（P）の局所最適解とする．但し，$f$ は $x^\ast$ で微分可能であるものとする．
+\\[5pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x)$
+\\[5pt]
+このとき，以下が満たされる．
+\begin{eqnarray*}
+\nabla f (x^\ast) = \vec{0}
+\end{eqnarray*}
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+これだけですか? $\lambda^\ast$ などは出てこないんですね。KKT 条件の最初の式のもっとシンプルなのだけ、といった感じでしょうか。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+あくまで必要条件だから、$\nabla f(x) = \vec{0}$ なら $x$ が局所最適解というわけではないからね。
+\end{SERIFU}
+
+
+\renewcommand*{\mysectiontitle}{等式制約が1つあるときの条件}
 \section*{\mysectiontitle}
 \addcontentsline{toc}{section}{\mysectiontitle}
 \vspace{3pt}
 
-\renewcommand*{\mysectiontitle}{不等式制約があるとき}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+じゃあ等式制約 $h_i(x) = 0 \, (i = 1, \cdots, m)$ がある場合はどうだろう? 最適解 $x^\ast$ は依然として「どんな向きに進んでも $f$ の値がより小さくなることはない」点だろうか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+等式制約がある場合は…等式制約を満たす範囲で $f$ が最小の点を探さなければなりませんね。$x$ が2次元の場合でイメージすると、制約がない場合は2次元平面全体から解を探していたのが、$h(x)=0$ という制約があるとこれを満たす曲線上でだけ解を探すといった感じです。この場合の $x^\ast$ も「どんな向きに進んでも $f$ の値がより小さくなることはない」点になっているかといわれると……違いますね。$x^\ast$ はあくまで曲線 $h(x)=0$ 上で一番小さい点です。この曲線をはみ出す向きに進むならば $f(x)$ は小さくならないとは限りません。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+つまり、「$\nabla h(x^\ast)^\top s = 0$ かつ $\nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」かな?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+今度は $h$ の微分も出てきましたね……$\nabla h(x^\ast)^\top s = 0$ とは $x^\ast$ から $s$ だけ進んでも $h$ の値が変わらないということですよね。……なるほど、最適解 $x^\ast$ は「$h$ の値を変えずに $f$ を減らすような方向付きステップ $s$ が存在しない」点だといいたいのですね?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+だから、さっきと同様の議論により、$\nabla h(x^\ast)^\top s = 0$ を満たす $s$ では $\nabla f(x^\ast)^\top s = 0$ でないといけない(ここで $\nabla h(x^\ast) = 0$ となるような局所最適解 $x^\ast$ については考えないことにする；$h(x) = 0$ 上にこういう点があったら別途調べることにしよう)。ということは、$\nabla h(x^\ast)$ と $\nabla f(x^\ast)$ って平行でないといけない。$\nabla h(x^\ast)$ に直交する任意の $s$ が $\nabla f(x^\ast)$ に直交しないといけないからね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+直交? ああ、2つのベクトルの内積がゼロということは、直交するということでしたね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+だから、等式制約が1つのバージョンの「KKT条件」はこうなる。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{定理．等式制約が1つあるときの1次の必要条件}
+$x^\ast$ を $\nabla h(x^\ast) = 0$ ではないような問題（P）の局所最適解とする．但し，$f, \, h$ は $x^\ast$ で微分可能であるものとする．
+\\[5pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x) \quad  \mathrm{subject \; to}   \; \; \; h(x) = 0$
+\\[5pt]
+このとき，以下を満たす $\lambda^\ast \in \mathbb{R}$ が存在する．
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\nabla f (x^\ast) + \lambda^\ast \nabla h (x^\ast) = \vec{0}
+\\[5pt]
+h(x^\ast) = 0 
+\end{array}
+\right.
+\end{eqnarray*}
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+2つ目の条件式の $h(x^\ast) = 0$ は $x^\ast$ が問題（P）の局所最適解だから等式制約を満たしているって当然の話だけどね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+あ、今度は $\lambda^\ast$ が出てきましたね…この $\lambda^\ast$ が存在することは $\nabla h(x^\ast)$ と $\nabla f(x^\ast)$ が平行であるための必要十分条件ですね。
+\end{SERIFU}
+
+
+\renewcommand*{\mysectiontitle}{等式制約があるときの条件}
 \section*{\mysectiontitle}
 \addcontentsline{toc}{section}{\mysectiontitle}
 \vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+いまは等式制約が1つのみの場合の条件を考えたんですね。KKT 条件を目標とするなら、等式制約が複数の場合についても考えた方がよいのではないでしょうか。その場合、「$h_1, \cdots, h_m$ の値を変えずに $f$ を減らすような方向付きステップ $s$ が存在しない」のですよね。なので、$\nabla h_i(x^\ast)^\top s = 0 \, (i = 1, \cdots, m)$ をすべて満たす $s$ では $\nabla f(x^\ast)^\top s = 0$ でもなければならないということになりますが、これは $\nabla f(x^\ast)$ が $\nabla h_i(x^\ast) \, (i = 1, \cdots, m)$ たちと同じ超平面内にあるというイメージです。とすると、$\nabla f(x^\ast)$ が $\nabla h_i(x^\ast) \, (i = 1, \cdots, m)$ の線形和でかければよく、上の1つ目の条件式が $\nabla f (x^\ast) + \sum_{i=1}^m \lambda_i^\ast \nabla h_i (x^\ast) = \vec{0}$ と修正されるのではないでしょうか? あ、こうすれば KKT 条件の1つ目の条件式と同じ形になりますね！
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+その条件式でいいケースと駄目なケースがあるかな。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+え?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+3次元空間内での等式制約付き最適化を考えてみよう。$xy$ 平面上にトーラスを置く。このトーラスの表面が $h(x)=0$ だとする。$h(x)$ はトーラスの外側に向かうほど大きくなる関数とでもしよう。このとき、$g(x)=0$ の下で $f(x, y, z) = x$ を最小化する点は、トーラスの表面上で $x$ 座標が一番小さい点だよね。この点ではトーラス上の勾配は $x$ 軸のマイナス方向を向いている。他方、$f(x, y, z) = x$ の勾配は空間内のどこでも $x$ 軸のプラス方向を向いている。確かに2つの勾配は平行になっている。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+文章だとわかりづらいですね……絵でも描いてくださいよ……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+じゃあ等式制約をもう1つ増やそう。ドーナツの上にドーナツを重ねるようにトーラスの上にもう1つトーラスを置こう。制約を満たす領域(よく実行可能領域というね)は曲面から曲線になる。2つのトーラスが接する円周上になるからね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+いや、日常でドーナツの上にドーナツを重ねませんよ……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+このとき制約下で $f(x, y, z)=x$ を最小化する点は円周上で $x$ 座標が一番小さい点だけど、この点で $f$ の勾配は、トーラス(下側)の勾配とトーラス(上側)の勾配の線形和になるかな?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+あれ、ならないですね。$f$ の勾配は $-x$ 方向を向いている一方で、トーラスたちの勾配は $+z$ 方向と $-z$ 方向です。これらでは $f$ の勾配をつくれません……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+トーラスどうしが少しでもめり込んでいたらそうならないんだけどね。「どっちのトーラスの勾配にも垂直な向き」がちゃんと「すべての制約からはみ出さない向き」になるから。でも、トーラスどうしが接していると「どっちのトーラスの勾配にも垂直な向き」が「すべての制約からはみ出さない向き」にならないんだよね。勾配どうしが平行になっちゃってるせいで「どっちのトーラスの勾配にも垂直な向き」じゃ制約の中に閉じ込められないって感じかな。だからもう、制約付き最適化の局所最適解の必要条件を考えるとき、こういうケースは除外しちゃう。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+ええ……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+よく仮定されるのが \cite{wikipedia_en} の Regularity conditions の LICQ: Linear Independence Constraint Qualification だね。局所最適解 $x^\ast$ では全ての制約の勾配が線形独立であるとするって仮定。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{定理．等式制約があるときの1次の必要条件}
+$x^\ast$ を問題（P）の局所最適解とする．但し，$f, \, h_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であり，かつ，LICQ が満たされているものとする．
+\\[5pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x) \quad  \mathrm{subject \; to}   \; \; \; h_i(x) = 0,  \quad i = 1, \cdots, m$
+\\[5pt]
+このとき，以下を満たす $\lambda^\ast \in \mathbb{R}^m$ が存在する．
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\displaystyle \nabla f (x^\ast) + \sum_{i=1}^m \lambda^\ast_i \nabla h_i (x^\ast) = \vec{0}
+\\[5pt]
+h_i(x^\ast) = 0 \; \; (i = 1, \cdots, m)
+\end{array}
+\right.
+\end{eqnarray*}
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+上には LICQ とかいたけど、例えば LICQ の1つ上にある LCQ: Linearity Constraint Qualification を仮定してもいいよ。こっちは全ての制約が線形関数という仮定だね。全ての制約が線形なら「ちょうど局所最適解のところでだけ接する」なんてことにならないからね。ただ LCQ は LICQ よりずっと強い仮定になるね。LICQ や LCQ のような仮定は制約想定(CQ: constraint qualification)といわれるよ。LICQ より下の方の仮定は MFCQ は等式制約のみの場合は LICQ と同じだし、SC は LCQ と同じだけど、それ以外はちょっとよくわかってないや。そもそもこれらの制約想定が不等式制約もある場合のものだけど。
+\end{SERIFU}
+
+
+\renewcommand*{\mysectiontitle}{不等式制約があるときの条件}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+そうです、考えたかったのは不等式制約の場合です。早速そちらを考えていきましょう。これまでと同じように考えると……あれ? えっと、どう考えればいいのでしょう??
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+例えば2次元平面内での最適化だったら、等式制約 $h(x)=0$ は実行可能領域をある曲線上に絞り込むようなイメージだけど、不等式制約 $g(x) \leqq 0$ は曲線で囲まれた領域に絞り込むイメージだね。それで、不等式制約付き最適化の場合は、考える局所最適解 $x^\ast$ が、領域の境界上にある場合も、領域の内部にある場合もある。不等式制約が複数ある場合は一般に、$x^\ast$ はある不等式制約たちについては領域の境界上だけど、その他の不等式制約たちについては領域の内部って感じになる。前者の制約では $g_i(x^\ast) = 0$ で、後者の制約では $g_i(x^\ast) < 0$ だね。この前者の $g_i(x^\ast) = 0$ となるような制約を「有効」な制約ということが多いよ。まあそれで、不等式制約付き最適化問題の局所最適解 $x^\ast$ は、「有効な $g_i$ を大きくしないままに $f$ を小さくする向きが存在しない」点といえる。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+なるほど、「不等式を満たしながら最適化せよ」という問題ですから、「余裕で満たされる」制約もあれば、「ぎりぎり満たされる」制約もありますね。ある制約が余裕で満たされている場合は、その制約は局所最適解が満たす条件に関わってこないということですね。確かに、局所的にはそんな制約は最初からなかったも同然ですもんね。では、「 有効なすべての $g_i$ に対して $\nabla g_i(x^\ast)^\top s \leqq 0$ であって、かつ $\nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」といった感じになるでしょうか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+それだとドーナツ重ね問題が発生するんだよね。ドーナツの内部が負のとき、2つのドーナツが接する円周上が実行可能領域になるけど、この円周上の最適解 $x^\ast$ から $-x$ 方向に向かうベクトル $s$ は $\nabla g_1(x^\ast)^\top s = 0$ も $\nabla g_2(x^\ast)^\top s = 0$ も $\nabla f(x^\ast)^\top s = 0$ も満たしちゃうからね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smile.png}
+では、すべての有効な制約の勾配に LICQ を仮定すればいいですね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+それでもいいけど、もっと弱い仮定もあるよ。\cite{wikipedia_en} の Regularity conditions の LICQ の下にある MFCQ が例えばそう。表の下に LICQ ⇒ MFCQ ってあるよね。MFCQ は $\exists d \in \mathbb{R}^n, \, \nabla g_i(x^\ast) ^\top d < 0$ for all active inequality constraints ――つまり、「すべての有効な制約について $g_i(x^\ast)$ を同時に減らす方向 $d$ が存在する」って感じかな。ドーナツを2つ重ね置きした場合のドーナツが接する円周上にそんな点はないよね。同時に2つのドーナツの内部に向かうベクトルはないからね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+へえ。しかし、なぜその仮定で大丈夫なんです?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+まず MFCQ を課さずに以下の上の定理が示せて、それに MFCQ を課すと下の定理が示せるんだよね。あ、$I(x^\ast)$ は $x^\ast$ において有効な制約の添え字を集めた集合ね。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{定理．不等式制約があるときの1次の必要条件}
+$x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であるものとする．
+\\[3pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x)  \quad  \mathrm{subject \; to}   \; \; \; g_i(x) \leqq 0,  \quad i = 1, \cdots, m $
+\\[3pt]
+このとき，以下を満たす $s \in \mathbb{R}^n$ は存在しない．但し，$I(x) = \{i \, | \, g_i(x) = 0\}$ とする．
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\displaystyle \nabla f (x^\ast) ^\top s < 0  \\[5pt]
+\nabla g_i (x^\ast) ^\top s < 0  \; \; (i \in I(x) \, )
+\end{array}
+\right.
+\end{eqnarray*}
+\end{PROP}
+
+\begin{PROP}[colback=White]{定理．不等式制約があるときの1次の必要条件(MFCQ下)}
+$x^\ast$ を問題(P)の局所最適解とする．但し，$f, \, g_i \, (i = 1, \cdots, m)$ は $x^\ast$ で微分可能であり，かつ，MFCQ が満たされているものとする．
+\\[3pt]
+　(P)　$\displaystyle \underset{x \in \mathbb{R}^n}{\mathrm{minimize}} \; \; f(x)  \quad  \mathrm{subject \; to}   \; \; \; g_i(x) \leqq 0,  \quad i = 1, \cdots, m $
+\\[3pt]
+このとき，以下を満たす $s \in \mathbb{R}^n$ は存在しない．但し，$I(x) = \{i \, | \, g_i(x) = 0\}$ とする．
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\displaystyle \nabla f (x^\ast) ^\top s < 0  \\[5pt]
+\nabla g_i (x^\ast) ^\top s \leqq 0  \; \; (i \in I(x) \, )
+\end{array}
+\right.
+\end{eqnarray*}
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+どちらも同じにみえるんですが…あ、よくみると、下の定理では2つ目の条件式にイコールが付いているんですね。というか、下の定理はよくみるとさっき直感的に考えた「 有効なすべての $g_i$ に対して $\nabla g_i(x^\ast)^\top s \leqq 0$ であって、かつ $\nabla f(x^\ast)^\top s < 0$ となるような $s \in \mathbb{R}^n$ は存在しない」と同じですね。イコールがない上の場合は MFCQ は要らないんですか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+うん。もしこのような $s \in \mathbb{R}^n$ が存在したら、$g_i(x^\ast + ts) < 0$ かつ $f(x^\ast + ts) < f(x^\ast)$ を満たす $t \in \mathbb{R}$ がとれるからね。$x^\ast$ が局所最適解であることに矛盾する。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+では、MFCQ が課された場合は、つまり、$\exists d \in \mathbb{R}^n, \, \nabla g_i(x^\ast) ^\top d < 0, \, \forall i \in I(x^\ast)$ が成り立つ場合はどうなるんでしょう?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+下の定理の場合は、もしこのような $s \in \mathbb{R}^n$ が存在したら、$s$ を少しずらした $\hat{s}$ が存在して $\nabla f(x^\ast) ^\top \hat{s} < 0, \, \nabla g_i(x^\ast) ^\top \hat{s} < 0, \, \forall i \in I(x^\ast)$ となるようにできる。これに上の定理を用いると $x^\ast$ が局所最適解であることに矛盾する。もし下の定理の2つ目の条件がイコールで成り立っていたら上の定理を適用できないけど、MFCQ ですべての有効な $g_i(x^\ast)$ が減る方向が存在することを仮定しているから、$s$ を少しずらせばイコールがとれるんだよね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+説明が雑ですね……しかし、下の定理が示せたにしろ、冒頭の KKT 条件とだいぶ違いませんか? いま、「なぜ最適解では KKT 条件が成り立つのか」を知りたいんですが。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+この下の定理と KKT 条件は同値だよ。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+え、同値なんですか? そうはみえないんですが……。
+\end{SERIFU}
+
+\renewcommand*{\mysectiontitle}{二者択一定理}
+\section*{\mysectiontitle}
+\addcontentsline{toc}{section}{\mysectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+次の補題をつかう。ここで（１）の $Ax \leqq \vec{0}$ はベクトルの各成分がゼロ以下って意味ね。
+\end{SERIFU}
+
+\begin{PROP}[colback=White]{補題．Farkas’\, lemma}
+$A \in \mathbb{R}^{m \times n}$ と $c \in \mathbb{R}^n$ に対して次の（１）または（２）が成り立つ．しかし同時に（１），（２）が成立することはない．
+
+　　（１）　$\exists x \in \mathbb{R}^n, \; Ax \leqq \vec{0}, \; c^\top x < 0$
+
+　　（２）　$\exists y \in \mathbb{R}^m, \; A^\top y + c = \vec{0}, \; y \geqq 0$
+\end{PROP}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+どちらか一方が成立し、同時に成立することはない、ですか。不思議な定理ですね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+Farkas の二者択一定理ともいうみたいだね。この（１）の $c$ を $\nabla f(x^\ast)$ に読み替えて、$A$ を有効な制約について横ベクトル $\nabla g_i(x^\ast)^\top$ を縦に並べた行列に読み替えると、（１）が主張する「このような $x$ が存在する」は、不等式制約があるときの1次の必要条件（MFCQ下）の「このような $s$ は存在しない」の否定になっているよね?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+えっと、そのように $c$ と $A$ を読み替えれば、（１）は確かに先ほどの定理を否定のようですね。先ほどの定理では存在しないといったものを存在するといっている。……否定じゃ駄目なんじゃないですか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+さっきの定理を仮定すると（１）が否定される。ということは、必ず（２）が成り立つ。二者択一定理だからね。そして、（２）が成り立つならば、$y$ が存在する。この $y$ を $\lambda^\ast$ とかき換えるとどうだろう。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smile.png}
+（２）の $y$ を $\lambda^\ast$ とかき換えて、$c$ と $A$ もかき換えると、こうですね。……これ、KKT 条件の1番目と4番目の条件式ですね！
+\begin{eqnarray*}
+\left\{
+\begin{array}{l}
+\displaystyle \nabla f (x^\ast) + \sum_{i \in I(x)} \lambda^\ast_i \nabla g_i (x^\ast) = \vec{0} \\[5pt]
+\lambda^\ast_i \geqq 0 \; \; (i = 1, \cdots, m)
+\end{array}
+\right.
+\end{eqnarray*}
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+……でもよくみると、1番目の条件式の和が制約が有効な $i$ についてだけになってしまっていますね。それに、2番目と3番目の条件式も足りませんし。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+KKT 条件の2番目の条件式は $x^\ast$ が局所最適解であることからただちにしたがうからさっきの定理から示す必要はないよ。そして残りの問題は、制約が有効でない $i$ で $\lambda_i^\ast = 0$ とすれば全部解決するかな。
+\end{SERIFU}
+
+\vspace{5pt}
+\noindent 力尽きた
+
 
 % 奥付
 \clearpage

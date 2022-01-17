@@ -3,14 +3,6 @@
 \graphicspath{{../images/}}
 
 
-\renewcommand{\footnoterule}{%
-  \kern -5pt
-  \color{DarkGray}
-  \hrule width \textwidth height 1pt
-  \kern 4.7pt
-}
-
-
 \begin{document}
 
 
@@ -35,7 +27,11 @@
 \vspace{3pt}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\section*{ハミルトン「時系列解析」の前半から後半へ}
+\addcontentsline{toc}{section}{ハミルトン「時系列解析」の前半から後半へ}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　ハミルトン「時系列解析」\cite{hamilton1994}の前半をふりかえってみます．
 \vspace{-0.3\baselineskip}
 \begin{itemize}
@@ -53,19 +49,19 @@
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　――こうしてみると，前半を終えただけでも私たちは目の前の時系列に対して既に色々なことが推測できるように思えます．将来の値を予測したり，変数間にグレンジャー因果があるかを推測したり，あるとしたらその効果の大きさはどれくらいなのか推測したり――ただし往々にしてノイズが正規ホワイトノイズであるような ARMA 過程を仮定することにはなりますが．
 
 　となると，12章からは何を扱うのでしょうか？ やはり仮定を緩和していくとか？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　それも後の章では出てくるけど，12章でまずやることは違うかな．12章でやることは，12章の冒頭から天下り的にいえば，{\addCJKfontfeatures{Color=DarkCyan}「推測に事前知識を反映させること」}みたいだからね．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　事前知識？
 \end{SERIFU}
 
@@ -75,39 +71,39 @@
 \vspace{3pt}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　そうだな，12章冒頭の例だけど，任意の時刻 $t$ に $y_t \sim \mathrm{i.i.d} \, N(\mu, \sigma^2)$ が観測されるとするよ．$y = (y_1, \cdots, y_T)^\top$ を観測したときに $\theta = (\mu, \sigma^2)^\top$ をどのように推測するべきだろうか？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　そのモデルはもはや各時刻の値が独立なので全く時系列らしくないですが……しかし，そのような推測は5章で扱いましたよ．そのモデルの下で時刻 $1, \cdots, T$ にどんな値が観測されるかは確率ベクトル $Y = (Y_1, \cdots, Y_T)^\top$ です．$Y$ の確率密度関数は $\theta = (\mu, \sigma^2)^\top$ を用いてかけます．実際には $y = (y_1, \cdots, y_T)^\top$ が観測されているのでこの点で $Y$ の確率密度関数($y$ の関数でなく $\theta$ の関数と考えると尤度関数)が最大になっていてほしいです．そのようになる $\hat{\theta}$ を選びます…というものでしたよね．最尤推定です．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　そうだね．その選び方がどれくらいよいかは，たくさんのパラレルワールドで $y$ を観測してそれぞれで $\hat{\theta}$ を推定したときに，平均的にどれくらい真の $\theta$ とずれるか $E(\hat{\theta} - \theta)(\hat{\theta} - \theta)^\top$ で評価されるね．
 
 　じゃあ少し違う状況を考えるよ．いやモデルは同じなんだけど，観測者は事前に $\theta$ に対してある程度の知識というか信念をもっていたとする．「$\mu$ がゼロ未満であることはほとんどないと思う」といった具合に．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　なんと，事前に知識が……いえでも，現実にはそのように事前にある程度の見通しがある状況もありそうですね．しかし，最尤推定ではそのような知識を取り込むことは難しそうですね．尤度関数の最大点を取るだけですから……「$\mu$ がゼロ未満であることはほとんどないと思う」と考えているなら，$\mu$ がゼロ未満である場所で尤度関数を薄くしておく必要がありそうです．しかし，どのように薄くすればよいのやら．それに，そうやって尤度関数の最大点が少しずれたとして，その点をどれくらい信用してよいのか……．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　うん，もはや，「観測したデータをもとにただ1点の推測値 $\hat{\theta}$ を出す」という枠組みだと扱いづらくなってくるよね．だから，ここでは $\theta$ も確率変数であると考えるよ．$\theta$ に対して事前に想定している確率分布 $f(\theta)$ があって，観測したデータ $y$ をもとにその確率分布を $f(\theta|y)$ に更新する，という手続きをとる．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　$\theta$ も確率変数であると考える？……これまでは神様がモデルというサイコロを振って観測値が出てくると考えていましたが，そのモデル(のパラメータ)すらもサイコロを振った結果で決まっていたということなのですか？ \, では，モデルから観測値を出す神様は実は下請けの神様にパラメータを発注していて，下請けの神様がサイコロを振ってパラメータを出して納品していたと……神様界にもそんな下請け構造が……．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　ちょっと意味がわからないかな．
 \end{SERIFU}
 
@@ -122,12 +118,12 @@
 \vspace{3pt}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　12章でベイズ推測を導入して，13章はカルマンフィルタ？ \, 何ですかそれは？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　カルマンフィルタとは「各時刻の観測値が，観測できない『状態』から生成されるというモデルを仮定した下で，状態の分布をトラッキングする手続き」かな．
 
 　仮定するモデルについてもっとちゃんと説明するよ．{\addCJKfontfeatures{Color=DarkCyan}状態空間モデル}というんだけど，各時刻の観測値 $y_t \in \mathbb{R}^n$ は以下のモデルから生成されると考えるよ．
@@ -144,12 +140,12 @@ y_t &= A^\top x_t + H^\top \xi_t + w_t \tag{13.1.2}
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　観測できない「状態」が観測値を生み出す……そうですね，例えば私が毎日動物園にパンダさんのようすをみにいくとします．私に観測できるのは，パンダさんが遊び回っているか，そっぽを向いているかのどちらかくらいでしょう．しかし，パンダさんのそのようすの裏には「今日はいい気分だ」「今日は疲れがたまっている」「今日はいらいらしている」「今日は寂しい」などのもっと複雑な「状態」があるに違いありません．そのようなパンダさんの状態の分布の推移をこそモデリングしようというのが「状態空間モデル」なのですね？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　う，うん……パンダの毎日のふるまいを分析する用途に適切かどうかは別として，状態空間モデルの考え方はそれで合っていると思うよ．
 
 　まあそれで重要なのは，状態空間モデルは以下が満たされるとき状態 $\xi_t$ の分布を完全に解析的に追いかけることができるということなんだよね．
@@ -162,17 +158,17 @@ y_t &= A^\top x_t + H^\top \xi_t + w_t \tag{13.1.2}
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　状態の分布を完全に追いかけることができる……とは？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　初期状態 $\xi_0$ の分布は決め打っておくとして，時刻 $t$ までに観測できる情報 $\mathcal{Y}_t \equiv (y_t, \cdots, y_1, x_t, \cdots, x_t)$ が手に入ったとき，現在の状態 $\xi_t$ の分布が完全に求まるってことだね．確率密度関数 $p(\xi_t | \mathcal{Y}_t)$ を具体的に求めてみれば，きちんと求まることがわかると思うよ．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　$p(\xi_t | \mathcal{Y}_t)$ を求めるのですか……といわれましても，どうやって求めればいいのやら……とりあえず，ベイズの定理を適用してみましょう．$\mathcal{Y}_t$ というかたまりは $y_t, x_t, \mathcal{Y}_{t-1}$ とほぐしてみましょう．観測値 $y_t$ を切り出したいので．条件付き分布の項からは，なくてもいい条件は取り除いておきましょう．
 \begin{align}
 p(\xi_t | \mathcal{Y}_t) &= p(\xi_t | y_t, x_t, \mathcal{Y}_{t-1}) \notag \\
@@ -191,7 +187,7 @@ p(\xi_t | \mathcal{Y}_{t-1}) = \int p(\xi_t | \xi_{t-1}) p(\xi_{t-1} | \mathcal{
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　それで問題ないよ．最初の時刻の $p(\xi_1 | \mathcal{Y}_1)$ がどうなるか考えてみて．
 先にここでいくつかの表記を導入しておこうか．$\mathcal{Y}_\tau$ が手に入っている条件下での $\xi_t$ の期待値と分散共分散行列を以下のように表記することにしよう．
 \begin{align}
@@ -202,7 +198,7 @@ P_{t|\tau} &\equiv E \bigl[ (\xi_t - \hat{\xi}_{t|\tau}) (\xi_t - \hat{\xi}_{t|\
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　はあ……$p(\xi_1 | \mathcal{Y}_1)$ がどうなるかというと，(ア) に当てはめれば $p(y_1 | \xi_1, x_1)$ と $p(\xi_1)$ の積の正規化ですね．前者は(13.1.2)式より以下ですね．
 \begin{align}
 y_1 | \xi_1, x_1 &\sim N(A^\top x_1 + H^\top \xi_1, \, R) \tag{イ'}
@@ -242,12 +238,12 @@ p(\xi_1 | \mathcal{Y}_1) &\propto \exp \biggl( -\frac{1}{2} (\xi_1 -\hat{\xi}_{1
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　そうだね．それに，部長がいま $p(\xi_1 | \mathcal{Y}_1)$ を求めたのと全く同じ要領で，任意の $t$ に対する $p(\xi_t | \mathcal{Y}_t)$ が求まるよ．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　え？ \, あっ，なるほど，いま $p(\xi_1 | \mathcal{Y}_1)$ を求めたことで以下がわかりましたね．
 \begin{itemize}
   \item 初期状態 $\xi_0$ の分布を多変量正規分布 $N(\hat{\xi}_{0|0}, P_{0|0})$ とする．
@@ -270,12 +266,12 @@ P_{t|t}^{-1} &= H R^{-1} H^\top + P_{t|t-1}^{-1} \tag{ク}
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　……と思ったのですが，上式の (キ), (ク) は教科書の (13.2.15), (13.2.16) 式とは異なってみえますね．教科書の (13.2.15), (13.2.16) 式の $\hat{\xi}_{t|t}$ と $P_{t|t}^{-1}$ は時刻 $t$ の観測をする前のそれにインクリメントする形式になっていますが，上式はそうなっていません．どこで計算ミスしてしまったのでしょうか？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　計算ミスではないよ．以下の Woodbury の公式を使ってみよう．
 \end{SERIFU}
 
@@ -289,7 +285,7 @@ $A \in \mathbb{R}^{n \times n}, \, B \in \mathbb{R}^{n \times m}, \, C \in \math
 \end{PROP}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　何ですかその公式は……右辺も左辺もややこしくてありがたみがよくわからないのですが…しかし，今回は $( H R^{-1} H^\top + P_{t|t-1}^{-1} )^{-1}$ の箇所にその公式を適用することができそうですね．$A = P_{t|t-1}^{-1} \in \mathbb{R}^{r \times r}$ としましょう．$D = -R \in \mathbb{R}^{n \times n}$ としましょう．$B = H \in \mathbb{R}^{r \times n}, \, C = H^\top \in \mathbb{R}^{n \times r}$ とすれば次元の要件は満たされますね．適用すると以下のようになります．
 \begin{align}
 ( H R^{-1} H^\top + P_{t|t-1}^{-1} )^{-1} = P_{t|t-1} - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1} \tag{ケ}
@@ -316,32 +312,32 @@ P_{t|t} = P_{t|t-1} - P_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1} H^\top P_{t|t-1}
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　形のわかりやすさ以上の意味があるよ．(キ), (ク) の場合と (コ), (サ) の場合で逆行列をとるべき行列のサイズはどうなっているだろう？ \, どちらの場合でも式の中にインバースがあるから，実際に計算していくにあたって逆行列の計算をしないといけないよね．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　逆行列をとるべき行列のサイズですか？ \, ……(キ), (ク) の場合は $r \times r$，(コ), (サ) の場合は $n \times n$ ですね．両者で異なっていますね……．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　だよね．それで，カルマンフィルタを用いる状況下では，観測ベクトルの次元数 $n$ よりも状態ベクトルの次元数 $r$ を大きくとることが多い．逆行列の計算は行列のサイズに対して $\mathcal{O}(N^3)$ だから，逆行列をとるべき行列のサイズは小さいほどよい．だから普通は (コ), (サ) の形式で状態の平均ベクトルと共分散行列の更新式を表示することが多いはずだよ．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　なるほど．ときに (コ), (サ) が求まったのはよいのですが，私たちはこれを求めてどうすればいいのでしょうか．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　次の時刻 $t+1$ の状態がどうなるか予測してみたら？ \, (コ), (サ) に基づくとどうなるだろうか．
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_smile.png}
 　次の時刻 $t+1$ の状態の予測ですか．といっても時刻 $t$ の状態を (13.1.1) 式にしたがって線形変換するだけですよね．結局多変量正規分布のままですし．
 \begin{align}
 P_{t+1|t} &= F P_{t|t} F^\top + Q \notag \\
@@ -352,7 +348,7 @@ P_{t+1|t} &= F P_{t|t} F^\top + Q \notag \\
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　うん．ここで $K_t \equiv FP_{t|t-1} H (R + H^\top P_{t|t-1} H)^{-1}$ とおくと以下のようにかけるよ．この $K_t$ をカルマンゲインとか利得行列とかよぶ．
 \begin{align}
 \hat{\xi}_{t+1|t} = F\hat{\xi}_{t|t-1} + K_t (y_t - A^\top x_t - H^\top \hat{\xi}_{t|t-1}) \tag{ス'}
@@ -360,12 +356,12 @@ P_{t+1|t} &= F P_{t|t} F^\top + Q \notag \\
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleIris]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris,colbacktitle=PaleIris2]{kazusa_worried.png}
 　カルマンゲイン？
 \end{SERIFU}
 
 
-\begin{SERIFU}[colback=PaleGold]{takumi_0.png}
+\begin{SERIFU}[colback=PaleGold,colbacktitle=PaleGold2]{takumi_smile.png}
 　(ス') においてカルマンゲイン $K_t$ がかかっている $(y_1 - A^\top x_1 - H^\top \hat{\xi}_{t|t-1})$ の部分って，「時刻 $t-1$ までの観測に基づいて $y_t$ を予測したときの誤差」(予測分布の期待値を予測値としたときの) に他ならないよね．だから，カルマンゲインは「予測誤差を受けて状態の予測をどれだけ修正するか」という係数(行列)になる．
 　カルマンゲイン $K_t$ は例えば観測ノイズの共分散行列 $R$ のノルムが大きいと小さくなるよね．「観測のノイズが大きいなら予測誤差が出てもあまり修正しない」というのは理解しやすいよね．
 \end{SERIFU}

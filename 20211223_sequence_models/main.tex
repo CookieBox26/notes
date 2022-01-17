@@ -93,11 +93,11 @@ keepaspectratio]{cover.png}%
 \centerline{\textbf{登場人物紹介}}
 
 \vspace{3pt}
-\begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_3.png}
+\begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_smiley.png}
 \small
 この人はベイズ統計部の部長です。1年生です。とある目的のためにベイズ統計部を立ち上げ、統計や機械学習を勉強しています。ベイズ統計部には部長と副部長しかいません。姉が2人います。
 \end{SERIFU}
-\begin{SERIFU}[colback=White, colbacktitle=PaleGold2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{takumi_2.png}
+\begin{SERIFU}[colback=White, colbacktitle=PaleGold2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{takumi_smiley.png}
 \small
 この人はベイズ統計部の副部長です。2年生です。海外からの編入生でラクロス部に入部しようとしていましたが、部長に勧誘されてベイズ統計部に入部しました。数学が得意ですがなぜか著者を超える数学力が出せません。
 \end{SERIFU}
@@ -107,21 +107,21 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{section}{NeurIPS 2021 のニューラル系列モデルを眺める}
 \vspace{5pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 (時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。予稿サイトによると、NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}!?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 あ、あまりに多いので絞り込みましょう。タイトルに time series, sequential, rnn, recurrent, transformer, attention, state space のいずれかを含む論文は……それでも 155本……。ただこの絞り込みだと画像認識, GAN, 強化学習の研究も多そうですね。それらも興味深いですが、(時)系列に関する研究を優先するべく断腸の思いでとばしていきましょう……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けしてみましょう。さらにグループ内をアブストラクトから私が想像できる範囲で整理してみましょう。
 \end{SERIFU}
 \vspace{1pt}
 \centerline{――作業後。}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 まず、最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます。特に\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続いて人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。全体としては、「Transformer の性質を明らかにしようとしたもの」「訓練方法を工夫したもの」「使い方を工夫したもの」「アーキテクチャ自体を工夫したもの」「新しい用途に利用したもの」といった区分をしてみました。無論、この区分も恣意的なものであることに留意ください。
 \end{SERIFU}
 
@@ -168,7 +168,7 @@ keepaspectratio]{cover.png}%
 \end{PROP}
 \vspace{1pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。それぞれ「訓練をロバストにしたい」「表現力を上げたい」「訓練時間を短くしたい」といったところでしょうか。
 \end{SERIFU}
 
@@ -196,7 +196,7 @@ keepaspectratio]{cover.png}%
 \end{PROP}
 \vspace{1pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 後はその他とでもしましょうか。内容は色々なんですが……例えば Transformer と CNN の比較がありました。後は微分方程式で記述されるシステムを表現するモデルが2つ。それ以降は特に時系列といった研究ですね。異常検知やクラスタリングの研究はたまたま目に付いたので選びました。
 \end{SERIFU}
 
@@ -235,7 +235,7 @@ keepaspectratio]{cover.png}%
 \end{PROP}
 \vspace{1pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 最後に\textbf{「セルフアテンションの計算量に対処する」}を回収しましょう。そもそも Transformer の計算量が取り沙汰されるのは $\mathrm{Softmax} \left( Q K ^\top / \sqrt{d} \right) \in \mathbb{R}^{N \times N}$ を求めるのに系列長 $N$ に対して $\mathcal{O}(N^2)$ の計算量がかかるためですが、$\mathcal{O}(N^2)$ を回避するために、以下のようなアプローチが取られているようです。スパース化、低ランク近似自体はこれまでも計算量削減の基本路線であったと思いますが、新たな切り口を導入しているのと、その他の独自路線アプローチもみられるのではないでしょうか。「長距離依存性だけ近似して対処する」という研究が3つありますね。
 \end{SERIFU}
 
@@ -271,15 +271,15 @@ keepaspectratio]{cover.png}%
 \end{PROP2}
 \vspace{1pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 大雑把に全体が整理できた気がします。とはいえ、アブストラクトだけではよくわからないので本文も確認したいですが、これだけ選んでしまったので一人で作業するのは骨が折れますね……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 ――お疲れさま。随分とホワイトボードがぎっしりだね。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_0.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smile.png}
 副部長! よいところにいらっしゃいました!!
 \end{SERIFU}
 
@@ -288,7 +288,7 @@ keepaspectratio]{cover.png}%
 \section*{それぞれのお話}
 \addcontentsline{toc}{section}{それぞれのお話}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 えっこれらの論文を全部読みたいの? まあいいけど……何を抑えたいか絞った方がいいんじゃないかな。理論系の論文には当てはまらないけど、「提案手法」「想定データ(実際に検証したデータ)」「ベースライン手法」あたりかな。とりあえず予稿で出てきた順に確認していこうか。
 \end{SERIFU}
 
@@ -297,11 +297,11 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{subsection}{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 「『線形状態空間層(LSSL)』で RNN、CNN、連続時間モデルを結合する」といったタイトルだよね。であれば想定データはこれらのモデルの性質を全て要するデータなんだろうか?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 この論文はゴールを「RNN、CNN、連続時間モデルの結合」に置いていると思います。なので RNN と CNN と連続時間モデルをコンポーネントとして組み合わせたようなモデルをイメージしてしまうのですが、どうもそうではないんです。
 \end{SERIFU}
 
@@ -311,7 +311,7 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{subsection}{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 この論文についてはアブストラクトで何となく研究内容がわかるような気がします。つまり、「Transformerはそんなにパラメータが必要なのか」という問題意識から、Transformerの低ランク近似表現を打ち出し、その表現でも性能を損なわないといったことを検証しているはずです。具体的にどの層をどのように低ランク近似したかまではわかりませんが……なお、この研究を「セルフアテンションの計算量に対処する」ではなく「Transformerの性質を理解する」に分類した理由は、この研究が専ら「パラメータ数」に主眼を置いているようにみえるからです。無論パラメータ数の削減は計算量の削減と無関係ではありませんが、この研究は指標もパラメータ数そのものになっているようにみえます。実務的に「パラメータ数を小さくすること」は最終目的にはならないと思うんです。なのでこれはむしろTransformerの性質を解明した研究であると解釈しました。
 \end{SERIFU}
 
@@ -321,11 +321,11 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{subsection}{\cite{YifanChen2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 これまでのセルフアテンションの計算量削減には往々にして近似誤差の理論保証がないというようにいっていますね。だから手法間の比較もできなくなっているし、ハイパーパラメータによる計算量削減度合いの調整もできなくなっていると――
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 Nyström 近似?
 \end{SERIFU}
 
@@ -335,7 +335,7 @@ Nyström 近似?
 \addcontentsline{toc}{subsection}{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 先の論文に続いて「セルフアテンションの計算量に対処する」一味です。
 \end{SERIFU}
 
@@ -357,7 +357,7 @@ Nyström 近似?
 \addcontentsline{toc}{subsection}{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 これも「セルフアテンションの計算量に対処する」一味なんですが、一味の中でも最も異端児なのではと思うんです。
 \end{SERIFU}
 
@@ -449,11 +449,11 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{ChenZhu2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の長男ですね。なるほど長男らしいストレートなアプローチです。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 3兄弟だったの!?
 \end{SERIFU}
 
@@ -482,7 +482,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{HongyuRen2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の次男ですね。お兄さんとは一味違うアプローチです。
 \end{SERIFU}
 
@@ -492,7 +492,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 アブストラクトは、「セルフアテンションの計算量を削減する既存研究の多くは『内積をとってからソフトマックスする』方式にしか対応できない」と主張しているようにみえます。そして、それだと「相対位置エンコーディング(RPE)に対応できない」と……これまでに提案されているセルフアテンション計算量削減ってそんなに制約があったんですか??
 \end{SERIFU}
 
@@ -538,7 +538,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{ZimingZhang2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 こちらの SBO-RNN は、RNN の中でも勾配消失/爆発せず安定的に学習できる構造を突き止め、そのサブセットに SBO-RNN と名付けたということなのでしょうか?
 \end{SERIFU}
 
@@ -548,7 +548,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 時系列データのオンライン異常検知の話ですが、「FDRC ルール」とは読んで字のごとく偽陽性率を抑えるためのルール、なのでしょうか……? 
 \end{SERIFU}
 
@@ -558,7 +558,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{YutongBai2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 「Transformer が CNN よりロバストとされているがそんなことはない」といったアブストラクトですが、そもそも Transformer が CNN よりロバストとされているんですか?
 \end{SERIFU}
 
@@ -568,11 +568,11 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{StephenChung2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 チューリング完全って何ですか?
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 大雑把にいうと、C言語がチューリング完全だから、C言語で実装できる関数を実装できるってことかな。
 \end{SERIFU}
 
@@ -582,7 +582,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 検証したのがテーブルデータや CIFAR-10 であって系列データといった向きのデータではなさそうですが、タイトルが気になりました。Self-Attention Between Datapoints というのは、言語データに喩えるなら、単語から文章内の他の単語へアテンションするのではなく、文章から他の文章へアテンションするということなのでしょうか。それって Self なんでしょうか……? それはさておき、本当に「データセット全体を入力とする」のであれば訓練や推論のコストが膨大になりそうですが……?
 \end{SERIFU}
 
@@ -592,15 +592,15 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \addcontentsline{toc}{subsection}{\cite{TanNguyen2021} \, FMMformer――FMMを応用して長距離依存性を低ランク近似する}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の3男にして、1番目のお兄さんとも2番目のお兄さんとも似ていないアプローチです。複雑な家庭環境なんでしょうか……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 兄弟じゃないんだよなあ。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 FMM(高速多重極法)というのは粒子間の相互作用を近距離成分と遠距離成分に分けて計算量を削減する電磁気学分野の手法なのでしょうか? こういわれると、Transformer の相互作用にも応用できる気配がしますが、具体的にどのような手法なのでしょうか?
 \end{SERIFU}
 
@@ -610,7 +610,7 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \addcontentsline{toc}{subsection}{\cite{FanKengSun2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_2.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 通常ニューラルネットで時系列データを学習するときにステップ間で誤差に自己相関はないとしていますが、現実には自己相関するので誤差の自己相関係数も学習するといっていますね?
 \end{SERIFU}
 
@@ -620,11 +620,11 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \addcontentsline{toc}{subsection}{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_1.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 時系列のレジームの切り替わりを捉えたいといっていますね……レジームというのはこの時点を境に好景気から不景気になったというような環境の変化のようなものですよね、適当な訳語がわかりませんが……。それで、RED-SDS: Recurrent Explicit Duration Switching Dynamical System なる提案モデルでは状態にも時間にも依存してレジームをスイッチングできるようにしたんですね? うーん、いまいちどう価値があることをしたのかわからないのですが……。
 \end{SERIFU}
 
-\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_2.png}
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 おそらくレジームスイッチングモデルは元々は何らかの変数(観測不可能なら状態といった方がいいかな)に依存してスイッチングするモデルとして考案されたんだよね。ある変数がこうなってきたらここから不景気レジームだな、みたいに。でも、レジームの継続期間にもパターンがあるならそれを積極的に利用した方がいいよね。わからないけど、この病気の流行は1ヶ月で落ち着く、みたいな知識があったりしたらさ。それが Explicit Duration Switching の意味かなと思うんだけど、この発想自体は前からあって、この論文の新規性はそれを状態スイッチングモデルと組み合わせてディープで実現したところにあるのかな?
 \end{SERIFU}
 
@@ -641,7 +641,7 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \addcontentsline{toc}{subsection}{\mysubsectiontitle}
 \vspace{3pt}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_3.png}
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 Skyformer \cite{YifanChen2021}を動かしてみましょう。
 \begin{CODE}[boxrule=0pt,frame hidden]
 \begin{lstlisting}[language=python]
