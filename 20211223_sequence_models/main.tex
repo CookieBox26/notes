@@ -16,7 +16,7 @@
 }
 
 %\makeatletter
-%\renewcommand*\l@section{\@dottedtocline{1}{0.0em}{4.0em}}
+%\renewcommand*\l@section{\@dottedtocline{0}{0.0em}{0.0em}}
 %\makeatother
 
 \usepackage{eso-pic}
@@ -31,7 +31,10 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-17 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-21 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
+\renewcommand*{\mywatermark}{}
+\hypersetup{urlcolor=Teal}
+
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
     \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
@@ -48,6 +51,22 @@ keepaspectratio]{cover.png}%
   \BackgroundPic
   \AtPageUpperLeft{
     \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
+  }
+  \AtPageLowerLeft{
+    \raisebox{18.0\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{15.4cm}\rightline{{\addCJKfontfeatures{Color=MediumVioletRed} \textbf{\huge 未完成ドラフト}}}\end{minipage}}}
+  }
+  \AtPageLowerLeft{
+    \raisebox{14.0\baselineskip}{\makebox[\paperwidth]{
+    \begin{minipage}{0.9\paperwidth}{
+        \addfontfeatures{Color=MediumVioletRed}
+        \addCJKfontfeatures{Color=MediumVioletRed}
+        {\large
+        \hspace{20em}この本は未完成ドラフトです。 \\
+        \hspace{20em}目次の内容をかくことを目指しましたが \\
+        \hspace{20em}第2節以降が完成していません。
+        }
+    }\end{minipage}
+  }}
   }
 }
 \begin{titlepage}
@@ -73,11 +92,9 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は機械学習の国際会議 \, {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を私見で選んでコメントしたものです。網羅的でも排他的でもありません。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を俯瞰しようとしたものです。が、選定した論文は網羅的でも排他的でもありません。また、論文の内容に関する記述は著者の理解であることに留意ください。著者の誤りは著者に帰属します。
 
-本書の内容は著者の理解であることにご留意ください。著者の誤りは著者に帰属します。
-
-本書の内容についてお気付きの点がありましたら、大変お手数ですが、この原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
+本書の内容についてお気付きの点がありましたら、大変お手数ですがこの原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
 \begin{description}
     \item[　リポジトリ] \url{https://github.com/CookieBox26/notes/}
@@ -92,7 +109,7 @@ keepaspectratio]{cover.png}%
 %\subsubsection*{登場人物紹介}
 \centerline{\textbf{登場人物紹介}}
 
-\vspace{3pt}
+\vspace{1pt}
 \begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_smiley.png}
 \small
 この人はベイズ統計部の部長です。1年生です。とある目的のためにベイズ統計部を立ち上げ、統計や機械学習を勉強しています。ベイズ統計部には部長と副部長しかいません。姉が2人います。
@@ -103,12 +120,12 @@ keepaspectratio]{cover.png}%
 \end{SERIFU}
 
 \vspace{6pt}
-\section*{NeurIPS 2021 のニューラル系列モデルを眺める}
-\addcontentsline{toc}{section}{NeurIPS 2021 のニューラル系列モデルを眺める}
+\section*{第1節 \, NeurIPS 2021 のニューラル系列モデルを眺める}
+\addcontentsline{toc}{section}{第1節 \, NeurIPS 2021 のニューラル系列モデルを眺める}
 \vspace{5pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-(時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。予稿サイトによると、NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日時の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}!?
+(時)系列データを処理するためのニューラルネットワークモデルの動向を知るために、NeurIPS 2021 で発表された研究をみていきましょう。予稿サイトをみると、NeurIPS 2021 で発表された論文の総数は……2334本\footnote{2021年11月28日の https://proceedings.neurips.cc/paper/2021 のリンク数に基づく。}!?
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
@@ -116,13 +133,13 @@ keepaspectratio]{cover.png}%
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けしてみましょう。さらにグループ内をアブストラクトから私が想像できる範囲で整理してみましょう。
+とばしても 39 本……多いですね……こう多いと何が何だかわかりません。モデルの切り口でグループ分けしてみましょう。さらにグループ内をアブストラクトからの私の理解の範囲で区分してみましょう。
 \end{SERIFU}
 \vspace{1pt}
 \centerline{――作業後。}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-まず、最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます。特に\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続いて人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。全体としては、「Transformer の性質を明らかにしようとしたもの」「訓練方法を工夫したもの」「使い方を工夫したもの」「アーキテクチャ自体を工夫したもの」「新しい用途に利用したもの」といった区分をしてみました。無論、この区分も恣意的なものであることに留意ください。
+まず、最大勢力は Transformer ですね、検索語に含めたのでヒットするのは当然ですが、多くを占めます。特に\textbf{「セルフアテンションの計算量に対処する」}は昨年以前から引き続いて人気(?)なテーマであるようです。このサブグループは後で改めてメモしましょう。全体としては、「Transformer の性質を明らかにしようとしたもの」「訓練方法を工夫したもの」「使い方を工夫したもの」「アーキテクチャ自体を工夫したもの」「新しい用途に利用したもの」といった区分をしてみました。無論、この区分も解釈の一例であることに留意ください。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「Transformer」}
@@ -169,7 +186,7 @@ keepaspectratio]{cover.png}%
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。それぞれ「訓練をロバストにしたい」「表現力を上げたい」「訓練時間を短くしたい」といったところでしょうか。
+次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。このグループの4研究の趣旨はそれぞれ「訓練をロバストにしたい」「表現力を上げたい」「訓練時間を短くしたい」「レジームを最大限に利用したい」といったところでしょうか。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「RNN」}
@@ -191,13 +208,14 @@ keepaspectratio]{cover.png}%
     \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
     \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
     \item ドロップアウトを活用してLSTMの訓練を効率化する \cite{AnupSarma2021}。
+    \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
   \end{itemize}
 \end{itemize}
 \end{PROP}
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-後はその他とでもしましょうか。内容は色々なんですが……例えば Transformer と CNN の比較がありました。後は微分方程式で記述されるシステムを表現するモデルが2つ。それ以降は特に時系列といった研究ですね。異常検知やクラスタリングの研究はたまたま目に付いたので選びました。
+後はその他とでもしましょうか。内容は色々なんですが……例えば Transformer と CNN の比較がありました。微分方程式で記述されるようなシステムを表現するモデルの話題も複数。それ以降は特に時系列といった研究ですね。モデルへの工夫がメインとなる研究は既に Transformer, RNN のグループに分類しましたから、ここに分類されてくるのはプレ処理/ポスト処理といった向きのもののようです。異常検知やクラスタリングについては予測といったものではないですが、たまたま目に付いて興味を引いたので選びました。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{その他}
@@ -215,11 +233,10 @@ keepaspectratio]{cover.png}%
     \item 連立微分方程式システムをベイズフィルタで解く \cite{JonathanSchmidt2021}。
   \end{itemize}
   \vspace{6pt}
-  \item 時系列モデルの表現力を向上させる。
+  \item 時系列モデルの性能を向上させる汎用的なプレ処理/ポスト処理を導入する。
   \begin{itemize}
     \item 機械的に汎用的なプレ処理(成分クラスタリング)をする \cite{ZhiboZhu2021}。
     \item 誤差の自己相関を調整する \cite{FanKengSun2021}。
-    \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
   \end{itemize}
   \vspace{6pt}
   \item 時系列の異常検知を工夫する。
@@ -245,7 +262,7 @@ keepaspectratio]{cover.png}%
 \begin{itemize}
   \item $Q K ^\top$ の成分を間引く(スパースにする) 。
   \begin{itemize}
-    \item どの成分か不要なのか自体を学習する \cite{SebastianJaszczur2021}。
+    \item Transformer 内のすべてのコンポーネントをスパースな亜種にした上でスパースなアテンションも取り入れる \cite{SebastianJaszczur2021}。
   \end{itemize}
   \vspace{6pt}
   \item $Q K ^\top$ を低ランク近似する(行列分解する)。
@@ -285,11 +302,30 @@ keepaspectratio]{cover.png}%
 
 
 \vspace{6pt}
-\section*{それぞれのお話}
-\addcontentsline{toc}{section}{それぞれのお話}
+\section*{
+第2節 \, それぞれのお話
+{
+\addfontfeatures{Color=MediumVioletRed}
+\addCJKfontfeatures{Color=MediumVioletRed}
+(※ 一言ずつのみ)
+}
+}
+\addcontentsline{toc}{section}{
+第2節 \, それぞれのお話
+{
+\addfontfeatures{Color=MediumVioletRed}
+\addCJKfontfeatures{Color=MediumVioletRed}
+(※ 一言ずつのみ)
+}
+}
 
 \begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
-えっこれらの論文を全部読みたいの? まあいいけど……何を抑えたいか絞った方がいいんじゃないかな。理論系の論文には当てはまらないけど、「提案手法」「想定データ(実際に検証したデータ)」「ベースライン手法」あたりかな。とりあえず予稿で出てきた順に確認していこうか。
+えっこれらの論文を全部読みたいの? まあいいけど……何を抑えたいか絞った方がいいんじゃないかな。理論系の論文には当てはまらないけど、「提案手法」「想定データ(実際に検証したデータ)」「ベースライン手法」あたりかな。とりあえず予稿で出てきた順に確認していこうか
+{\normalsize
+\addfontfeatures{Color=MediumVioletRed}
+\addCJKfontfeatures{Color=MediumVioletRed}
+(2022-01-21 確認できていません)
+}。
 \end{SERIFU}
 
 \newcommand*{\mysubsectiontitle}{RNN、CNN、連続時間モデルの性質をあわせもつ「線形状態空間層」}
@@ -330,7 +366,7 @@ Nyström 近似?
 \end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{Luna――固定長系列を利用してセルフアテンションの計算量を線形に抑える}
+\renewcommand*{\mysubsectiontitle}{Luna――固定長変数を利用してセルフアテンションの計算量を線形に抑える}
 \subsection*{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \vspace{3pt}
@@ -373,7 +409,9 @@ Nyström 近似?
 \addcontentsline{toc}{subsection}{\cite{AstonZhang2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 自由度が高そうです。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能を得る}
@@ -381,15 +419,28 @@ Nyström 近似?
 \addcontentsline{toc}{subsection}{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能が得られると。これによって画像認識ではセルフアテンションが重要でないこともわかったとありますね。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{Terraformer――セルフアテンションを如何に疎にすべきかも学習する}
+\renewcommand*{\mysubsectiontitle}{Terraformer――疎な代替コンポーネントからなる Transformer}
 \subsection*{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
-controllerなる、ベクトルであって多くの成分が0で少しの成分が1であるようなものを全結合の結果に噛ませているのでしょうか。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能が得られると。これによって画像認識ではセルフアテンションが重要でないこともわかったとありますね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_neutral.png}
+Transformer 内の全てのコンポーネントをスパースな代替品にしたという感じなのかな。3節 Sparse is Enough のサブセクションが以下のようになっているね。
+\begin{itemize}
+    \item Sparse Feedforward Layer 
+    \item Sparse QKV Layer
+    \item Sparse loss layer
+\end{itemize}
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{Transformerによるガウス過程モデルのカーネル同定}
@@ -397,7 +448,9 @@ controllerなる、ベクトルであって多くの成分が0で少しの成分
 \addcontentsline{toc}{subsection}{\cite{FergusSimpson2021} \, \mysubsectiontitle}
 \vspace{3pt}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 Figure 1 を覗いてみると、正解付きの訓練データをすべて投入してエンコードしてデコードすると Matern 1/2 + Matern 3/2 + RBF × Matern 1/2 といったカーネルが出力されているように確かにみえますね。これが画像にキャプションを付けるモデルと似ているのでしょうか。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{微分方程式群システムの逐次ベイズ推定}
@@ -601,7 +654,7 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-FMM(高速多重極法)というのは粒子間の相互作用を近距離成分と遠距離成分に分けて計算量を削減する電磁気学分野の手法なのでしょうか? こういわれると、Transformer の相互作用にも応用できる気配がしますが、具体的にどのような手法なのでしょうか?
+FMM(高速多重極法)というのは粒子間の相互作用を近距離成分と遠距離成分に分けて計算量を削減する電磁気学分野の手法なのでしょうか。こういわれると、Transformer の相互作用にも応用できる気配がしますが、具体的にどのような手法なのでしょうか?
 \end{SERIFU}
 
 
@@ -629,8 +682,22 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \end{SERIFU}
 
 
-\section*{結び――NeurIPS 2021 にみる最近のニューラル系列モデルへの発見・工夫・理解}
-\addcontentsline{toc}{section}{結び――NeurIPS 2021 にみる最近のニューラル系列モデルへの発見・工夫・理解}
+\section*{
+第3節 \, 結び――NeurIPS 2021にみる最近のニューラル系列 \, 　　　　 \, モデルへの発見・工夫・理解 \,
+{
+\addfontfeatures{Color=MediumVioletRed}
+\addCJKfontfeatures{Color=MediumVioletRed}
+(※ 未執筆)
+}
+}
+\addcontentsline{toc}{section}{
+第3節 \, 結び――NeurIPS 2021にみる最近のニューラル系列モデルへの発見{\tiny・}工夫{\tiny・}理解 \,
+{
+\addfontfeatures{Color=MediumVioletRed}
+\addCJKfontfeatures{Color=MediumVioletRed}
+(※ 未執筆)
+}
+}
 
 
 \section*{Appendix}
@@ -677,10 +744,27 @@ ModelForSC(
 # 以下省略
 \end{lstlisting}
 \end{CODE}
-
-
-
 これに Long Range Arena のデータを渡せばよいですね。
+\end{SERIFU}
+
+
+\renewcommand*{\mysubsectiontitle}{公開コードを動かす――\cite{SebastianJaszczur2021} Terraformer}
+\subsection*{\mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\mysubsectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+Terraformer \cite{SebastianJaszczur2021} のソースコードは trax なるライブラリの一部として公開されているそうなのですが……この trax は PyPI に登録されているのですね。pip でインストールできました(CentOS 上の Python 3.9.4 に)。何でも trax パッケージの 1.4.0 にコードを含めたとかいてあるので、GitHub 上の 1.4.0 のリリースノートに何かかいてあるでしょうか……ここには何もかいていませんね。ドキュメントにもリリースノートのようなものはないようです……ライブラリの機能のうちTerraformerに該当するものはどれなのでしょうか……。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+もう v1.3.9 と v1.4.0 の差分からそれらしいコミットを探せばいいんじゃない？ ……以下がそれっぽい。
+
+%The evaluation notebook for the NeurIPS paper "Sparse is Enough in Sc…  google/trax@2238490 · GitHub
+
+つまり以下のノートブックだね。
+
+%trax/Terraformer_from_scratch.ipynb at v1.4.1  google/trax  GitHub
 \end{SERIFU}
 
 
@@ -688,62 +772,63 @@ ModelForSC(
 \clearpage
 \addcontentsline{toc}{section}{参考文献}
 \begin{thebibliography}{99}
-    \bibitem{AlbertGu2021} Albert Gu, Isys Johnson, Karan Goel, Khaled Saab, Tri Dao, Atri Rudra, Christopher Ré. Combining Recurrent, Convolutional, and Continuous-time Models with Linear State Space Layers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/05546b0e38ab9175cd905eebcc6ebb76-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AliakbarPanahi2021} Aliakbar Panahi, Seyran Saeedi, Tom Arodz. Shapeshifter: a Parameter-efficient Transformer using Factorized Reshaped Matrices. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/09def3ebbc44ff3426b28fcd88c83554-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{YifanChen2021} Yifan Chen, Qi Zeng, Heng Ji, Yun Yang. Skyformer: Remodel Self-Attention with Gaussian Kernel and Nyström method. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/10a7cdd970fe135cf4f7bb55c0e3b59f-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{XuezheMa2021} Xuezhe Ma, Xiang Kong, Sinong Wang, Chunting Zhou, Jonathan May, Hao Ma, Luke Zettlemoyer. Luna: Linear Unified Nested Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/14319d9cfc6123106878dc20b94fbaf3-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AdelineFermanian2021} Adeline Fermanian, Pierre Marion, Jean-Philippe Vert, Gérard Biau. Framing RNN as a kernel method: A neural ODE approach. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/18a9042b3fc5b02fe3d57fea87d6992f-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AlbertGu2021} Albert Gu, Isys Johnson, Karan Goel, Khaled Saab, Tri Dao, Atri Rudra, Christopher Ré. Combining Recurrent, Convolutional, and Continuous-time Models with Linear State Space Layers. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/05546b0e38ab9175cd905eebcc6ebb76-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AliakbarPanahi2021} Aliakbar Panahi, Seyran Saeedi, Tom Arodz. Shapeshifter: a Parameter-efficient Transformer using Factorized Reshaped Matrices. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/09def3ebbc44ff3426b28fcd88c83554-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{YifanChen2021} Yifan Chen, Qi Zeng, Heng Ji, Yun Yang. Skyformer: Remodel Self-Attention with Gaussian Kernel and Nyström method. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/10a7cdd970fe135cf4f7bb55c0e3b59f-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{XuezheMa2021} Xuezhe Ma, Xiang Kong, Sinong Wang, Chunting Zhou, Jonathan May, Hao Ma, Luke Zettlemoyer. Luna: Linear Unified Nested Attention. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/14319d9cfc6123106878dc20b94fbaf3-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AdelineFermanian2021} Adeline Fermanian, Pierre Marion, Jean-Philippe Vert, Gérard Biau. Framing RNN as a kernel method: A neural ODE approach. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/18a9042b3fc5b02fe3d57fea87d6992f-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{SoonHoeLim2021} Soon Hoe Lim, N. Benjamin Erichson, Liam Hodgkinson, Michael W. Mahoney. Noisy Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/29301521774ff3cbd26652b2d5c95996-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{SubhabrataDutta2021} Subhabrata Dutta, Tanya Gautam, Soumen Chakrabarti, Tanmoy Chakraborty. Redesigning the Transformer Architecture with Insights from Multi-particle Dynamical Systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2bd388f731f26312bfc0fe30da009595-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{DavidSo2021} David So, Wojciech Mańke, Hanxiao Liu, Zihang Dai, Noam Shazeer, Quoc Le. Searching for Efficient Transformers for Language Modeling. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AstonZhang2021} Aston Zhang, Yi Tay, Yikang Shen, Alvin Chan Guo Wei, SHUAI ZHANG. Self-Instantiated Recurrent Units with Dynamic Soft Recursion. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/3341f6f048384ec73a7ba2e77d2db48b-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{HanxiaoLiu2021} Hanxiao Liu, Zihang Dai, David So, Quoc Le. Pay Attention to MLPs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/4cc05b35c2f937c5bd9e7d41d3686fff-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SoonHoeLim2021} Soon Hoe Lim, N. Benjamin Erichson, Liam Hodgkinson, Michael W. Mahoney. Noisy Recurrent Neural Networks. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/29301521774ff3cbd26652b2d5c95996-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SubhabrataDutta2021} Subhabrata Dutta, Tanya Gautam, Soumen Chakrabarti, Tanmoy Chakraborty. Redesigning the Transformer Architecture with Insights from Multi-particle Dynamical Systems. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/2bd388f731f26312bfc0fe30da009595-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{DavidSo2021} David So, Wojciech Mańke, Hanxiao Liu, Zihang Dai, Noam Shazeer, Quoc Le. Searching for Efficient Transformers for Language Modeling. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AstonZhang2021} Aston Zhang, Yi Tay, Yikang Shen, Alvin Chan Guo Wei, SHUAI ZHANG. Self-Instantiated Recurrent Units with Dynamic Soft Recursion. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/3341f6f048384ec73a7ba2e77d2db48b-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HanxiaoLiu2021} Hanxiao Liu, Zihang Dai, David So, Quoc Le. Pay Attention to MLPs. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/4cc05b35c2f937c5bd9e7d41d3686fff-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{SebastianJaszczur2021} Sebastian Jaszczur, Aakanksha Chowdhery, Afroz Mohiuddin, Łukasz Kaiser, Wojciech Gajewski, Henryk Michalewski, Jonni Kanerva. Sparse is Enough in Scaling Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/51f15efdd170e6043fa02a74882f0470-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{FergusSimpson2021} Fergus Simpson, Ian Davies, Vidhi Lalchand, Alessandro Vullo, Nicolas Durrande, Carl Edward Rasmussen. Kernel Identification Through Transformers. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/56c3b2c6ea3a83aaeeff35eeb45d700d-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{JonathanSchmidt2021} Jonathan Schmidt, Nicholas Krämer, Philipp Hennig. A Probabilistic State Space Model for Joint Inference from Differential Equations and Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6734fa703f6633ab896eecbdfad8953a-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ZhiboZhu2021} Zhibo Zhu, Ziqi Liu, Ge Jin, Zhiqiang Zhang, Lei Chen, Jun Zhou, Jianyong Zhou. MixSeq: Connecting Macroscopic Time Series Forecasting with Microscopic Time Series Data. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6b5754d737784b51ec5075c0dc437bf0-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ShujianZhang2021} Shujian Zhang, Xinjie Fan, Huangjie Zheng, Korawat Tanwisuth, Mingyuan Zhou. Alignment Attention by Matching Key and Query Distributions. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/6fd6b030c6afec018415662d0db43f9d-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SebastianJaszczur2021} Sebastian Jaszczur, Aakanksha Chowdhery, Afroz Mohiuddin, Łukasz Kaiser, Wojciech Gajewski, Henryk Michalewski, Jonni Kanerva. Sparse is Enough in Scaling Transformers. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/51f15efdd170e6043fa02a74882f0470-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{FergusSimpson2021} Fergus Simpson, Ian Davies, Vidhi Lalchand, Alessandro Vullo, Nicolas Durrande, Carl Edward Rasmussen. Kernel Identification Through Transformers. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/56c3b2c6ea3a83aaeeff35eeb45d700d-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{JonathanSchmidt2021} Jonathan Schmidt, Nicholas Krämer, Philipp Hennig. A Probabilistic State Space Model for Joint Inference from Differential Equations and Data. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/6734fa703f6633ab896eecbdfad8953a-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ZhiboZhu2021} Zhibo Zhu, Ziqi Liu, Ge Jin, Zhiqiang Zhang, Lei Chen, Jun Zhou, Jianyong Zhou. MixSeq: Connecting Macroscopic Time Series Forecasting with Microscopic Time Series Data. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/6b5754d737784b51ec5075c0dc437bf0-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShujianZhang2021} Shujian Zhang, Xinjie Fan, Huangjie Zheng, Korawat Tanwisuth, Mingyuan Zhou. Alignment Attention by Matching Key and Query Distributions. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/6fd6b030c6afec018415662d0db43f9d-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{TrentonBricken2021} Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{KaiHan2021} Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{JimmySmith2021} Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{BeidiChen2021} Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ChenZhu2021} Chen Zhu, Wei Ping, Chaowei Xiao, Mohammad Shoeybi, Tom Goldstein, Anima Anandkumar, Bryan Catanzaro. Long-Short Transformer: Efficient Transformers for Language and Vision. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/9425be43ba92c2b4454ca7bf602efad8-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{TrentonBricken2021} Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{KaiHan2021} Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{JimmySmith2021} Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{BeidiChen2021} Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ChenZhu2021} Chen Zhu, Wei Ping, Chaowei Xiao, Mohammad Shoeybi, Tom Goldstein, Anima Anandkumar, Bryan Catanzaro. Long-Short Transformer: Efficient Transformers for Language and Vision. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/9425be43ba92c2b4454ca7bf602efad8-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{LifuWang2021} Lifu Wang, Bo Shen, Bo Hu, Xing Cao. On the Provable Generalization of Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/a928731e103dfc64c0027fa84709689e-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AbhishekPanigrahi2021} Abhishek Panigrahi, Navin Goyal. Learning and Generalization in RNNs. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/b04c387c8384ca083a71b8da516f65f6-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{HaixuWu2021} Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{HongyuRen2021} Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ShengjieLuo2021} Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{LifuWang2021} Lifu Wang, Bo Shen, Bo Hu, Xing Cao. On the Provable Generalization of Recurrent Neural Networks. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/a928731e103dfc64c0027fa84709689e-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AbhishekPanigrahi2021} Abhishek Panigrahi, Navin Goyal. Learning and Generalization in RNNs. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/b04c387c8384ca083a71b8da516f65f6-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HaixuWu2021} Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{HongyuRen2021} Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShengjieLuo2021} Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{LingxiaoHuang2021} Lingxiao Huang, K Sudhir, Nisheeth Vishnoi. Coresets for Time Series Clustering. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c115ba9e04ab27fbbb664f932112246d-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{BinhTang2021} Binh Tang, David Matteson. Probabilistic Transformer For Time Series Analysis. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/c68bd9055776bf38d8fc43c0ed283678-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AnupSarma2021} Anup Sarma, Sonali Singh, Huaipan Jiang, Rui Zhang, Mahmut Kandemir, Chita Das. Structured in Space, Randomized in Time: Leveraging Dropout in RNNs for Efficient Training. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/cd81cfd0a3397761fac44ddbe5ec3349-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{SebastianZeng2021} Sebastian Zeng, Florian Graf, Christoph Hofer, Roland Kwitt. Topological Attention for Time Series Forecasting. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d062f3e278a1fbba2303ff5a22e8c75e-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ShuhaoCao2021} Shuhao Cao. Choose a Transformer: Fourier or Galerkin. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d0921d442ee91b896ad95059d13df618-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{LingxiaoHuang2021} Lingxiao Huang, K Sudhir, Nisheeth Vishnoi. Coresets for Time Series Clustering. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/c115ba9e04ab27fbbb664f932112246d-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{BinhTang2021} Binh Tang, David Matteson. Probabilistic Transformer For Time Series Analysis. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/c68bd9055776bf38d8fc43c0ed283678-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AnupSarma2021} Anup Sarma, Sonali Singh, Huaipan Jiang, Rui Zhang, Mahmut Kandemir, Chita Das. Structured in Space, Randomized in Time: Leveraging Dropout in RNNs for Efficient Training. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/cd81cfd0a3397761fac44ddbe5ec3349-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{SebastianZeng2021} Sebastian Zeng, Florian Graf, Christoph Hofer, Roland Kwitt. Topological Attention for Time Series Forecasting. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/d062f3e278a1fbba2303ff5a22e8c75e-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ShuhaoCao2021} Shuhao Cao. Choose a Transformer: Fourier or Galerkin. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/d0921d442ee91b896ad95059d13df618-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{EliaTurner2021} Elia Turner, Kabir Dabholkar, Omri Barak. Charting and Navigating the Space of Solutions for Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d530d454337fb09964237fecb4bea6ce-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{ZimingZhang2021} Ziming Zhang, Yun Yue, Guojun Wu, Yanhua Li, Haichong Zhang. SBO-RNN: Reformulating Recurrent Neural Networks via Stochastic Bilevel Optimization. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/d87ca511e2a8593c8039ef732f5bffed-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{QuentinRebjock2021} Quentin Rebjock, Baris Kurt, Tim Januschowski, Laurent Callot. Online false discovery rate control for anomaly detection in time series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/def130d0b67eb38b7a8f4e7121ed432c-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{YutongBai2021} Yutong Bai, Jieru Mei, Alan L. Yuille, Cihang Xie. Are Transformers more robust than CNNs? . {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/e19347e1c3ca0c0b97de5fb3b690855a-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{StephenChung2021} Stephen Chung, Hava Siegelmann. Turing Completeness of Bounded-Precision Recurrent Neural Networks. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/ef452c63f81d0105dd4486f775adec81-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{EliaTurner2021} Elia Turner, Kabir Dabholkar, Omri Barak. Charting and Navigating the Space of Solutions for Recurrent Neural Networks. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/d530d454337fb09964237fecb4bea6ce-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{ZimingZhang2021} Ziming Zhang, Yun Yue, Guojun Wu, Yanhua Li, Haichong Zhang. SBO-RNN: Reformulating Recurrent Neural Networks via Stochastic Bilevel Optimization. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/d87ca511e2a8593c8039ef732f5bffed-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{QuentinRebjock2021} Quentin Rebjock, Baris Kurt, Tim Januschowski, Laurent Callot. Online false discovery rate control for anomaly detection in time series. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/def130d0b67eb38b7a8f4e7121ed432c-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{YutongBai2021} Yutong Bai, Jieru Mei, Alan L. Yuille, Cihang Xie. Are Transformers more robust than CNNs? . {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/e19347e1c3ca0c0b97de5fb3b690855a-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{StephenChung2021} Stephen Chung, Hava Siegelmann. Turing Completeness of Bounded-Precision Recurrent Neural Networks. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/ef452c63f81d0105dd4486f775adec81-Abstract.html}{In NeurIPS 2021}}.
 
-    \bibitem{JannikKossen2021} Jannik Kossen, Neil Band, Clare Lyle, Aidan N. Gomez, Thomas Rainforth, Yarin Gal. Self-Attention Between Datapoints: Going Beyond Individual Input-Output Pairs in Deep Learning. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{TanNguyen2021} Tan Nguyen, Vai Suliafu, Stanley Osher, Long Chen, Bao Wang. FMMformer: Efficient and Flexible Transformer via Decomposed Near-field and Far-field Attention. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f621585df244e9596dc70a39b579efb1-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{FanKengSun2021} Fan-Keng Sun, Chris Lang, Duane Boning. Adjusting for Autocorrelated Errors in Neural Networks for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/f8e6ba1db0f3c4054afec1684ba8fb26-Abstract.html}{In NeurIPS 2021}}.
-    \bibitem{AbdulFatirAnsari2021} Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. {\addfontfeatures{Color=SteelBlue}\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{JannikKossen2021} Jannik Kossen, Neil Band, Clare Lyle, Aidan N. Gomez, Thomas Rainforth, Yarin Gal. Self-Attention Between Datapoints: Going Beyond Individual Input-Output Pairs in Deep Learning. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{TanNguyen2021} Tan Nguyen, Vai Suliafu, Stanley Osher, Long Chen, Bao Wang. FMMformer: Efficient and Flexible Transformer via Decomposed Near-field and Far-field Attention. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/f621585df244e9596dc70a39b579efb1-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{FanKengSun2021} Fan-Keng Sun, Chris Lang, Duane Boning. Adjusting for Autocorrelated Errors in Neural Networks for Time Series. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/f8e6ba1db0f3c4054afec1684ba8fb26-Abstract.html}{In NeurIPS 2021}}.
+    \bibitem{AbdulFatirAnsari2021} Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{In NeurIPS 2021}}.
 \end{thebibliography}
 
 
 % 奥付
 \clearpage
-\vspace*{16.7cm}
-
-\begin{OKUDUKE}[title={NeurIPS 2021 にみる \, \textbf{\large 最近のニューラル系列モデルへの発見・工夫・理解}}]
-YYYY年MM月DD日　初版発行 \\
-YYYY年MM月DD日　第2版発行 \\
+\vspace*{16.5cm} % 16.7
+ \, \, NeurIPS 2021 にみる \, \textbf{\large 最近のニューラル系列モデルへの発見・工夫・理解}
+\vspace*{-0.27cm}
+\begin{OKUDUKE}[title={未完成ドラフト}]
+2021年1月22日　初版発行 \\
+%YYYY年MM月DD日　第2版発行 (まだ) \\
 {
 \renewcommand\arraystretch{0.9}
 \begin{tabular}{p{4cm}rp{5.9cm}}
