@@ -31,7 +31,7 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-21 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-27 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
 \renewcommand*{\mywatermark}{}
 \hypersetup{urlcolor=Teal}
 
@@ -41,7 +41,19 @@ keepaspectratio]{cover.png}%
   }
 }
 
-
+\newtcolorbox{AUTHORTITLE}[1][]{
+    enhanced, top=7pt, right=5pt, left=5pt, bottom=5pt,
+    colbacktitle=White, colback=White,
+    borderline={{0.5pt}{0pt}{DarkGray,solid}},
+    colframe=White, boxrule=1pt, arc=4pt,
+    attach boxed title to top left={xshift=10pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={skin=enhancedfirst jigsaw, boxrule=0pt, frame hidden, left=2pt, right=2pt},
+    title={{\small 著者・原題 \, (予稿リンク)}},
+    fontupper=\small\addfontfeatures{Color=Teal},
+    enlarge top by=-3pt,
+    enlarge bottom by=2pt,
+    #1
+}
 
 \begin{document}
 
@@ -92,7 +104,7 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は機械学習の国際会議 \, {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を俯瞰しようとしたものです。が、選定した論文は網羅的でも排他的でもありません。また、論文の内容に関する記述は著者の理解であることに留意ください。著者の誤りは著者に帰属します。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を俯瞰しようとしたものです。が、網羅的でも排他的でもありません。また、論文の内容に関する記述は著者の理解であることに留意ください。著者の誤りは著者に帰属します。
 
 本書の内容についてお気付きの点がありましたら、大変お手数ですがこの原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
@@ -186,7 +198,7 @@ keepaspectratio]{cover.png}%
 \vspace{1pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。このグループの4研究の趣旨はそれぞれ「訓練をロバストにしたい」「表現力を上げたい」「訓練時間を短くしたい」「レジームを最大限に利用したい」といったところでしょうか。
+次の勢力は RNN ですね。\textbf{「RNN を理論的に理解する」}という研究が割にみられるように感じられます。理論解析が進めばどのような系列データにどのようなニューラルアーキテクチャを用いるべきかにつながるのでしょうか……?? もちろん、「RNN を工夫する」といったより目先の実用を見据えた動機でありそうな研究もみうけられます。このグループの3研究の趣旨はそれぞれ「表現力を上げたい」「訓練時間を短くしたい」「レジームを最大限に利用したい」といったところでしょうか。
 \end{SERIFU}
 
 \addcontentsline{toc}{subsection}{グループ「RNN」}
@@ -196,6 +208,7 @@ keepaspectratio]{cover.png}%
   \item \textbf{RNN を理論的に理解する}。
   \begin{itemize}
     \item RNN がある再生核ヒルベルト空間におけるカーネル法であると示す \cite{AdelineFermanian2021}。
+    \item 隠れ状態にノイズ添加して訓練すると正則化されると示す \cite{SoonHoeLim2021}。
     \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
     \item RNN が学習できると保証される関数の制約を撤廃する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
     \item タスクの解空間を構造化して RNN の性質を調べる \cite{EliaTurner2021}。
@@ -205,7 +218,6 @@ keepaspectratio]{cover.png}%
   \vspace{6pt}
   \item RNN を工夫する。
   \begin{itemize}
-    \item 訓練時に隠れ状態にノイズ添加してロバストにする \cite{SoonHoeLim2021}。
     \item RNN 自体が時間変化できるようにする \cite{AstonZhang2021}。
     \item ドロップアウトを活用してLSTMの訓練を効率化する \cite{AnupSarma2021}。
     \item 継続期間も明示的に利用するレジームスイッチングモデルを実現する \cite{AbdulFatirAnsari2021}。
@@ -324,14 +336,16 @@ keepaspectratio]{cover.png}%
 {\normalsize
 \addfontfeatures{Color=MediumVioletRed}
 \addCJKfontfeatures{Color=MediumVioletRed}
-(2022-01-21 確認できていません)
+(2022-01-27 確認できていません)
 }。
 \end{SERIFU}
 
 \newcommand*{\mysubsectiontitle}{RNN、CNN、連続時間モデルの性質をあわせもつ「線形状態空間層」}
 \subsection*{\cite{AlbertGu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AlbertGu2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/05546b0e38ab9175cd905eebcc6ebb76-Abstract.html}{Albert Gu, Isys Johnson, Karan Goel, Khaled Saab, Tri Dao, Atri Rudra, Christopher Ré. Combining Recurrent, Convolutional, and Continuous-time Models with Linear State Space Layers}
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 「『線形状態空間層(LSSL)』で RNN、CNN、連続時間モデルを結合する」といったタイトルだよね。であれば想定データはこれらのモデルの性質を全て要するデータなんだろうか?
@@ -345,7 +359,9 @@ keepaspectratio]{cover.png}%
 \renewcommand*{\mysubsectiontitle}{Transformerを行列分解してパラメータが10倍削減できることを示す}
 \subsection*{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AliakbarPanahi2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/09def3ebbc44ff3426b28fcd88c83554-Abstract.html}{Aliakbar Panahi, Seyran Saeedi, Tom Arodz. Shapeshifter: a Parameter-efficient Transformer using Factorized Reshaped Matrices. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 この論文についてはアブストラクトで何となく研究内容がわかるような気がします。つまり、「Transformerはそんなにパラメータが必要なのか」という問題意識から、Transformerの低ランク近似表現を打ち出し、その表現でも性能を損なわないといったことを検証しているはずです。具体的にどの層をどのように低ランク近似したかまではアブストラクトのみからはわかりませんが……なお、この研究を「セルフアテンションの計算量に対処する」ではなく「Transformerの性質を理解する」に分類した理由は、この研究が専ら「パラメータ数」に主眼を置いているようにみえるからです。無論パラメータ数の削減は計算量の削減と無関係ではありませんが、この研究は指標もパラメータ数そのものになっているようにみえます。実務的に「パラメータ数を小さくすること」は最終目的にはならないと思うんです。なのでこれはむしろTransformerの性質を解明した研究であると解釈しました。
@@ -355,59 +371,81 @@ keepaspectratio]{cover.png}%
 \renewcommand*{\mysubsectiontitle}{Skyformer――セルフアテンションの Nyström 近似}
 \subsection*{\cite{YifanChen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{YifanChen2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/10a7cdd970fe135cf4f7bb55c0e3b59f-Abstract.html}{Yifan Chen, Qi Zeng, Heng Ji, Yun Yang. Skyformer: Remodel Self-Attention with Gaussian Kernel and Nyström method. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
-これまでのセルフアテンションの計算量削減には往々にして近似誤差の理論保証がないというようにいっていますね。だから手法間の比較もできなくなっているし、ハイパーパラメータによる計算量削減度合いの調整もできなくなっていると――
-\end{SERIFU}
-
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
-Nyström 近似?
+これまでのセルフアテンションの計算量削減には往々にして近似誤差の理論保証がないというようにいっていますね。だから手法間の比較もできなくなっているし、ハイパーパラメータによる計算量削減度合いの調整もできなくなっていると。他方、カーネルマシンもまた内積計算がボトルネックになっていると。そうですね、カーネル法のグラム行列のサイズはデータサイズに応じて n×n になるわけですから。だから対処法として Nyström 近似などが…って、タイトル中の文字化けしているのこれですね。Nyström 近似を適用できるようにして適用した Transformer が Skyformer であると。なぜ Skyformer なのかというと \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method ですか……Y に無理みが強い……。
 \end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{Luna――固定長変数を利用してセルフアテンションの計算量を線形に抑える}
 \subsection*{\cite{XuezheMa2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{XuezheMa2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/14319d9cfc6123106878dc20b94fbaf3-Abstract.html}{Xuezhe Ma, Xiang Kong, Sinong Wang, Chunting Zhou, Jonathan May, Hao Ma, Luke Zettlemoyer. Luna: Linear Unified Nested Attention. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-先の論文に続いて「セルフアテンションの計算量に対処する」一味です。
+先の論文に続いて「セルフアテンションの計算量に対処する」一味です。論文の Fiugre 2 にある黄色いベクトルがミソなんでしょうか。
 \end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{RNN がある再生核ヒルベルト空間におけるカーネル法であると示す}
 \subsection*{\cite{AdelineFermanian2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AdelineFermanian2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/18a9042b3fc5b02fe3d57fea87d6992f-Abstract.html}{Adeline Fermanian, Pierre Marion, Jean-Philippe Vert, Gérard Biau. Framing RNN as a kernel method: A neural ODE approach. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+RNN がある再生核ヒルベルト空間におけるカーネル法であると示しているようですね。まず RNN が常微分方程式の離散化だよねというところから着手していますね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{RNN の隠れ状態にノイズを添加して訓練してロバスト性を向上させる}
 \subsection*{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SoonHoeLim2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/29301521774ff3cbd26652b2d5c95996-Abstract.html}{Soon Hoe Lim, N. Benjamin Erichson, Liam Hodgkinson, Michael W. Mahoney. Noisy Recurrent Neural Networks. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+RNN の隠れ状態にノイズを添加して訓練することで正則化でき、ロバスト性が向上すると。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{セルフアテンション行列を時間発展させる}
 \subsection*{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SubhabrataDutta2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/2bd388f731f26312bfc0fe30da009595-Abstract.html}{Subhabrata Dutta, Tanya Gautam, Soumen Chakrabarti, Tanmoy Chakraborty. Redesigning the Transformer Architecture with Insights from Multi-particle Dynamical Systems. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-これも「セルフアテンションの計算量に対処する」一味なんですが、一味の中でも最も異端児なのではと思うんです。
+これも「セルフアテンションの計算量に対処する」一味なんですが、一味の中でも異彩を放っているのではと思うんです。
 \end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{言語処理に適したTransformerの構造を探索する}
 \subsection*{\cite{DavidSo2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{DavidSo2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html}{David So, Wojciech Mańke, Hanxiao Liu, Zihang Dai, Noam Shazeer, Quoc Le. Searching for Efficient Transformers for Language Modeling. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+こちらの論文は、Transformer の計算コスト削減にもはやアーキテクチャの探索というアプローチをしていますね。そのように特定されたアーキテクチャを Primer とよんでいるようです。学習コストが3分の1にまで削減されたということですが……。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{Self-IRU――繰り返し自身のインスタンスを生み出すRNN}
 \subsection*{\cite{AstonZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AstonZhang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/3341f6f048384ec73a7ba2e77d2db48b-Abstract.html}{Aston Zhang, Yi Tay, Yikang Shen, Alvin Chan Guo Wei, SHUAI ZHANG. Self-Instantiated Recurrent Units with Dynamic Soft Recursion. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 自由度が高そうです。
@@ -417,7 +455,9 @@ Nyström 近似?
 \renewcommand*{\mysubsectiontitle}{gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能を得る}
 \subsection*{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HanxiaoLiu2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/4cc05b35c2f937c5bd9e7d41d3686fff-Abstract.html}{Hanxiao Liu, Zihang Dai, David So, Quoc Le. Pay Attention to MLPs. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能が得られると。これによって画像認識ではセルフアテンションが重要でないこともわかったとありますね。
@@ -427,7 +467,9 @@ gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能�
 \renewcommand*{\mysubsectiontitle}{Terraformer――疎な代替コンポーネントからなる Transformer}
 \subsection*{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianJaszczur2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/51f15efdd170e6043fa02a74882f0470-Abstract.html}{Sebastian Jaszczur, Aakanksha Chowdhery, Afroz Mohiuddin, Łukasz Kaiser, Wojciech Gajewski, Henryk Michalewski, Jonni Kanerva. Sparse is Enough in Scaling Transformers. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 gMLP――ゲーティングを付けたMLPでTransformerと同程度の性能が得られると。これによって画像認識ではセルフアテンションが重要でないこともわかったとありますね。
@@ -446,7 +488,9 @@ Transformer 内の全てのコンポーネントをスパースな代替品に�
 \renewcommand*{\mysubsectiontitle}{Transformerによるガウス過程モデルのカーネル同定}
 \subsection*{\cite{FergusSimpson2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{FergusSimpson2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/56c3b2c6ea3a83aaeeff35eeb45d700d-Abstract.html}{Fergus Simpson, Ian Davies, Vidhi Lalchand, Alessandro Vullo, Nicolas Durrande, Carl Edward Rasmussen. Kernel Identification Through Transformers. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 Figure 1 を覗いてみると、正解付きの訓練データをすべて投入してエンコードしてデコードすると Matern 1/2 + Matern 3/2 + RBF × Matern 1/2 といったカーネルが出力されているように確かにみえますね。これが画像にキャプションを付けるモデルと似ているのでしょうか。
@@ -456,51 +500,77 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \renewcommand*{\mysubsectiontitle}{微分方程式群システムの逐次ベイズ推定}
 \subsection*{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JonathanSchmidt2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/6734fa703f6633ab896eecbdfad8953a-Abstract.html}{Jonathan Schmidt, Nicholas Krämer, Philipp Hennig. A Probabilistic State Space Model for Joint Inference from Differential Equations and Data. }
+\end{AUTHORTITLE}
 
-COVID-19 データに SIRD モデルを適用して検証しているのですね。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+複数の微分方程式で記述されるモデル――例えばシステムモデルや観測モデルが微分方程式で記述されているようなイメージでしょうか?――における推論は計算コストが高く、数値ソルバーとの相性が悪いと。しかし最近では常微分方程式をベイズフィルタで解く方法が打ち出されてきているので、隠れ変数がある状態空間モデルに適用できる…ということでしょうか。ODE を解くのと同様のコストで拡張カルマンフィルタできると。COVID-19 データに SIRD モデルを適用して検証しているのですね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{時系列データのプレ処理としての成分クラスタリング}
 \subsection*{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ZhiboZhu2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/6b5754d737784b51ec5075c0dc437bf0-Abstract.html}{Zhibo Zhu, Ziqi Liu, Ge Jin, Zhiqiang Zhang, Lei Chen, Jun Zhou, Jianyong Zhou. MixSeq: Connecting Macroscopic Time Series Forecasting with Microscopic Time Series Data. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+個別の確率分布が混合されて予測対象の時系列をつくり上げていると仮定して成分クラスタリングするのでしょうか。Table 4 にあるように既存の時系列モデルに好きに組み合わせられるようですね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{セルフアテンションのヘッド間で $Q, K$ の分布を一致させるように訓練する}
 \subsection*{\cite{ShujianZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShujianZhang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/6fd6b030c6afec018415662d0db43f9d-Abstract.html}{Shujian Zhang, Xinjie Fan, Huangjie Zheng, Korawat Tanwisuth, Mingyuan Zhou. Alignment Attention by Matching Key and Query Distributions. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+ヘッドごとにセルフアテンションの強さのようなものが異なると困るということでしょうか。英文を和文に翻訳するのに、ビジネス英語に強い A さんと日常会話に強い B さんを連れてきて、「あなたたちの専門からみて、1単語目に影響を及ぼす単語に色鉛筆で色を塗ってください」と指示したとして、コントラストの付け方がからっきし違うと困るとか……いや、こんな話ではないかもしれませんが。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{セルフアテンションを生物学的な記憶モデルと解釈する}
 \subsection*{\cite{TrentonBricken2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{TrentonBricken2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. }
+\end{AUTHORTITLE}
 
 
 \renewcommand*{\mysubsectiontitle}{Vision Transformerでグリッド分割のグリッド分割もTransformerする}
 \subsection*{\cite{KaiHan2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{KaiHan2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. }
+\end{AUTHORTITLE}
 
 
 \renewcommand*{\mysubsectiontitle}{スイッチング線形動的システムで RNN をリバースエンジニアリングする}
 \subsection*{\cite{JimmySmith2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JimmySmith2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. }
+\end{AUTHORTITLE}
 
 
 \renewcommand*{\mysubsectiontitle}{スパース化と低ランク近似を併用してセルフアテンションの計算量を削減する}
 \subsection*{\cite{BeidiChen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{BeidiChen2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. }
+\end{AUTHORTITLE}
 
 
 \renewcommand*{\mysubsectiontitle}{長距離依存性は短い系列に射影してセルフアテンションする}
 \subsection*{\cite{ChenZhu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ChenZhu2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/9425be43ba92c2b4454ca7bf602efad8-Abstract.html}{Chen Zhu, Wei Ping, Chaowei Xiao, Mohammad Shoeybi, Tom Goldstein, Anima Anandkumar, Bryan Catanzaro. Long-Short Transformer: Efficient Transformers for Language and Vision. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
 これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の長男ですね。なるほど長男らしいストレートなアプローチです。
@@ -514,36 +584,57 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{RNN が学習できると保証される関数の制約を撤廃する}
 \subsection*{\cite{LifuWang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{LifuWang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/a928731e103dfc64c0027fa84709689e-Abstract.html}{Lifu Wang, Bo Shen, Bo Hu, Xing Cao. On the Provable Generalization of Recurrent Neural Networks. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+RNN が学習できると保証される関数について、これまでの制約を一部撤廃して誤差の上限を示したり、制約がなくても多項式時間で学習できることを示したというアブストラクトにみえます……。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{RNN が学習できると保証される関数の制約を撤廃する}
 \subsection*{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AbhishekPanigrahi2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/b04c387c8384ca083a71b8da516f65f6-Abstract.html}{Abhishek Panigrahi, Navin Goyal. Learning and Generalization in RNNs. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+RNN が学習できると保証される関数について、制約を撤廃したというアブストラクトにみえます……。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{機械的にプレ処理(トレンド-季節性分解)してからTransformerする}
+\renewcommand*{\mysubsectiontitle}{Autoformer――トレンド-季節性分解付きのTransformer}
 \subsection*{\cite{HaixuWu2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HaixuWu2021} \, \mysubsectiontitle}
-\vspace{3pt}
-ほげ。
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/bcc0d400288793e8bdcd7c19a8ac0c2b-Abstract.html}{Haixu Wu, Jiehui Xu, Jianmin Wang, Mingsheng Long. Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+この論文自体はタイトルで長期予測とはいってもセルフアテンションの計算量削減の話ではないようですね……季節成分とトレンドの分解をするブロックを導入することで時系列の長期予測の精度を上げたという話にみえます。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{長距離依存性については重み付き期待値に対してセルフアテンションする}
+\renewcommand*{\mysubsectiontitle}{Combiner――長距離依存性については重み付き期待値に対してセルフアテンションする}
 \subsection*{\cite{HongyuRen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{HongyuRen2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/bd4a6d0563e0604510989eb8f9ff71f5-Abstract.html}{Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai. Combiner: Full Attention Transformer with Sparse Computation Cost. }
+\end{AUTHORTITLE}
 
-\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の次男ですね。お兄さんとは一味違うアプローチです。
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の次男ですね。お兄さんとは一味違うアプローチにみえます。タイトルの Full Attention は「間引くタイプの計算量削減ではない」というニュアンスがあるのかもしれません。間引いても性能が出れば間引いてもいいとは思いますが……。こちらのモデルには Combiner という名前が付けられていて、論文の 4 節にあるようにいくつかの亜種があるのですね……。
 \end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{FFTを応用した相対位置エンコーディングにも適用できるセルフアテンション計算量削減}
 \subsection*{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShengjieLuo2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/c0f168ce8900fa56e57789e2a2f2c9d0-Abstract.html}{Shengjie Luo, Shanda Li, Tianle Cai, Di He, Dinglan Peng, Shuxin Zheng, Guolin Ke, Liwei Wang, Tie-Yan Liu. Stable, Fast and Accurate: Kernelized Attention with Relative Positional Encoding. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 アブストラクトは、「セルフアテンションの計算量を削減する既存研究の多くは『内積をとってからソフトマックスする』方式にしか対応できない」と主張しているようにみえます。そして、それだと「相対位置エンコーディング(RPE)に対応できない」と……これまでに提案されているセルフアテンション計算量削減ってそんなに制約があったんですか??
@@ -553,43 +644,97 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{時系列の混合分布を推定するためのコアセットを構築する}
 \subsection*{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{LingxiaoHuang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/c115ba9e04ab27fbbb664f932112246d-Abstract.html}{Lingxiao Huang, K Sudhir, Nisheeth Vishnoi. Coresets for Time Series Clustering. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+データが混合分布からなると仮定して、その最尤推定のために必要なコアセットを構築するアルゴリズムを打ち出したと。コアセットというのは訓練データの部分集合の意味ですよね? 訓練データをすべてつかって混合分布の最尤推定をするのは、確かに大変そうですから、効果的なコアセットに絞ることは重要そうに思えます。
+\end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{Transformerに状態空間モデルを組み合わせて時系列を長期予測する}
+\renewcommand*{\mysubsectiontitle}{Transformerに状態空間モデルを組み合わせて時系列を予測する}
 \subsection*{\cite{BinhTang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{BinhTang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/c68bd9055776bf38d8fc43c0ed283678-Abstract.html}{Binh Tang, David Matteson. Probabilistic Transformer For Time Series Analysis. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+状態空間モデルの状態の時間発展を Transformer にしたのでしょうか? ProTran: Probabilistic Transformer というモデル名が付いていますね。Table 1 をみると確かに明確に比較手法よりよさそうにみえますが……何ですかこの評価指標は? CRPS?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_neutral.png}
+Table 1 の下の方に定義があるね。分布予測をしたときの評価指標みたいだ。ああ、この式の $F(z)$ は累積分布関数で、$1_{x \leqq z}$ は真の累積分布関数といったところなのかな? だからぴったり正解の値で階段になる累積分布関数を予測すれば CRPS は $0$ だね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{ドロップアウトを活用してLSTMの訓練を効率化する}
 \subsection*{\cite{AnupSarma2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AnupSarma2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/cd81cfd0a3397761fac44ddbe5ec3349-Abstract.html}{Anup Sarma, Sonali Singh, Huaipan Jiang, Rui Zhang, Mahmut Kandemir, Chita Das. Structured in Space, Randomized in Time: Leveraging Dropout in RNNs for Efficient Training. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
+LSTM の計算量に課題感を抱いている研究はこれが唯一にみえます……それで、ドロップアウトを活用して計算量を削減する? ドロップアウトで計算量を削減できるんですか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+論文4ページの Figure 1 に Case 1～4 のドロップアウトの図示があるね。この中の Case 3 を使うのかな? そうするとこの Case 3 で灰色になっている列はそもそも計算しなくていいことになるね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{時系列予測のための位相的アテンション}
 \subsection*{\cite{SebastianZeng2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{SebastianZeng2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/d062f3e278a1fbba2303ff5a22e8c75e-Abstract.html}{Sebastian Zeng, Florian Graf, Christoph Hofer, Roland Kwitt. Topological Attention for Time Series Forecasting. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+タイトルから想像でいうと、おそらくある時点のデータがある時点のデータにどれだけアテンションすべきか＝とれだけ近いのかを何か位相的データ解析のように考えたのではないかと思いますが、そうであればこれは RNN や CNN ではない Transformer にだから投げ付けられる発想だと思います (RNN や CNN にも位相を活かした亜種があるか存じ上げませんが)。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{Softmax しないセルフアテンションで偏微分方程式を解く}
 \subsection*{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShuhaoCao2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/d0921d442ee91b896ad95059d13df618-Abstract.html}{Shuhao Cao. Choose a Transformer: Fourier or Galerkin. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+関係ないですが今回選んだ論文の中で単著なのこれだけなんですよね……偏微分方程式を解くってどういうことですか? 解演算子(solution operator)とは?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+ゴールは偏微分方程式の中に出てくる関数 $f$ を特定することだよね。解演算子は、偏微分方程式の空間から関数の空間への写像だと思う。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{タスクの解空間を構造化して RNN の性質を調べる}
 \subsection*{\cite{EliaTurner2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{EliaTurner2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/d530d454337fb09964237fecb4bea6ce-Abstract.html}{Elia Turner, Kabir Dabholkar, Omri Barak. Charting and Navigating the Space of Solutions for Recurrent Neural Networks. }
+\end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+Figure 1B. は、式 (1) で表されるモデルにしたがって移動する点が最初緑の点にいて、時刻 $T=10$ に赤い点に到達するようにしたいという図ですね。こうなるようにモデルのパラメータを調整したいと。それでそのようなパラメータは Figure 1C の紫いろの濃いところに分布していて、どの点を選ぶかで Figure 1D, 1E, 1F のように緑の点から赤い点までの軌跡が異なってくるようです。……これってRNNなんですか?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+式 (1) の右辺の $-x$ を左辺に移項したら「次の状態 = 今の状態を変換したもの」って感じにはみえなくもないかも……。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{SBO-RNN――勾配消失/爆発しない RNN のサブセット}
 \subsection*{\cite{ZimingZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ZimingZhang2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/d87ca511e2a8593c8039ef732f5bffed-Abstract.html}{Ziming Zhang, Yun Yue, Guojun Wu, Yanhua Li, Haichong Zhang. SBO-RNN: Reformulating Recurrent Neural Networks via Stochastic Bilevel Optimization. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 こちらの SBO-RNN は、RNN の中でも勾配消失/爆発せず安定的に学習できる構造を突き止め、そのサブセットに SBO-RNN と名付けたということなのでしょうか?
@@ -599,7 +744,9 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{時系列のオンライン異常検知の偽陽性率を制御する}
 \subsection*{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{QuentinRebjock2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/def130d0b67eb38b7a8f4e7121ed432c-Abstract.html}{Quentin Rebjock, Baris Kurt, Tim Januschowski, Laurent Callot. Online false discovery rate control for anomaly detection in time series. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 時系列データのオンライン異常検知の話ですが、「FDRC ルール」とは読んで字のごとく偽陽性率を抑えるためのルール、なのでしょうか……? 
@@ -609,7 +756,9 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{Transformer と CNN のロバスト性を比較する}
 \subsection*{\cite{YutongBai2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{YutongBai2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/e19347e1c3ca0c0b97de5fb3b690855a-Abstract.html}{Yutong Bai, Jieru Mei, Alan L. Yuille, Cihang Xie. Are Transformers more robust than CNNs? . }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 「Transformer が CNN よりロバストとされているがそんなことはない」といったアブストラクトですが、そもそも Transformer が CNN よりロバストとされているんですか?
@@ -619,7 +768,9 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{成長するメモリ付き固定精度 RNN がチューリング完全であると示す}
 \subsection*{\cite{StephenChung2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{StephenChung2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/ef452c63f81d0105dd4486f775adec81-Abstract.html}{Stephen Chung, Hava Siegelmann. Turing Completeness of Bounded-Precision Recurrent Neural Networks. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 チューリング完全って何ですか?
@@ -633,7 +784,9 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{データ間でセルフ(セルフ?)アテンションするNon-Parametric Transformer}
 \subsection*{\cite{JannikKossen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{JannikKossen2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html}{Jannik Kossen, Neil Band, Clare Lyle, Aidan N. Gomez, Thomas Rainforth, Yarin Gal. Self-Attention Between Datapoints: Going Beyond Individual Input-Output Pairs in Deep Learning. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
 検証したのがテーブルデータや CIFAR-10 であって系列データといった向きのデータではなさそうですが、タイトルが気になりました。Self-Attention Between Datapoints というのは、言語データに喩えるなら、単語から文章内の他の単語へアテンションするのではなく、文章から他の文章へアテンションするということなのでしょうか。それって Self なんでしょうか……? それはさておき、本当に「データセット全体を入力とする」のであれば訓練や推論のコストが膨大になりそうですが……?
@@ -643,10 +796,12 @@ COVID-19 データに SIRD モデルを適用して検証しているのです�
 \renewcommand*{\mysubsectiontitle}{FMMformer――FMM(高速多重極法)を応用して長距離依存性を低ランク近似する}
 \subsection*{\cite{TanNguyen2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{TanNguyen2021} \, FMMformer――FMMを応用して長距離依存性を低ランク近似する}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/f621585df244e9596dc70a39b579efb1-Abstract.html}{Tan Nguyen, Vai Suliafu, Stanley Osher, Long Chen, Bao Wang. FMMformer: Efficient and Flexible Transformer via Decomposed Near-field and Far-field Attention. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
-これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の3男にして、1番目のお兄さんとも2番目のお兄さんとも似ていないアプローチです。複雑な家庭環境なんでしょうか……。
+これは「長距離依存性だけ近似してセルフアテンションの計算量に対処する」3兄弟の3男にして、1番目のお兄さんとも2番目のお兄さんとも似ていないアプローチです。
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
@@ -661,17 +816,37 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \renewcommand*{\mysubsectiontitle}{ニューラル時系列モデルにおける誤差の自己相関の調整}
 \subsection*{\cite{FanKengSun2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{FanKengSun2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/f8e6ba1db0f3c4054afec1684ba8fb26-Abstract.html}{Fan-Keng Sun, Chris Lang, Duane Boning. Adjusting for Autocorrelated Errors in Neural Networks for Time Series. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-通常ニューラルネットで時系列データを学習するときにステップ間で誤差に自己相関はないとしていますが、現実には自己相関するので誤差の自己相関係数も学習するといっていますね?
+通常ニューラルネットで時系列データを学習するときに誤差系列に自己相関はないとしていますが、現実には自己相関するので誤差系列の自己相関係数も学習するといっていますね? しかし、誤差系列の自己相関係数を学習してどうするんです?
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
+論文の 4〜5 ページをみると、学習の手順は以下かな? 誤差系列の1次の自己相関のみ考えているね。
+\begin{itemize}
+    \item まずは通常通り2乗誤差を最小化するように時系列予測モデルを学習する。
+    \item 学習したモデルの誤差系列の1次の自己相関係数を出す。
+    \item 次の学習では、予測値を「モデルの予測値に前ステップの誤差に1次の自己相関係数を乗じたもの」として、この2乗誤差を最小化するように時系列予測モデルを学習する。
+    \item また誤差系列の1次の自己相関を出す。
+    \item 収束するまで繰り返す。
+\end{itemize}
+つまり、実績誤差をみて修正していくモデルなんだね。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+なるほど? 「実績誤差をみて修正するマン」がいてくれる前提でモデルを最良にするということでしょうか。
 \end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{RED-SDS――継続期間も明示的に利用するレジームスイッチングモデル}
 \subsection*{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{AbdulFatirAnsari2021} \, \mysubsectiontitle}
-\vspace{3pt}
+\begin{AUTHORTITLE}
+\href{https://proceedings.neurips.cc/paper/2021/hash/fb4c835feb0a65cc39739320d7a51c02-Abstract.html}{Abdul Fatir Ansari, Konstantinos Benidis, Richard Kurle, Ali Caner Turkmen, Harold Soh, Alexander J. Smola, Bernie Wang, Tim Januschowski. Deep Explicit Duration Switching Models for Time Series. }
+\end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
 時系列のレジームの切り替わりを捉えたいといっていますね……レジームというのはこの時点を境に好景気から不景気になったというような環境の変化のようなものですよね、適当な訳語がわかりませんが……。それで、RED-SDS: Recurrent Explicit Duration Switching Dynamical System なる提案モデルでは状態にも時間にも依存してレジームをスイッチングできるようにしたんですね? うーん、いまいちどう価値があることをしたのかわからないのですが……。
@@ -703,13 +878,40 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \section*{Appendix}
 \addcontentsline{toc}{section}{Appendix}
 
-\renewcommand*{\mysubsectiontitle}{公開コードを動かす――\cite{YifanChen2021} Skyformer}
+
+\renewcommand*{\mysubsectiontitle}{公開コード}
+\subsection*{\mysubsectiontitle}
+\addcontentsline{toc}{subsection}{\mysubsectiontitle}
+\vspace{3pt}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+以下の論文はアクセスできる公開コードの存在が確認できました。見落としはあると思います……。\cite{AliakbarPanahi2021} \cite{FergusSimpson2021} については 2022-01-27 時点でリポジトリにコードが確認できなかったので含めていません。
+\begin{description}
+\item[\cite{AlbertGu2021} \, (LSSL)] \url{https://github.com/HazyResearch/state-spaces}
+\item[\cite{YifanChen2021} \, (Skyformer)] \url{https://github.com/pkuzengqi/Skyformer}
+\item[\cite{AdelineFermanian2021} \, (RNN as Kernel Method)] \url{https://github.com/afermanian/rnn-kernel}
+\item[\cite{SoonHoeLim2021} \, (Noisy RNN)] \url{https://github.com/erichson/NoisyRNN}
+\item[\cite{SubhabrataDutta2021} \, (TransEvolve)] \url{https://github.com/LCS2-IIITD/TransEvolve}
+\item[\cite{DavidSo2021} \, (Primer)] \url{https://github.com/google-research/google-research/tree/master/primer}
+\item[\cite{SebastianJaszczur2021} \, (Terraformer)] \url{https://github.com/google/trax/blob/v1.4.1/trax/examples/Terraformer_from_scratch.ipynb}
+\item[\cite{BeidiChen2021} \, (Scatterbrain)] \url{https://github.com/HazyResearch/pixelfly}
+\item[\cite{HaixuWu2021} \, (Autoformer)] \url{https://github.com/thuml/Autoformer}
+\item[\cite{HongyuRen2021} \, (Combiner)] \url{https://github.com/google-research/google-research/tree/master/combiner}
+\end{description}
+\end{SERIFU}
+
+
+\renewcommand*{\mysubsectiontitle}{\cite{YifanChen2021} Skyformer の公開コード}
 \subsection*{\mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\mysubsectiontitle}
 \vspace{3pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
-Skyformer \cite{YifanChen2021}を動かしてみましょう。
+Skyformer \cite{YifanChen2021} は以下にコードが公開されていますね。以下のリビジョンは 2022-01-27 時点の最新です。
+\begin{itemize}
+\item \url{https://github.com/pkuzengqi/Skyformer/tree/cfe8c8cb48a151fd150ff4a87fdb24b288356869}
+\end{itemize}
+リポジトリを clone した ./src/ 下で適当に以下を実行するとインスタンス化できます（ src/requirements.txt のパッケージが充足していれば）。
 \begin{CODE}[boxrule=0pt,frame hidden]
 \begin{lstlisting}[language=python]
 from models.model_LRA import ModelForSC, ModelForSCDual
@@ -744,11 +946,50 @@ ModelForSC(
 # 以下省略
 \end{lstlisting}
 \end{CODE}
-これに Long Range Arena のデータを渡せばよいですね。
+これに Long Range Arena のデータを渡せばよいです。データの取得及びプレ処理方法は README に記述されていますが、README には親切にもプレ処理済みのデータへのリンクもあるのでそれを拝借することにします。適当に lra-text.dev.pickle をダウンロードします(ご自身の責任で)。中身を確認すると 25000 の文章が入っており、1つの文章は 4096 文字(おそらく ASCII コード)からなっており、何か正解ラベルが付いていることがわかりますね。
+\begin{CODE}[boxrule=0pt,frame hidden]
+\begin{lstlisting}[language=python]
+import pickle
+with open('./Downloads/lra-text.dev.pickle', 'rb') as ifile:
+    x = pickle.load(ifile)
+
+print(len(x))
+print(x[0]['input_ids_0'])
+print(len(x[0]['input_ids_0']))
+print(x[0]['label'])
+\end{lstlisting}
+\end{CODE}
+\begin{CODE}[boxrule=0pt,frame hidden,colback=SlateGray2]
+\begin{lstlisting}[basicstyle={\ttfamily\small\color{White}}]
+25000
+[ 85 105 102 ...   0   0   0]
+4096
+1
+\end{lstlisting}
+\end{CODE}
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
+ここまでやっておいてなんですがモデルには文章とみせかけて適当な整数列を渡せば動きます。以下でモデルが値を返却してくれます。
+\begin{CODE}[boxrule=0pt,frame hidden]
+\begin{lstlisting}[language=python]
+import torch
+x = torch.tensor([[0, 1, 2, 3, 4]])
+label = torch.tensor([0])
+y = model(x, None, label)
+print(y)
+\end{lstlisting}
+\end{CODE}
+\begin{CODE}[boxrule=0pt,frame hidden,colback=SlateGray2]
+\begin{lstlisting}[basicstyle={\ttfamily\small\color{White}}]
+{'loss': tensor([0.8154], grad_fn=), 'accu': tensor([0.])}
+\end{lstlisting}
+\end{CODE}
+なお AttributeError: module 'torch.cuda.amp' has no attribute 'autocast' と怒られたので怒られなくなるまで with torch.cuda.amp.autocast(enabled = False): をコメントアウトしています。後日 GPU 機で試します。
 \end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{公開コードを動かす――\cite{SebastianJaszczur2021} Terraformer}
+\renewcommand*{\mysubsectiontitle}{\cite{SebastianJaszczur2021} Terraformer の公開コード}
 \subsection*{\mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\mysubsectiontitle}
 \vspace{3pt}
@@ -759,12 +1000,13 @@ Terraformer \cite{SebastianJaszczur2021} のソースコードは trax なるラ
 
 \begin{SERIFU}[colback=PaleGold, colbacktitle=PaleGold2]{takumi_smiley.png}
 もう v1.3.9 と v1.4.0 の差分からそれらしいコミットを探せばいいんじゃない？ ……以下がそれっぽい。
-
-%The evaluation notebook for the NeurIPS paper "Sparse is Enough in Sc…  google/trax@2238490 · GitHub
-
+\begin{itemize}
+\item \url{https://github.com/google/trax/commit/22384907983e697ec20fe3230cc0988cfc7ac140}
+\end{itemize}
 つまり以下のノートブックだね。
-
-%trax/Terraformer_from_scratch.ipynb at v1.4.1  google/trax  GitHub
+\begin{itemize}
+\item \url{https://github.com/google/trax/blob/v1.4.1/trax/examples/Terraformer_from_scratch.ipynb}
+\end{itemize}
 \end{SERIFU}
 
 
@@ -827,7 +1069,7 @@ Terraformer \cite{SebastianJaszczur2021} のソースコードは trax なるラ
  \, \, NeurIPS 2021 にみる \, \textbf{\large 最近のニューラル系列モデルへの発見・工夫・理解}
 \vspace*{-0.27cm}
 \begin{OKUDUKE}[title={未完成ドラフト}]
-2021年1月22日　初版発行 \\
+2021年1月27日　初版発行 \\
 %YYYY年MM月DD日　第2版発行 (まだ) \\
 {
 \renewcommand\arraystretch{0.9}
