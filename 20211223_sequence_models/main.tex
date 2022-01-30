@@ -31,8 +31,8 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-27 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
-\renewcommand*{\mywatermark}{}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=Teal} \textbf{\small DRAFT 2022-01-30 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211223_sequence_models} }}
+%\renewcommand*{\mywatermark}{}
 \hypersetup{urlcolor=Teal}
 
 \AddToShipoutPictureBG{
@@ -64,22 +64,22 @@ keepaspectratio]{cover.png}%
   \AtPageUpperLeft{
     \raisebox{-2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
   }
-  \AtPageLowerLeft{
-    \raisebox{18.0\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{15.4cm}\rightline{{\addCJKfontfeatures{Color=MediumVioletRed} \textbf{\huge 未完成ドラフト}}}\end{minipage}}}
-  }
-  \AtPageLowerLeft{
-    \raisebox{14.0\baselineskip}{\makebox[\paperwidth]{
-    \begin{minipage}{0.9\paperwidth}{
-        \addfontfeatures{Color=MediumVioletRed}
-        \addCJKfontfeatures{Color=MediumVioletRed}
-        {\large
-        \hspace{20em}この本は未完成ドラフトです。 \\
-        \hspace{20em}目次の内容をかくことを目指しましたが \\
-        \hspace{20em}第2節以降が完成していません。
-        }
-    }\end{minipage}
-  }}
-  }
+  %\AtPageLowerLeft{
+  %  \raisebox{18.0\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{15.4cm}\rightline{{\addCJKfontfeatures{Color=MediumVioletRed} \textbf{\huge 未完成ドラフト}}}\end{minipage}}}
+  %}
+  %\AtPageLowerLeft{
+  %  \raisebox{14.0\baselineskip}{\makebox[\paperwidth]{
+  %  \begin{minipage}{0.9\paperwidth}{
+  %      \addfontfeatures{Color=MediumVioletRed}
+  %      \addCJKfontfeatures{Color=MediumVioletRed}
+  %      {\large
+  %      \hspace{20em}この本は未完成ドラフトです。 \\
+  %      \hspace{20em}目次の内容をかくことを目指しましたが \\
+  %      \hspace{20em}第2節以降が完成しませんでした。
+  %      }
+  %  }\end{minipage}
+  %}}
+  %}
 }
 \begin{titlepage}
 \ 
@@ -104,7 +104,7 @@ keepaspectratio]{cover.png}%
 \addcontentsline{toc}{section}{まえがき}
 \vspace{3pt}
 
-本書は機械学習の国際会議 \, {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を俯瞰しようとしたものです。が、網羅的でも排他的でもありません。また、論文の内容に関する記述は著者の理解であることに留意ください。著者の誤りは著者に帰属します。
+本書は機械学習の国際会議 \, {\addfontfeatures{Color=Teal}\href{https://proceedings.neurips.cc/paper/2021}{ NeurIPS 2021}} で発表された論文から、(時)系列データを処理するためのニューラルネットワークモデル――長いのでニューラル系列モデルとよびます――に関連する研究を俯瞰しようとしたものです。が、網羅的でも排他的でもありません。また、内容は著者の表面的な理解であることに留意ください。著者の誤りは著者に帰属します。
 
 本書の内容についてお気付きの点がありましたら、大変お手数ですがこの原稿があるリポジトリの Issues、または著者ブログのコメント欄までお知らせください。著者ブログへのコメントはただちには公開されません。非公開希望の方はその旨をお知らせください。非公開希望であって返信が必要な場合はご連絡先の明記をお願いいたします。
 
@@ -166,7 +166,7 @@ keepaspectratio]{cover.png}%
   \vspace{6pt}
   \item Transformerの訓練方法を工夫する。
   \begin{itemize}
-    \item ヘッド間で $Q, K$ の分布を一致させる正則化をする \cite{ShujianZhang2021}。
+    \item $Q$ と $K$ の分布が近くなるように正則化する \cite{ShujianZhang2021}。
   \end{itemize}
   \vspace{6pt}
   \item Transformerの使い方を工夫する。
@@ -208,7 +208,7 @@ keepaspectratio]{cover.png}%
   \item \textbf{RNN を理論的に理解する}。
   \begin{itemize}
     \item RNN がある再生核ヒルベルト空間におけるカーネル法であると示す \cite{AdelineFermanian2021}。
-    \item 隠れ状態にノイズ添加して訓練すると正則化されると示す \cite{SoonHoeLim2021}。
+    \item 隠れ状態にノイズ添加して訓練すると正則化されることを示す \cite{SoonHoeLim2021}。
     \item スイッチング線形動的システムで RNN をリバースエンジニアリングする \cite{JimmySmith2021}。
     \item RNN が学習できると保証される関数の制約を撤廃する \cite{LifuWang2021} \cite{AbhishekPanigrahi2021}。
     \item タスクの解空間を構造化して RNN の性質を調べる \cite{EliaTurner2021}。
@@ -376,7 +376,7 @@ keepaspectratio]{cover.png}%
 \end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
-これまでのセルフアテンションの計算量削減には往々にして近似誤差の理論保証がないというようにいっていますね。だから手法間の比較もできなくなっているし、ハイパーパラメータによる計算量削減度合いの調整もできなくなっていると。他方、カーネルマシンもまた内積計算がボトルネックになっていると。そうですね、カーネル法のグラム行列のサイズはデータサイズに応じて n×n になるわけですから。だから対処法として Nyström 近似などが…って、タイトル中の文字化けしているのこれですね。Nyström 近似を適用できるようにして適用した Transformer が Skyformer であると。なぜ Skyformer なのかというと \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method ですか……Y に無理みが強い……。
+これまでのセルフアテンションの計算量削減には往々にして近似誤差の理論保証がないというようにいっていますね。だから手法間の比較もできなくなっているし、ハイパーパラメータによる計算量削減度合いの調整もできなくなっていると。他方、カーネルマシンもまた内積計算がボトルネックになっていると。そうですね、カーネル法のグラム行列のサイズはデータサイズに応じて $N \times N$ になるわけですから。だから対処法として Nyström 近似などが…って、タイトル中の文字化けしているのこれですね。Nyström 近似を適用できるようにして適用した Transformer が Skyformer であると。なぜ Skyformer なのかというと \textbf{S}ymmetrization of \textbf{K}ernelized attention for N\textbf{Y}ström method ですか……Y に無理みが強い……。
 \end{SERIFU}
 
 
@@ -521,7 +521,7 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \end{SERIFU}
 
 
-\renewcommand*{\mysubsectiontitle}{セルフアテンションのヘッド間で $Q, K$ の分布を一致させるように訓練する}
+\renewcommand*{\mysubsectiontitle}{$Q$ と $K$ の分布が近くなるように正則化する}
 \subsection*{\cite{ShujianZhang2021} \, \mysubsectiontitle}
 \addcontentsline{toc}{subsection}{\cite{ShujianZhang2021} \, \mysubsectiontitle}
 \begin{AUTHORTITLE}
@@ -529,7 +529,7 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \end{AUTHORTITLE}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-ヘッドごとにセルフアテンションの強さのようなものが異なると困るということでしょうか。英文を和文に翻訳するのに、ビジネス英語に強い A さんと日常会話に強い B さんを連れてきて、「あなたたちの専門からみて、1単語目に影響を及ぼす単語に色鉛筆で色を塗ってください」と指示したとして、コントラストの付け方がからっきし違うと困るとか……いや、こんな話ではないかもしれませんが。
+式 (1) をみるとヘッド内で $Q$ と $K$ の分布を揃えるような正則化をしているようにみえます。
 \end{SERIFU}
 
 
@@ -540,6 +540,10 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \href{https://proceedings.neurips.cc/paper/2021/hash/8171ac2c5544a5cb54ac0f38bf477af4-Abstract.html}{Trenton Bricken, Cengiz Pehlevan. Attention Approximates Sparse Distributed Memory. }
 \end{AUTHORTITLE}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+セルフアテンションが SDM: Sparse distributed memory――生物学的な記憶のモデルの一つと解釈できるという話でしょうか。SDM 自体は割に古いようですね。なぜアテンションは性能がよいのか、を考えるのは興味深いです。新たなアーキテクチャのアイデアにつながるでしょうか?
+\end{SERIFU}
+
 
 \renewcommand*{\mysubsectiontitle}{Vision Transformerでグリッド分割のグリッド分割もTransformerする}
 \subsection*{\cite{KaiHan2021} \, \mysubsectiontitle}
@@ -547,6 +551,10 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \begin{AUTHORTITLE}
 \href{https://proceedings.neurips.cc/paper/2021/hash/854d9fca60b4bd07f9bb215d59ef5561-Abstract.html}{Kai Han, An Xiao, Enhua Wu, Jianyuan Guo, Chunjing XU, Yunhe Wang. Transformer in Transformer. }
 \end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+画像認識系はとばしていたのですが、名前が面白いので選びました……つまり、Vision Transformer は画像をグリッド分割しますが、それにグリッド内をさらにグリッド分割して Transformer した特徴も追加しようというのですね。しかし、この論文2ページ目の図に既視感が……自然言語処理で単語埋め込みに加えて文字系列の特徴を利用する方法に似ていますね。Vision Transformer でこれが有効かは扱う画像とグリッドサイズによりそうですが、Vision Transformer に暗いのでグリッドサイズの決定則がわからないです……。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{スイッチング線形動的システムで RNN をリバースエンジニアリングする}
@@ -556,6 +564,10 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \href{https://proceedings.neurips.cc/paper/2021/hash/8b77b4b5156dc11dec152c6c71481565-Abstract.html}{Jimmy Smith, Scott Linderman, David Sussillo. Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems. }
 \end{AUTHORTITLE}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
+「スイッチング線形動的システムで RNN をリバースエンジニアリングする」ということでしょうか。訓練済み RNN が如何に機能するかを理解しようとする研究はこれまでにもあって、不動点(RNN の不動点といういい方をするかわからないですが)の周りで線形化するなどがあったようですが、不動点の選択(?)や非線形な要素の考慮などに難があると。そこでスイッチング線形動的システムを導入して訓練済み RNN を表現するといい感じになるのですね? ただこのような手法の適用先はどのようなものになるのでしょうか……アブストラクトには生物学的データの解析に適用したとありますね。
+\end{SERIFU}
+
 
 \renewcommand*{\mysubsectiontitle}{スパース化と低ランク近似を併用してセルフアテンションの計算量を削減する}
 \subsection*{\cite{BeidiChen2021} \, \mysubsectiontitle}
@@ -563,6 +575,10 @@ Figure 1 を覗いてみると、正解付きの訓練データをすべて投�
 \begin{AUTHORTITLE}
 \href{https://proceedings.neurips.cc/paper/2021/hash/9185f3ec501c674c7c788464a36e7fb3-Abstract.html}{Beidi Chen, Tri Dao, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré. Scatterbrain: Unifying Sparse and Low-rank Attention. }
 \end{AUTHORTITLE}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_smiley.png}
+これはセルフアテンションの計算コストの話ですね。これまでにセルフアテンション行列のスパース化や低ランク近似が提案されてきましたが、それらを Unify というタイトルになっていますね。スパース化と低ランク近似はそれぞれに長所があり、双方の長所を活かした Scatterbrain なる手法を提案したと……興味深いです。検証タスクには long-range-arena も含まれていますね。
+\end{SERIFU}
 
 
 \renewcommand*{\mysubsectiontitle}{長距離依存性は短い系列に射影してセルフアテンションする}
@@ -885,7 +901,7 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \vspace{3pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
-以下の論文はアクセスできる公開コードの存在が確認できました。見落としはあると思います……。\cite{AliakbarPanahi2021} \cite{FergusSimpson2021} については 2022-01-27 時点でリポジトリにコードが確認できなかったので含めていません。
+以下の論文はアクセスできる公開コードの存在が確認できました。動作確認したわけではありません。見落としはあると思います……。\cite{AliakbarPanahi2021} \cite{FergusSimpson2021} については 2022-01-27 時点でリポジトリにコードが確認できなかったので含めていません。また、\cite{TanNguyen2021} については予稿サイト上の Supplemental が zip になっておりコードが同梱されていました。
 \begin{description}
 \item[\cite{AlbertGu2021} \, (LSSL)] \url{https://github.com/HazyResearch/state-spaces}
 \item[\cite{YifanChen2021} \, (Skyformer)] \url{https://github.com/pkuzengqi/Skyformer}
@@ -894,9 +910,20 @@ FMM(高速多重極法)というのは粒子間の相互作用を近距離成分
 \item[\cite{SubhabrataDutta2021} \, (TransEvolve)] \url{https://github.com/LCS2-IIITD/TransEvolve}
 \item[\cite{DavidSo2021} \, (Primer)] \url{https://github.com/google-research/google-research/tree/master/primer}
 \item[\cite{SebastianJaszczur2021} \, (Terraformer)] \url{https://github.com/google/trax/blob/v1.4.1/trax/examples/Terraformer_from_scratch.ipynb}
+\item[\cite{TrentonBricken2021} \, (Attention Approximates SDM)] \url{https://github.com/trentbrick/attention-approximates-sdm}
+\item[\cite{KaiHan2021} \, (TNT)] \url{https://gitee.com/mindspore/models/tree/master/research/cv/TNT}
+\item[\cite{JimmySmith2021} \, (Reverse Engineering RNN)] \url{https://github.com/jimmysmith1919/JSLDS_public}
 \item[\cite{BeidiChen2021} \, (Scatterbrain)] \url{https://github.com/HazyResearch/pixelfly}
 \item[\cite{HaixuWu2021} \, (Autoformer)] \url{https://github.com/thuml/Autoformer}
 \item[\cite{HongyuRen2021} \, (Combiner)] \url{https://github.com/google-research/google-research/tree/master/combiner}
+\item[\cite{SebastianZeng2021} \, (TAN)] \url{https://github.com/plus-rkwitt/TAN}
+\item[\cite{ShuhaoCao2021} \, (GalerkinTransformer)] \url{https://github.com/scaomath/galerkin-transformer}
+\item[\cite{EliaTurner2021} \, (Space of Solutions for RNN)] \url{https://github.com/eliaturner/space-of-solutions-RNN/}
+\item[\cite{ZimingZhang2021} \, (SBO-RNN)] \url{https://github.com/Zhang-VISLab/SBO-RNN-Reformulating-Recurrent-Neural-Networks-via-Stochastic-Bilevel-Optimization}
+\item[\cite{YutongBai2021} \, (ViTs-vs-CNNs)] \url{https://github.com/ytongbai/ViTs-vs-CNNs}
+\item[\cite{JannikKossen2021} \, (NPT)] \url{https://github.com/OATML/Non-Parametric-Transformers}
+\item[\cite{FanKengSun2021} \, (AdjustAutocorrelation)] \url{https://github.com/Daikon-Sun/AdjustAutocorrelation}
+% \item[\cite{} \, ()] \url{}
 \end{description}
 \end{SERIFU}
 

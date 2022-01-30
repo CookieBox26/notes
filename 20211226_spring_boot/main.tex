@@ -31,7 +31,8 @@ keepaspectratio]{cover.png}%
 \vfill
 }}}
 
-\newcommand*{\mywatermark}{\addfontfeatures{Color=PaleVioletRed} \textbf{\small DRAFT 2022-01-14 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} }}
+\newcommand*{\mywatermark}{\addfontfeatures{Color=Teal} \textbf{\small DRAFT 2022-01-30 \\ \url{https://github.com/CookieBox26/notes/tree/main/20211226_spring_boot} }}
+\renewcommand*{\mywatermark}{}
 \AddToShipoutPictureBG{
   \AtPageUpperLeft{
     \raisebox{-2.2\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
@@ -47,6 +48,22 @@ keepaspectratio]{cover.png}%
   \BackgroundPic
   \AtPageLowerLeft{
     \raisebox{2.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{14cm}\centering{\mywatermark}\end{minipage}}}
+  }
+  \AtPageUpperLeft{
+    \raisebox{-5.7\baselineskip}{\makebox[\paperwidth]{\begin{minipage}{15.4cm}\leftline{{\addCJKfontfeatures{Color=MediumVioletRed} \textbf{\huge \, \, \, \, 　　未完成ドラフト}}}\end{minipage}}}
+  }
+  \AtPageUpperLeft{
+    \raisebox{-8.8\baselineskip}{\makebox[\paperwidth]{
+    \begin{minipage}{0.9\paperwidth}{
+        \addfontfeatures{Color=MediumVioletRed}
+        \addCJKfontfeatures{Color=MediumVioletRed}
+        {\large
+        \hspace{7.6em}この本は未完成ドラフトです。 \\
+        \hspace{7.6em}目次の内容をかくことを目指しましたが \\
+        \hspace{7.6em}全然完成しませんでした。
+        }
+    }\end{minipage}
+  }}
   }
 }
 \begin{titlepage}
@@ -86,6 +103,9 @@ keepaspectratio]{cover.png}%
 \begin{description}
    \item[　コードリポジトリ] https://github.com/CookieBox26/bentou-application
    \item[　原稿リポジトリ] https://github.com/CookieBox26/notes/
+   \begin{itemize}
+       \item この本のディレクトリは 20211226\_spring\_boot です。
+   \end{itemize}
    \item[　著者ブログ] https://cookie-box.hatenablog.com/
 \end{description}
 
@@ -96,7 +116,7 @@ keepaspectratio]{cover.png}%
 \vspace{3pt}
 \begin{SERIFU}[colback=White, colbacktitle=PaleIris2, top=-1pt, bottom=0pt, left=18pt, right=10pt]{kazusa_smiley.png}
 \small
-この人はベイズ統計部の部長ですが、この本ではクッキーの代理として登場します。この人がベイズ統計部の部長として出てくるお話は{\addCJKfontfeatures{Color=SteelBlue}\href{https://cookiebox26.github.io/notes/20211223_sequence_models/main.pdf}{別の本}}を参照してください。
+この人はベイズ統計部の部長ですが、この本ではクッキーの代理として登場します。この人がベイズ統計部の部長として出てくるお話は他の本を参照してください。
 \end{SERIFU}
 
 \newcounter{mycounter}
@@ -107,7 +127,7 @@ keepaspectratio]{cover.png}%
 \vspace{3pt}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_worried.png}
-Spring Boot (Java)による REST API 開発に参加することになりました。Python でならいくつかのやり方で REST API を実装したことがありますが、Spring Boot は触ったことがありません。そもそも Java での開発も初めてに等しいです。Java モジュールに数行の修正 PR をしたことは何度かありますが、機能追加をするなどは経験がないので、Java における開発プラクティスの知見もまるでありません。C\# での開発経験はありますが昔すぎて記憶が……。
+Spring Boot (Java)による REST API 開発に参加することになりました。Python でならいくつかのやり方で REST API を実装したことがありますが、Spring Boot は触ったことがありません。そもそも Java での開発も初めてに等しいです。Java モジュールに数行の修正 PR をしたことは何度かありますが、機能追加をするなどは経験がないので、Java における開発プラクティスの知見もまるでありません。
 \end{SERIFU}
 
 \begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
@@ -173,11 +193,30 @@ public class BentouController {
 ……しかし、リクエストハンドラをもつ BentouController クラスがどこでインスタンス化されているのかさっぱりわかりません。リポジトリを grep してもそれらしき箇所がありません。BentouController クラスにはコンストラクタもあるようですし、やはりこれはインスタンス化して利用するものでしょう。であれば、何がどうなって――
 \end{SERIFU}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+調べてみたところ、Spring Boot プロジェクトをビルドして実行すると、@SpringBootApplication 付きのクラスに対して、以下の 1. 2. のオブジェクトが勝手に生成されるのですね\cite{doc_annotation}。
+\begin{enumerate}
+  \item そのクラス自身 or そのパッケージ以下で @Configuration 付きで定義されたクラスがもつ @Bean 付きのメソッドが返すオブジェクト。
+  \item そのパッケージ以下で @RestController, @Controller, @Service, @Repository, @Component 付きで定義されたクラスのインスタンス。 
+  \begin{itemize}
+      \item そもそも Spring には @Component しかなく、Spring Boot ではそのクラスの役割がリクエスト窓口 / ロジック / データ操作かに応じて @Controller / @Service / @Repository を使い分けるがクラスの役割の明確化以上の意味はないらしい \cite{review} \cite{kihon}。
+  \end{itemize}
+\end{enumerate}
+1. 2. から生成されたオブジェクトを {\addfontfeatures{Color=VioletRed}Bean} とよぶのですね。自作クラスを Bean とするときは 2. の方法、サードパーティのクラスを Bean とするときは 1. の方法をとることになるようです \cite{chigai}。
+\end{SERIFU}
 
 \stepcounter{mycounter}
 \renewcommand*{\mysectiontitle}{クッキー、Controller の単体テストで行き詰まる}
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+MockMvc を用いるとリクエストに対するレスポンスが期待通りかのテストを実装できそうです \cite{test_mockmvc}。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+しかし、このとき Bean を本番用のものと置き換えたいですね \cite{bean}。
+\end{SERIFU}
 
 
 \stepcounter{mycounter}
@@ -185,11 +224,19 @@ public class BentouController {
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+外部APIのレスポンス形式が JSON のとき、XML のときにレスポンスをパースするにはどうすればいいのでしょうか。
+\end{SERIFU}
+
 
 \stepcounter{mycounter}
 \renewcommand*{\mysectiontitle}{クッキー、Service の単体テストで行き詰まる}
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+外部APIをモックするには MockRestServiceServer が使えそうです。
+\end{SERIFU}
 
 
 \stepcounter{mycounter}
@@ -197,11 +244,23 @@ public class BentouController {
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+サーキットブレーカーとは、外部へのアクセスが失敗し続けている状況のときに遮断できる仕組みなのですね \cite{cb}。交通整理員さんのようなものでしょうか? 遮断している状態は電気回路でいうと途切れてしまっている状態 (解放) ですから、「オープン」なのですね。
+\end{SERIFU}
+
 
 \stepcounter{mycounter}
 \renewcommand*{\mysectiontitle}{クッキー、接続プールが不足する}
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+要求仕様通りに実装できたと思いきや、リクエスト数を捌いてくれませんね。いったいなぜ――
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+org.apache.http.impl.conn.PoolingHttpClientConnectionManager が接続プール数をつかさどっているのですね。予め上限をゆるめた PoolingHttpClientConnectionManager を用意する必要がありそうです。
+\end{SERIFU}
 
 
 \stepcounter{mycounter}
@@ -215,20 +274,37 @@ public class BentouController {
 \section*{第{\themycounter}話 \, \mysectiontitle}
 \addcontentsline{toc}{section}{\numberline {第{\themycounter}話}\mysectiontitle}
 
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+Spring Boot プロジェクトの開発とは、必要な Bean たちを用意し、適宜 Bean に他の Bean を持たせることだと思いました。
+\end{SERIFU}
+
+\begin{SERIFU}[colback=PaleIris, colbacktitle=PaleIris2]{kazusa_neutral.png}
+Spring Boot プロジェクトを会社に、各 Bean を部署に喩えるなら以下です。
+\end{SERIFU}
+
+\includegraphics[keepaspectratio, scale=0.56]{bentou.png}
+
 
 \addcontentsline{toc}{section}{参考文献}
 \begin{thebibliography}{99}
-    \bibitem{mockito_stubbing_consecutive_calls} \url{https://javadoc.io/doc/org.mockito/mockito-core/4.0.0/org/mockito/Mockito.html#10}
+    \bibitem{review} Spring Bootアプリケーションのコードレビューポイント - Qiita, \url{https://qiita.com/cross-xross/items/144f8bde2ef6fa4b379f}, 参照日：2022年1月30日.
+    \bibitem{kihon} 【Spring】@Autowired と @Component を使用した DI の基本 - 山崎屋の技術メモ, \url{https://www.shookuro.com/entry/2016/08/09/175801}, 参照日：2022年1月30日.
+    \bibitem{doc_annotation} Spring Boot での開発 - リファレンスドキュメント \#6. @SpringBootApplication アノテーションの使用, \url{https://spring.pleiades.io/spring-boot/docs/current/reference/html/using.html#using.using-the-springbootapplication-annotation}, 参照日：2022年1月30日.
+    \bibitem{chigai} Spring Bootの@Componentと@Beanの違い - grep Tips *, \url{https://www.greptips.com/posts/1318/}, 参照日：2022年1月30日.
+    \bibitem{test_mockmvc} Spring Boot MockMvc と @MockBean で Web レイヤーテスト - 公式サンプルコード, \url{https://spring.pleiades.io/guides/gs/testing-web/}, 参照日：2022年1月30日.
+    \bibitem{bean} 雑記： テスト時に Bean を別の Bean に置き換えたい話 - クッキーの日記, \url{https://cookie-box.hatenablog.com/entry/2021/12/05/124520}, 参照日：2022年1月30日.
+    \bibitem{cb} 雑記： Circuit Breaker をオープンさせるだけ (resilience4j-spring-boot2) - クッキーの日記, \url{https://cookie-box.hatenablog.com/entry/2021/12/13/040728}, 参照日：2022年1月30日.
 \end{thebibliography}
 
 
 % 奥付
 \clearpage
-\vspace*{16.7cm}
-
-\begin{OKUDUKE}[title={\textbf{\large クッキーと素敵な Spring Boot}}]
-YYYY年MM月DD日　初版発行 \\
-YYYY年MM月DD日　第2版発行 \\
+\vspace*{16.5cm} % 16.7
+　\textbf{\large クッキーと素敵な Spring Boot}
+\vspace*{-0.27cm}
+\begin{OKUDUKE}[title={未完成ドラフト}]
+2021年1月30日　初版発行 \\
+%YYYY年MM月DD日　第2版発行 (まだ) \\
 {
 \renewcommand\arraystretch{0.9}
 \begin{tabular}{p{4cm}rp{5.9cm}}
