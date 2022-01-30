@@ -1,9 +1,9 @@
-## NeurIPS 2021 ‚É‚İ‚é Å‹ß‚Ìƒjƒ…[ƒ‰ƒ‹Œn—ñƒ‚ƒfƒ‹‚Ö‚Ì”­Œ©EH•vE—‰ğ
+## NeurIPS 2021 ã«ã¿ã‚‹ æœ€è¿‘ã®ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ç³»åˆ—ãƒ¢ãƒ‡ãƒ«ã¸ã®ç™ºè¦‹ãƒ»å·¥å¤«ãƒ»ç†è§£
 
-### ÅVƒhƒ‰ƒtƒg
+### æœ€æ–°ãƒ‰ãƒ©ãƒ•ãƒˆ
 https://cookiebox26.github.io/notes/20211223_sequence_models/main.pdf
 
-### ‹Zp‘“T12”z•z –¢Š®¬ƒhƒ‰ƒtƒg
-https://cookiebox26.github.io/notes/20211223_sequence_models/main_v20221027.pdf
+### æŠ€è¡“æ›¸å…¸12é…å¸ƒ æœªå®Œæˆãƒ‰ãƒ©ãƒ•ãƒˆ
+https://techbookfest.org/product/6000469577039872?productVariantID=6463846887718912
 
-#### ³Œë•\
+#### æ­£èª¤è¡¨
